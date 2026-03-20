@@ -26,9 +26,20 @@ body{
   margin: 0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
   color: var(--text);
-  background: linear-gradient(120deg, var(--grad-a), var(--grad-b));
+  background: transparent;
   overflow-x: hidden;
   line-height: 1.6;
+  position: relative;
+  isolation: isolate;
+}
+
+body:before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(120deg, var(--grad-a), var(--grad-b));
 }
 
 a{ color: inherit; }
