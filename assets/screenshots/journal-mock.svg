@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b5bd3" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#22c55e" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.06"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="54" y="40" width="852" height="520" rx="44" fill="url(#bg)"/>
+  <rect x="86" y="70" width="788" height="460" rx="34" fill="rgba(0,0,0,0.18)" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+
+  <rect x="118" y="102" width="724" height="56" rx="18" fill="url(#card)" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+  <text x="152" y="136" font-family="ui-sans-serif, system-ui, -apple-system" font-size="22" font-weight="900" fill="rgba(255,255,255,0.92)">This week</text>
+
+  <rect x="118" y="175" width="724" height="134" rx="26" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.14)" stroke-width="2"/>
+  <text x="152" y="236" font-family="ui-sans-serif, system-ui, -apple-system" font-size="16" font-weight="900" fill="rgba(255,255,255,0.88)">Types of tasks you preferred</text>
+  <text x="152" y="269" font-family="ui-sans-serif, system-ui, -apple-system" font-size="14" font-weight="800" fill="rgba(255,255,255,0.66)">Focus: 3 (Analog) · Vent: 2 · Move: 1</text>
+
+  <rect x="118" y="320" width="724" height="178" rx="26" fill="rgba(0,0,0,0.14)" stroke="rgba(255,255,255,0.14)" stroke-width="2"/>
+  <text x="152" y="378" font-family="ui-sans-serif, system-ui, -apple-system" font-size="16" font-weight="900" fill="rgba(255,255,255,0.88)">AI Analysis</text>
+  <rect x="152" y="405" width="610" height="14" rx="7" fill="rgba(255,255,255,0.14)"/>
+  <rect x="152" y="430" width="540" height="14" rx="7" fill="rgba(255,255,255,0.12)"/>
+  <rect x="152" y="455" width="500" height="14" rx="7" fill="rgba(255,255,255,0.10)"/>
+
+  <rect x="118" y="512" width="724" height="18" rx="9" fill="rgba(255,255,255,0.08)" />
+</svg>
+

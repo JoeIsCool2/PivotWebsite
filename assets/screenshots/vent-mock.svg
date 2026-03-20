@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0ea5e9" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#34d399" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.06"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="54" y="40" width="852" height="520" rx="44" fill="url(#bg)"/>
+  <rect x="86" y="70" width="788" height="460" rx="34" fill="rgba(0,0,0,0.18)" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+
+  <rect x="118" y="102" width="724" height="56" rx="18" fill="url(#card)" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+  <circle cx="160" cy="130" r="10" fill="rgba(255,255,255,0.75)"/>
+  <circle cx="190" cy="130" r="10" fill="rgba(255,255,255,0.45)"/>
+  <circle cx="220" cy="130" r="10" fill="rgba(255,255,255,0.25)"/>
+
+  <rect x="118" y="175" width="724" height="212" rx="26" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.14)" stroke-width="2"/>
+  <text x="152" y="246" font-family="ui-sans-serif, system-ui, -apple-system" font-size="30" font-weight="800" fill="rgba(255,255,255,0.92)">Your vent</text>
+  <rect x="150" y="270" width="660" height="14" rx="7" fill="rgba(255,255,255,0.16)"/>
+  <rect x="150" y="295" width="590" height="14" rx="7" fill="rgba(255,255,255,0.12)"/>
+  <rect x="150" y="320" width="520" height="14" rx="7" fill="rgba(255,255,255,0.10)"/>
+
+  <circle cx="420" cy="456" r="44" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+  <text x="404" y="463" font-family="ui-sans-serif, system-ui, -apple-system" font-size="16" font-weight="900" fill="rgba(255,255,255,0.85)">Mic</text>
+
+  <rect x="510" y="430" width="332" height="86" rx="28" fill="rgba(0,0,0,0.16)" stroke="rgba(255,255,255,0.16)" stroke-width="2"/>
+  <text x="540" y="474" font-family="ui-sans-serif, system-ui, -apple-system" font-size="18" font-weight="900" fill="rgba(255,255,255,0.88)">Add to Journal</text>
+</svg>
+

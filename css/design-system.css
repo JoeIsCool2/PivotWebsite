@@ -1,0 +1,176 @@
+/* Pivot design system overlays.
+   We keep `site.css` as the base and add:
+   - a valid :root token source (fixes any invalid selectors in base CSS)
+   - reusable semantic classes for consistent iOS/app-store feel */
+
+:root{
+  --text: rgba(255,255,255,.92);
+  --muted: rgba(255,255,255,.72);
+  --card: rgba(255,255,255,.08);
+  --card2: rgba(255,255,255,.06);
+  --stroke: rgba(255,255,255,.14);
+  --shadow: rgba(0,0,0,.22);
+
+  --grad-a: #1d4ed8; /* app-ish blue */
+  --grad-b: #2dd4bf; /* app-ish mint */
+
+  --radius-xl: 28px;
+  --radius-lg: 18px;
+  --radius-md: 14px;
+  --radius-sm: 12px;
+
+  /* Spacing scale (8pt-ish rhythm) */
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 20px;
+  --space-5: 28px;
+  --space-6: 36px;
+  --space-7: 48px;
+
+  /* Typography */
+  --lh-tight: 1.15;
+  --lh-body: 1.65;
+
+  --font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+html, body{
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+/* Per-page gradient themes (replaces inline `--grad-a/--grad-b` on <body>) */
+.theme-index{ --grad-a:#1d4ed8; --grad-b:#2dd4bf; }
+.theme-features{ --grad-a:#0ea5e9; --grad-b:#34d399; }
+.theme-pro{ --grad-a:#4f46e5; --grad-b:#2dd4bf; }
+.theme-journal{ --grad-a:#0b5bd3; --grad-b:#22c55e; }
+.theme-contact{ --grad-a:#0369a1; --grad-b:#22c55e; }
+.theme-privacy{ --grad-a:#0f172a; --grad-b:#2563eb; }
+.theme-terms{ --grad-a:#111827; --grad-b:#34d399; }
+
+/* Semantic wrappers */
+.page{
+  padding: 22px 0 60px;
+}
+
+.sectionTitle{
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.textMax{
+  max-width: 72ch;
+}
+
+.glassCard{
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 14px 40px rgba(0,0,0,.12);
+  backdrop-filter: blur(18px);
+  padding: 16px;
+}
+
+/* CTA aliases (reuse existing button styles from site.css) */
+.ctaPrimary{ }
+.ctaSecondary{ }
+
+/* iOS-like phone wrapper; the inner `.shot-frame` already has the bezel/notch styling. */
+.devicePhone{
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 10px 10px;
+  border-radius: 40px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.05);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 30px 90px rgba(0,0,0,.25);
+}
+
+.devicePhone .shot-gallery{ margin-top: 0; }
+
+.devicePhone .shot-frame{
+  box-shadow: 0 26px 80px rgba(0,0,0,.32);
+}
+
+/* iOS Download badge row (placeholder, but styled to feel native). */
+.downloadBadges{
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+/* Footer brand helpers */
+.footerBrandName{
+  font-weight: 800;
+  color: rgba(255,255,255,.88);
+}
+.footerBrandTag{
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+/* Legal page titles */
+.legalSectionTitle{
+  font-size: 18px;
+  margin: 18px 0 10px;
+}
+
+/* Utilities (for removing inline styles) */
+.mt6{ margin-top: 6px !important; }
+.mt10{ margin-top: 10px !important; }
+.mt12{ margin-top: 12px !important; }
+.mt14{ margin-top: 14px !important; }
+.mt16{ margin-top: 16px !important; }
+.mt18{ margin-top: 18px !important; }
+.mt26{ margin-top: 26px !important; }
+
+.sp14{ height: 14px; }
+.sp16{ height: 16px; }
+
+.sectionTight8{ padding-top: 8px !important; }
+.sectionTight18{ padding-top: 18px !important; }
+
+.fs13{ font-size: 13px; }
+.fs14{ font-size: 14px; }
+
+.muted{ color: var(--muted); }
+
+/* Reduce the need for inline `margin: 0` without overriding more specific base styles. */
+h1,h2,h3,p{ margin: 0; }
+
+.downloadBadge{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 16px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.06);
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.downloadBadge:hover{
+  background: rgba(255,255,255,.09);
+}
+
+.downloadBadge .small{
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0;
+}
+
+/* Make fades slightly more deterministic if base CSS isn't applied */
+.fade.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+

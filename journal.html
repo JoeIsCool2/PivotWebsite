@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pivot Journal - Weekly Review & Insights</title>
+    <meta name="description" content="Your Pivot Journal organizes Focus, Vent, and Move entries. Pro can add a short weekly AI analysis." />
+    <meta property="og:title" content="Pivot Journal - Weekly Review & Insights" />
+    <meta property="og:description" content="Your Pivot Journal organizes Focus, Vent, and Move entries. Pro can add a short weekly AI analysis." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="ScreenShots/Focus.PNG" />
+    <meta property="og:image:alt" content="Pivot app preview (Focus)" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Pivot Journal - Weekly Review & Insights" />
+    <meta name="twitter:description" content="Your Pivot Journal organizes Focus, Vent, and Move entries. Pro can add a short weekly AI analysis." />
+    <meta name="twitter:image" content="ScreenShots/Focus.PNG" />
+    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="css/design-system.css" />
+  </head>
+  <body class="theme-journal">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="index.html" aria-label="Pivot home">
+          <img class="brand-mark" src="assets/logo.svg" alt="" />
+          <div>
+            <div class="brand-name">Pivot</div>
+            <div class="brand-tag">Focus • Vent • Move</div>
+          </div>
+        </a>
+
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="features.html">Features</a>
+          <a href="pro.html">Pro</a>
+          <a href="journal.html" aria-current="page">Journal</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+
+        <button id="burger" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" type="button">
+          Menu
+        </button>
+      </div>
+
+      <div class="wrap">
+        <div id="mobileMenu" class="mobile-menu" role="region" aria-label="Mobile menu">
+          <a href="index.html" data-mobile-link="true">Home</a>
+          <a href="features.html" data-mobile-link="true">Features</a>
+          <a href="pro.html" data-mobile-link="true">Pro</a>
+          <a href="journal.html" data-mobile-link="true" aria-current="page">Journal</a>
+          <a href="contact.html" data-mobile-link="true">Contact</a>
+          <a href="privacy.html" data-mobile-link="true">Privacy</a>
+          <a href="terms.html" data-mobile-link="true">Terms</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="section">
+      <div class="wrap">
+        <div class="section-head fade">
+          <h2>Your weekly journal</h2>
+          <p>Journal entries are organized across Focus, Vent, and Move—so you can notice patterns without extra effort.</p>
+        </div>
+
+        <div class="card callout fade mt14">
+          <div class="shot-frame">
+            <img
+              src="ScreenShots/Journal.PNG"
+              alt="Journal screen preview"
+              class="shot-img"
+              data-shot="true"
+              data-shot-title="Journal"
+            />
+          </div>
+          <div class="shot-caption">Journal</div>
+        </div>
+
+        <div class="two-col">
+          <section class="card callout fade">
+            <h3>Browse by day (or zoom out)</h3>
+            <p>
+              Each day shows the activity you saved from Focus, Vent, and Move. When you expand a day, you can review what you did and
+              what you wrote.
+            </p>
+            <ul class="list">
+              <li>Focus entries include the task and a focused vs scheduled view.</li>
+              <li>Vent entries include whether a reflection exists.</li>
+              <li>Move entries show your walk outcome and reflection.</li>
+            </ul>
+          </section>
+
+          <section class="card callout fade">
+            <h3>This week (summary)</h3>
+            <p>
+              Pivot can generate a compact “This week” snapshot based on your completed activities.
+            </p>
+            <ul class="list">
+              <li>Counts your Focus tasks and groups them by type.</li>
+              <li>Shows how many Vent and Move entries you completed.</li>
+              <li>Sets the stage for Pro’s weekly analysis.</li>
+            </ul>
+          </section>
+        </div>
+
+        <div class="sp16"></div>
+
+        <section class="card callout fade">
+          <h3>Pro’s AI Analysis card</h3>
+          <p>
+            With Pro enabled, Pivot can create a short weekly summary using your on-device data from Focus, Vent, and Move.
+          </p>
+          <p class="muted mt10">
+            If you’re not on Pro, the card encourages you to complete sessions this week and offers a Pro upgrade path for on-device AI reflection.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="pro.html">Upgrade to Pro</a>
+            <a class="btn" href="contact.html">Ask a question</a>
+          </div>
+        </section>
+
+        <section class="section sectionTight18">
+          <div class="section-head fade">
+            <h2>FAQ</h2>
+            <p>Journal questions.</p>
+          </div>
+
+          <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+              <button
+                class="accordion-button"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq1"
+              >
+                How are entries organized?
+              </button>
+              <div class="accordion-panel" id="faq1" hidden>
+                Entries are grouped by day across Focus, Vent, and Move, so you can scan your week at a glance.
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button
+                class="accordion-button"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq2"
+              >
+                What does “This week” show?
+              </button>
+              <div class="accordion-panel" id="faq2" hidden>
+                It’s a compact snapshot of completed Focus, Vent, and Move activity, setting up Pro’s weekly analysis.
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button
+                class="accordion-button"
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq3"
+              >
+                Do I need Pro to use the Journal?
+              </button>
+              <div class="accordion-panel" id="faq3" hidden>
+                No. The Journal works without Pro. Pro adds the short weekly AI summary.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section sectionTight8">
+          <div class="glassCard fade">
+            <div class="section-head">
+              <h2>Download Pivot</h2>
+              <p>Start tracking your Focus, Vent, and Move—then reflect in one place.</p>
+            </div>
+
+            <div class="downloadBadges" aria-label="Download options">
+              <a
+                class="downloadBadge"
+                href="https://example.com/app-store-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="small">Download on the</span>
+                App Store
+              </a>
+              <a
+                class="downloadBadge"
+                href="https://testflight.apple.com/join/REPLACE_ME"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="small">Get the</span>
+                TestFlight build
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="wrap footer-inner">
+        <div>
+          <div class="footerBrandName">Pivot</div>
+          <div class="footerBrandTag">Focus • Vent • Move • Journal</div>
+        </div>
+        <div class="footerRight">
+          <div class="downloadBadges footerDownloadBadges" aria-label="Download options">
+            <a
+              class="downloadBadge"
+              href="https://example.com/app-store-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="small">Download on the</span>
+              App Store
+            </a>
+            <a
+              class="downloadBadge"
+              href="https://testflight.apple.com/join/REPLACE_ME"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="small">Get the</span>
+              TestFlight build
+            </a>
+          </div>
+          <div class="footer-links">
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/site.js"></script>
+  </body>
+</html>
+
