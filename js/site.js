@@ -47,7 +47,11 @@
       const target = document.querySelector(id);
       if (!target) return;
       ev.preventDefault();
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      const nav = document.querySelector("header.nav");
+      const navH = nav ? nav.getBoundingClientRect().height : 0;
+      const targetRect = target.getBoundingClientRect();
+      const y = window.scrollY + targetRect.top - (navH + 10);
+      window.scrollTo({ top: y, behavior: "smooth" });
     });
   });
 
@@ -259,6 +263,12 @@
         : null;
       if (!imgEl) return;
 
+      // Landing hero/sticky phones are decorative in this setup and should not open the lightbox.
+      // (Only screenshot galleries should.)
+      const imgId = imgEl.getAttribute("id") || "";
+      if (imgId === "heroShotImg" || imgId === "showcaseShotImg") return;
+      if (imgEl.closest(".landingHeroPhone") || imgEl.closest("#showcase")) return;
+
       const shotSrc = imgEl.getAttribute("src");
       const shotTitle = imgEl.getAttribute("data-shot-title") || imgEl.getAttribute("alt") || "Screenshot";
       if (!shotSrc) return;
@@ -274,6 +284,16 @@
   const heroShots = $$("[data-hero-shot-src]");
   const heroImg = document.getElementById("heroShotImg");
   const heroRotatorImg = heroImg ? heroImg : null;
+
+  // Keep the sticky phone aligned under the current sticky nav height.
+  // (Header height can change across breakpoints.)
+  const navLanding = document.querySelector("header.nav");
+  if (navLanding) {
+    document.documentElement.style.setProperty(
+      "--navH",
+      `${Math.round(navLanding.getBoundingClientRect().height)}px`
+    );
+  }
 
   // Auto-cycle the hero phone preview (Focus -> Vent -> Move -> Journal -> Pro)
   // This is intentionally subtle and disabled when the user prefers reduced motion.
@@ -331,6 +351,8 @@
       setShowcaseShot(first);
     }
 
+    let activeShowcaseStepKey = first ? (first.getAttribute("data-showcase-step") || "").toLowerCase() : null;
+
     // Pause hero rotation when the user is actively viewing the showcase.
     const showcaseWrap = document.getElementById("showcase") || showcaseSteps[0].closest(".showcase");
     const pauseRotation = () => {
@@ -344,12 +366,27 @@
     const io = new IntersectionObserver(
       (entries) => {
         const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => (b.intersectionRatio || 0) - (a.intersectionRatio || 0));
+          .filter((e) => e.isIntersecting);
 
         if (visible.length === 0) return;
 
-        const best = visible[0].target;
+        const stickyTop = showcaseImg.getBoundingClientRect().top;
+        let best = null;
+        let bestDist = Infinity;
+        for (const v of visible) {
+          const top = v.target.getBoundingClientRect().top;
+          const dist = Math.abs(top - stickyTop);
+          if (dist < bestDist) {
+            bestDist = dist;
+            best = v.target;
+          }
+        }
+
+        if (!best) return;
+        const bestKey = (best.getAttribute("data-showcase-step") || "").toLowerCase();
+        if (bestKey && bestKey === activeShowcaseStepKey) return; // prevent jitter
+
+        activeShowcaseStepKey = bestKey;
         showcaseSteps.forEach((el) => el.classList.remove("is-active"));
         best.classList.add("is-active");
         setShowcaseShot(best);
@@ -359,7 +396,7 @@
         }
       },
       {
-        threshold: [0.18, 0.33, 0.5, 0.66],
+        threshold: [0.35, 0.55],
         rootMargin: "-10% 0px -55% 0px",
       }
     );

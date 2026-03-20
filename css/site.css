@@ -555,6 +555,12 @@ input:focus, textarea:focus{
   position: relative;
   z-index: 1;
 }
+
+/* Landing phone screenshots are decorative (lightbox is disabled for these). */
+#heroShotImg,
+#showcaseShotImg{
+  cursor: default;
+}
 .shot-caption{
   margin-top: 8px;
   color: var(--muted);
@@ -732,7 +738,7 @@ input:focus, textarea:focus{
 }
 .stickyPhone{
   position: sticky;
-  top: 92px;
+  top: calc(var(--navH, 92px) + 0px);
 }
 .showcaseSteps{
   display: grid;
