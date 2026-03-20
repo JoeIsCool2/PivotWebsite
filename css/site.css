@@ -42,6 +42,23 @@ body:before{
   background: linear-gradient(120deg, var(--grad-a), var(--grad-b));
 }
 
+body.site-theme-breathe{
+  --grad-a: #1d4ed8;
+  --grad-b: #2dd4bf;
+}
+body.site-theme-grounded-earth{
+  --grad-a: #2f4f3e;
+  --grad-b: #a8825b;
+}
+body.site-theme-sunset-wind-down{
+  --grad-a: #b8574f;
+  --grad-b: #5b3b89;
+}
+body.site-theme-zen-garden{
+  --grad-a: #0f766e;
+  --grad-b: #14532d;
+}
+
 a{ color: inherit; }
 
 img{ max-width: 100%; height: auto; }
@@ -726,6 +743,24 @@ input:focus, textarea:focus{
 .landingHeroPhone{
   display: grid;
   place-items: center;
+}
+.themeArrowBtn{
+  margin-top: 14px;
+  border: 1px solid rgba(255,255,255,.28);
+  background: rgba(0,0,0,.22);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: .01em;
+  cursor: pointer;
+}
+.themeArrowBtn:hover{
+  background: rgba(255,255,255,.12);
+}
+.themeArrowBtn:focus-visible{
+  outline: 3px solid rgba(255,255,255,.24);
+  outline-offset: 2px;
 }
 .heroShotsPreload{
   display: none;

@@ -284,6 +284,7 @@
   const heroShots = $$("[data-hero-shot-src]");
   const heroImg = document.getElementById("heroShotImg");
   const heroRotatorImg = heroImg ? heroImg : null;
+  const nextThemeBtn = document.getElementById("nextThemeBtn");
 
   // Keep the sticky phone aligned under the current sticky nav height.
   // (Header height can change across breakpoints.)
@@ -309,22 +310,7 @@
     heroRotatorImg.setAttribute("data-shot-title", title);
   };
 
-  if (heroRotatorImg && heroShots.length > 0) {
-    // Initialize to the first shot for deterministic render.
-    setHeroShot(heroShots[0]);
-
-    const shouldRotate = !prefersReducedMotion && heroShots.length > 1;
-    if (shouldRotate) {
-      let i = 0;
-      const rotateMs = 4300;
-      window.setInterval(() => {
-        i = (i + 1) % heroShots.length;
-        setHeroShot(heroShots[i]);
-      }, rotateMs);
-    }
-  }
-
-  // Sticky showcase: as each step scrolls into view, update the sticky phone.
+  // Sticky showcase: click-driven, and synced with hero + page theme.
   const showcaseSteps = $$("[data-showcase-step][data-showcase-src]");
   const showcaseImg = document.getElementById("showcaseShotImg");
 
@@ -338,49 +324,61 @@
     showcaseImg.setAttribute("data-shot-title", title);
   };
 
-  if (showcaseSteps.length > 0 && showcaseImg) {
-    // Ensure deterministic initial state.
-    const first = showcaseSteps[0];
-    showcaseSteps.forEach((el) => el.classList.remove("is-active"));
-    if (first) {
-      first.classList.add("is-active");
-      setShowcaseShot(first);
-    }
+  if (showcaseSteps.length > 0 && showcaseImg && heroRotatorImg && heroShots.length > 0) {
+    const siteThemeClasses = [
+      "site-theme-breathe",
+      "site-theme-grounded-earth",
+      "site-theme-sunset-wind-down",
+      "site-theme-zen-garden"
+    ];
 
-    let activeShowcaseStepKey = first ? (first.getAttribute("data-showcase-step") || "").toLowerCase() : null;
+    let activeThemeIndex = 0;
 
-    const showcaseWrap = document.getElementById("showcase") || showcaseSteps[0].closest(".showcase");
+    const applyThemeByIndex = (index) => {
+      const normalized = ((index % showcaseSteps.length) + showcaseSteps.length) % showcaseSteps.length;
+      activeThemeIndex = normalized;
 
-    const activateShowcaseStep = (stepEl) => {
-      if (!stepEl) return;
-      const stepKey = (stepEl.getAttribute("data-showcase-step") || "").toLowerCase();
-      if (stepKey && stepKey === activeShowcaseStepKey) return;
-
-      activeShowcaseStepKey = stepKey;
-
-      showcaseSteps.forEach((el) => {
-        el.classList.remove("is-active");
-        el.setAttribute("aria-pressed", "false");
+      showcaseSteps.forEach((el, i) => {
+        const isActive = i === normalized;
+        el.classList.toggle("is-active", isActive);
+        el.setAttribute("aria-pressed", isActive ? "true" : "false");
       });
 
-      stepEl.classList.add("is-active");
-      stepEl.setAttribute("aria-pressed", "true");
-      setShowcaseShot(stepEl);
+      const activeStep = showcaseSteps[normalized];
+      const bodyTheme = activeStep.getAttribute("data-theme-key");
+      const newThemeClass = bodyTheme ? `site-theme-${bodyTheme}` : siteThemeClasses[normalized];
+      document.body.classList.remove(...siteThemeClasses);
+      document.body.classList.add(newThemeClass);
 
-      if (showcaseWrap) {
-        // no-op: showcase is click-driven only
-      }
+      setShowcaseShot(activeStep);
+      if (heroShots[normalized]) setHeroShot(heroShots[normalized]);
     };
 
-    showcaseSteps.forEach((stepEl) => {
-      stepEl.addEventListener("click", () => activateShowcaseStep(stepEl));
+    applyThemeByIndex(0);
+
+    showcaseSteps.forEach((stepEl, index) => {
+      stepEl.addEventListener("click", () => applyThemeByIndex(index));
       stepEl.addEventListener("keydown", (ev) => {
         if (ev.key === "Enter" || ev.key === " ") {
           ev.preventDefault();
-          activateShowcaseStep(stepEl);
+          applyThemeByIndex(index);
         }
       });
     });
+
+    if (nextThemeBtn) {
+      nextThemeBtn.addEventListener("click", () => {
+        applyThemeByIndex(activeThemeIndex + 1);
+      });
+    }
+
+    const shouldRotate = !prefersReducedMotion && heroShots.length > 1;
+    if (shouldRotate) {
+      const rotateMs = 4300;
+      window.setInterval(() => {
+        applyThemeByIndex(activeThemeIndex + 1);
+      }, rotateMs);
+    }
   }
 
 })();
