@@ -316,25 +316,10 @@
     const shouldRotate = !prefersReducedMotion && heroShots.length > 1;
     if (shouldRotate) {
       let i = 0;
-      const rotateMs = 5200;
-      const slideOutMs = 380;
+      const rotateMs = 4300;
       window.setInterval(() => {
-        const next = (i + 1) % heroShots.length;
-        heroRotatorImg.classList.add("is-switching");
-        window.setTimeout(() => {
-          // Swap once old frame slid/faded out.
-          setHeroShot(heroShots[next]);
-          i = next;
-
-          // Start the new frame from the right, then glide into place.
-          heroRotatorImg.classList.remove("is-switching");
-          heroRotatorImg.classList.add("is-entering");
-          window.requestAnimationFrame(() => {
-            window.requestAnimationFrame(() => {
-              heroRotatorImg.classList.remove("is-entering");
-            });
-          });
-        }, slideOutMs);
+        i = (i + 1) % heroShots.length;
+        setHeroShot(heroShots[i]);
       }, rotateMs);
     }
   }
@@ -355,7 +340,7 @@
 
   if (showcaseSteps.length > 0 && showcaseImg) {
     // Ensure deterministic initial state.
-    const first = showcaseSteps.find((el) => (el.getAttribute("data-showcase-step") || "").toLowerCase() === "focus") || showcaseSteps[0];
+    const first = showcaseSteps[0];
     showcaseSteps.forEach((el) => el.classList.remove("is-active"));
     if (first) {
       first.classList.add("is-active");
