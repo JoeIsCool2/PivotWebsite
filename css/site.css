@@ -751,6 +751,7 @@ input:focus, textarea:focus{
   border: 1px solid rgba(255,255,255,.14);
   background: rgba(0,0,0,.10);
   transition: border-color .2s ease, background .2s ease, transform .2s ease;
+  cursor: pointer;
 }
 .showcaseStep h3{
   font-size: 18px;
@@ -767,6 +768,11 @@ input:focus, textarea:focus{
   border-color: rgba(255,255,255,.30);
   background: rgba(255,255,255,.06);
   transform: translateY(-1px);
+}
+
+.showcaseStep:focus-visible{
+  outline: 3px solid rgba(255,255,255,.22);
+  outline-offset: 3px;
 }
 
 /* Social proof */

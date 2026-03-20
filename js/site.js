@@ -363,45 +363,34 @@
       }
     };
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting);
+    const activateShowcaseStep = (stepEl) => {
+      if (!stepEl) return;
+      const stepKey = (stepEl.getAttribute("data-showcase-step") || "").toLowerCase();
+      if (stepKey && stepKey === activeShowcaseStepKey) return;
 
-        if (visible.length === 0) return;
+      activeShowcaseStepKey = stepKey;
 
-        const stickyTop = showcaseImg.getBoundingClientRect().top;
-        let best = null;
-        let bestDist = Infinity;
-        for (const v of visible) {
-          const top = v.target.getBoundingClientRect().top;
-          const dist = Math.abs(top - stickyTop);
-          if (dist < bestDist) {
-            bestDist = dist;
-            best = v.target;
-          }
+      showcaseSteps.forEach((el) => {
+        el.classList.remove("is-active");
+        el.setAttribute("aria-pressed", "false");
+      });
+
+      stepEl.classList.add("is-active");
+      stepEl.setAttribute("aria-pressed", "true");
+      setShowcaseShot(stepEl);
+
+      if (showcaseWrap) pauseRotation();
+    };
+
+    showcaseSteps.forEach((stepEl) => {
+      stepEl.addEventListener("click", () => activateShowcaseStep(stepEl));
+      stepEl.addEventListener("keydown", (ev) => {
+        if (ev.key === "Enter" || ev.key === " ") {
+          ev.preventDefault();
+          activateShowcaseStep(stepEl);
         }
-
-        if (!best) return;
-        const bestKey = (best.getAttribute("data-showcase-step") || "").toLowerCase();
-        if (bestKey && bestKey === activeShowcaseStepKey) return; // prevent jitter
-
-        activeShowcaseStepKey = bestKey;
-        showcaseSteps.forEach((el) => el.classList.remove("is-active"));
-        best.classList.add("is-active");
-        setShowcaseShot(best);
-
-        if (showcaseWrap && heroRotationTimer) {
-          pauseRotation();
-        }
-      },
-      {
-        threshold: [0.35, 0.55],
-        rootMargin: "-10% 0px -55% 0px",
-      }
-    );
-
-    showcaseSteps.forEach((s) => io.observe(s));
+      });
+    });
   }
 
   // Footer QR code: use a simple QR API so the page is still static (no build step).
