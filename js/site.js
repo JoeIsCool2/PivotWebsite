@@ -1,6 +1,46 @@
 (() => {
   const $ = (sel) => document.querySelector(sel);
   const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+  const siteThemeClasses = [
+    "site-theme-breathe",
+    "site-theme-grounded-earth",
+    "site-theme-sunset-wind-down",
+    "site-theme-zen-garden"
+  ];
+  const themeKeys = ["breathe", "grounded-earth", "sunset-wind-down", "zen-garden"];
+  const THEME_STORAGE_KEY = "pivotSiteTheme";
+
+  const normalizeThemeKey = (raw) => {
+    const key = (raw || "").toLowerCase().trim();
+    return themeKeys.includes(key) ? key : "breathe";
+  };
+
+  const applySiteThemeClass = (themeKey) => {
+    const normalized = normalizeThemeKey(themeKey);
+    document.body.classList.remove(...siteThemeClasses);
+    document.body.classList.add(`site-theme-${normalized}`);
+    return normalized;
+  };
+
+  const setStoredThemeKey = (themeKey) => {
+    try {
+      window.localStorage.setItem(THEME_STORAGE_KEY, normalizeThemeKey(themeKey));
+    } catch {
+      // Ignore storage failures (private mode, etc.)
+    }
+  };
+
+  const getStoredThemeKey = () => {
+    try {
+      return normalizeThemeKey(window.localStorage.getItem(THEME_STORAGE_KEY) || "breathe");
+    } catch {
+      return "breathe";
+    }
+  };
+
+  // Apply persisted theme as early as possible on every page.
+  const initialThemeKey = getStoredThemeKey();
+  applySiteThemeClass(initialThemeKey);
 
   // If the user drags a gallery, we suppress the next click so it doesn't
   // accidentally open the screenshot lightbox.
@@ -284,7 +324,6 @@
   const heroShots = $$("[data-hero-shot-src]");
   const heroImg = document.getElementById("heroShotImg");
   const heroRotatorImg = heroImg ? heroImg : null;
-  const nextThemeBtn = document.getElementById("nextThemeBtn");
 
   // Keep the sticky phone aligned under the current sticky nav height.
   // (Header height can change across breakpoints.)
@@ -321,18 +360,8 @@
   };
 
   if (showcaseSteps.length > 0 && showcaseImg && heroRotatorImg && heroShots.length > 0) {
-    const siteThemeClasses = [
-      "site-theme-breathe",
-      "site-theme-grounded-earth",
-      "site-theme-sunset-wind-down",
-      "site-theme-zen-garden"
-    ];
-
-    let activeThemeIndex = 0;
-
     const applyThemeByIndex = (index) => {
       const normalized = ((index % showcaseSteps.length) + showcaseSteps.length) % showcaseSteps.length;
-      activeThemeIndex = normalized;
 
       showcaseSteps.forEach((el, i) => {
         const isActive = i === normalized;
@@ -342,15 +371,19 @@
 
       const activeStep = showcaseSteps[normalized];
       const bodyTheme = activeStep.getAttribute("data-theme-key");
-      const newThemeClass = bodyTheme ? `site-theme-${bodyTheme}` : siteThemeClasses[normalized];
-      document.body.classList.remove(...siteThemeClasses);
-      document.body.classList.add(newThemeClass);
+      const resolvedThemeKey = bodyTheme || themeKeys[normalized] || "breathe";
+      applySiteThemeClass(resolvedThemeKey);
+      setStoredThemeKey(resolvedThemeKey);
 
       setShowcaseShot(activeStep);
       if (heroShots[normalized]) setHeroShot(heroShots[normalized]);
     };
 
-    applyThemeByIndex(0);
+    // Prefer persisted theme index when available.
+    const persistedIndex = showcaseSteps.findIndex(
+      (step) => normalizeThemeKey(step.getAttribute("data-theme-key")) === initialThemeKey
+    );
+    applyThemeByIndex(persistedIndex >= 0 ? persistedIndex : 0);
 
     showcaseSteps.forEach((stepEl, index) => {
       stepEl.addEventListener("click", () => applyThemeByIndex(index));
@@ -362,12 +395,30 @@
       });
     });
 
-    if (nextThemeBtn) {
-      nextThemeBtn.addEventListener("click", () => {
-        applyThemeByIndex(activeThemeIndex + 1);
-      });
-    }
+  }
 
+  // Theme picker controls for non-landing pages.
+  const themePickers = $$("[data-theme-select]");
+  if (themePickers.length > 0) {
+    const refreshThemePickerState = (activeKey) => {
+      themePickers.forEach((btn) => {
+        const key = normalizeThemeKey(btn.getAttribute("data-theme-select"));
+        const isActive = key === activeKey;
+        btn.classList.toggle("is-active", isActive);
+        btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+    };
+
+    refreshThemePickerState(initialThemeKey);
+
+    themePickers.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const key = normalizeThemeKey(btn.getAttribute("data-theme-select"));
+        applySiteThemeClass(key);
+        setStoredThemeKey(key);
+        refreshThemePickerState(key);
+      });
+    });
   }
 
 })();
