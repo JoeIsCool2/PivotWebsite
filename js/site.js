@@ -317,21 +317,24 @@
     if (shouldRotate) {
       let i = 0;
       const rotateMs = 5200;
-      const fadeMs = 340;
+      const slideOutMs = 380;
       window.setInterval(() => {
         const next = (i + 1) % heroShots.length;
         heroRotatorImg.classList.add("is-switching");
         window.setTimeout(() => {
-          // Swap while fully faded out.
+          // Swap once old frame slid/faded out.
           setHeroShot(heroShots[next]);
           i = next;
-          // Let the browser paint the new src before fading back in.
+
+          // Start the new frame from the right, then glide into place.
+          heroRotatorImg.classList.remove("is-switching");
+          heroRotatorImg.classList.add("is-entering");
           window.requestAnimationFrame(() => {
             window.requestAnimationFrame(() => {
-              heroRotatorImg.classList.remove("is-switching");
+              heroRotatorImg.classList.remove("is-entering");
             });
           });
-        }, fadeMs);
+        }, slideOutMs);
       }, rotateMs);
     }
   }

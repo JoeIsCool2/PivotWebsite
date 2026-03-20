@@ -731,10 +731,17 @@ input:focus, textarea:focus{
   display: none;
 }
 #heroShotImg{
-  transition: opacity .35s ease;
+  transition: transform .42s cubic-bezier(.22,.61,.36,1), opacity .42s cubic-bezier(.22,.61,.36,1);
+  transform: translateX(0);
+  opacity: 1;
 }
 #heroShotImg.is-switching{
-  opacity: .18;
+  transform: translateX(-28px);
+  opacity: .06;
+}
+#heroShotImg.is-entering{
+  transform: translateX(28px);
+  opacity: .06;
 }
 
 /* Sticky “show, don’t tell” */
