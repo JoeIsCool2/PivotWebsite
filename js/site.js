@@ -295,7 +295,9 @@
     );
   }
 
-  const heroSwitchBtns = $$(".heroSwitchBtn[data-hero-index]");
+  const prefersReducedMotion = window.matchMedia
+    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    : false;
 
   const setHeroShot = (shotEl) => {
     if (!heroRotatorImg || !shotEl) return;
@@ -311,34 +313,20 @@
     // Initialize to the first shot for deterministic render.
     setHeroShot(heroShots[0]);
 
-    let activeHeroIndex = 0;
-    const setActiveHeroBtn = (index) => {
-      heroSwitchBtns.forEach((btn) => {
-        const isActive = Number(btn.getAttribute("data-hero-index")) === index;
-        btn.classList.toggle("is-active", isActive);
-        btn.setAttribute("aria-selected", isActive ? "true" : "false");
-      });
-    };
-
-    const switchHeroTo = (index) => {
-      if (index < 0 || index >= heroShots.length) return;
-      if (index === activeHeroIndex) return;
-      activeHeroIndex = index;
-      heroRotatorImg.classList.add("is-switching");
-      setHeroShot(heroShots[index]);
-      window.setTimeout(() => {
-        heroRotatorImg.classList.remove("is-switching");
-      }, 170);
-      setActiveHeroBtn(index);
-    };
-
-    setActiveHeroBtn(0);
-    heroSwitchBtns.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const idx = Number(btn.getAttribute("data-hero-index"));
-        switchHeroTo(idx);
-      });
-    });
+    const shouldRotate = !prefersReducedMotion && heroShots.length > 1;
+    if (shouldRotate) {
+      let i = 0;
+      const rotateMs = 5200;
+      const fadeMs = 260;
+      window.setInterval(() => {
+        i = (i + 1) % heroShots.length;
+        heroRotatorImg.classList.add("is-switching");
+        window.setTimeout(() => {
+          setHeroShot(heroShots[i]);
+          heroRotatorImg.classList.remove("is-switching");
+        }, fadeMs);
+      }, rotateMs);
+    }
   }
 
   // Sticky showcase: as each step scrolls into view, update the sticky phone.
