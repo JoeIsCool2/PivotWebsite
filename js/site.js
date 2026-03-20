@@ -295,14 +295,7 @@
     );
   }
 
-  // Auto-cycle the hero phone preview (Focus -> Vent -> Move -> Journal -> Pro)
-  // This is intentionally subtle and disabled when the user prefers reduced motion.
-  const prefersReducedMotion = window.matchMedia
-    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    : false;
-
-  const heroRotateMs = 4300;
-  let heroRotationTimer = null;
+  const heroSwitchBtns = $$(".heroSwitchBtn[data-hero-index]");
 
   const setHeroShot = (shotEl) => {
     if (!heroRotatorImg || !shotEl) return;
@@ -318,14 +311,34 @@
     // Initialize to the first shot for deterministic render.
     setHeroShot(heroShots[0]);
 
-    const shouldRotate = !prefersReducedMotion && heroShots.length > 1;
-    if (shouldRotate) {
-      let i = 0;
-      heroRotationTimer = window.setInterval(() => {
-        i = (i + 1) % heroShots.length;
-        setHeroShot(heroShots[i]);
-      }, heroRotateMs);
-    }
+    let activeHeroIndex = 0;
+    const setActiveHeroBtn = (index) => {
+      heroSwitchBtns.forEach((btn) => {
+        const isActive = Number(btn.getAttribute("data-hero-index")) === index;
+        btn.classList.toggle("is-active", isActive);
+        btn.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+    };
+
+    const switchHeroTo = (index) => {
+      if (index < 0 || index >= heroShots.length) return;
+      if (index === activeHeroIndex) return;
+      activeHeroIndex = index;
+      heroRotatorImg.classList.add("is-switching");
+      setHeroShot(heroShots[index]);
+      window.setTimeout(() => {
+        heroRotatorImg.classList.remove("is-switching");
+      }, 170);
+      setActiveHeroBtn(index);
+    };
+
+    setActiveHeroBtn(0);
+    heroSwitchBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const idx = Number(btn.getAttribute("data-hero-index"));
+        switchHeroTo(idx);
+      });
+    });
   }
 
   // Sticky showcase: as each step scrolls into view, update the sticky phone.
@@ -353,15 +366,7 @@
 
     let activeShowcaseStepKey = first ? (first.getAttribute("data-showcase-step") || "").toLowerCase() : null;
 
-    // Pause hero rotation when the user is actively viewing the showcase.
     const showcaseWrap = document.getElementById("showcase") || showcaseSteps[0].closest(".showcase");
-    const pauseRotation = () => {
-      if (!heroRotationTimer) return;
-      if (heroRotationTimer) {
-        window.clearInterval(heroRotationTimer);
-        heroRotationTimer = null;
-      }
-    };
 
     const activateShowcaseStep = (stepEl) => {
       if (!stepEl) return;
@@ -379,7 +384,9 @@
       stepEl.setAttribute("aria-pressed", "true");
       setShowcaseShot(stepEl);
 
-      if (showcaseWrap) pauseRotation();
+      if (showcaseWrap) {
+        // no-op: showcase is click-driven only
+      }
     };
 
     showcaseSteps.forEach((stepEl) => {
