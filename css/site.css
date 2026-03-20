@@ -364,8 +364,8 @@ img{ max-width: 100%; height: auto; }
 footer{
   padding: 34px 0 50px;
   color: rgba(255,255,255,.72);
-  border-top: 1px solid rgba(255,255,255,.12);
-  background: rgba(0,0,0,.08);
+  border-top: 0;
+  background: transparent;
 }
 .footer-inner{
   display: flex;
@@ -823,7 +823,7 @@ input:focus, textarea:focus{
 
 /* QR + final push footer */
 .footerFinal{
-  padding: 34px 0 50px;
+  padding: 24px 0 34px;
 }
 .footerFinalInner{
   align-items: flex-start;
