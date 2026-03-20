@@ -296,10 +296,6 @@
     );
   }
 
-  const prefersReducedMotion = window.matchMedia
-    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    : false;
-
   const setHeroShot = (shotEl) => {
     if (!heroRotatorImg || !shotEl) return;
     const src = shotEl.getAttribute("data-hero-shot-src");
@@ -372,13 +368,6 @@
       });
     }
 
-    const shouldRotate = !prefersReducedMotion && heroShots.length > 1;
-    if (shouldRotate) {
-      const rotateMs = 4300;
-      window.setInterval(() => {
-        applyThemeByIndex(activeThemeIndex + 1);
-      }, rotateMs);
-    }
   }
 
 })();

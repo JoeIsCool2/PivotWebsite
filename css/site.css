@@ -43,20 +43,28 @@ body:before{
 }
 
 body.site-theme-breathe{
-  --grad-a: #1d4ed8;
-  --grad-b: #2dd4bf;
+  --text: #1C1C1E;
+  --muted: rgba(28,28,30,.72);
+  --grad-a: #E0F7FA;
+  --grad-b: #80DEEA;
 }
 body.site-theme-grounded-earth{
-  --grad-a: #2f4f3e;
-  --grad-b: #a8825b;
+  --text: #3E2723;
+  --muted: rgba(62,39,35,.72);
+  --grad-a: #F5F5DC;
+  --grad-b: #DEDEBC;
 }
 body.site-theme-sunset-wind-down{
-  --grad-a: #b8574f;
-  --grad-b: #5b3b89;
+  --text: #F4F4F5;
+  --muted: rgba(244,244,245,.76);
+  --grad-a: #4A00E0;
+  --grad-b: #FF9A9E;
 }
 body.site-theme-zen-garden{
-  --grad-a: #0f766e;
-  --grad-b: #14532d;
+  --text: #455A64;
+  --muted: rgba(69,90,100,.72);
+  --grad-a: #ECE9E6;
+  --grad-b: #FFFFFF;
 }
 
 a{ color: inherit; }
