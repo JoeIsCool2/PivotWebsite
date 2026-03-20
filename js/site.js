@@ -317,13 +317,20 @@
     if (shouldRotate) {
       let i = 0;
       const rotateMs = 5200;
-      const fadeMs = 260;
+      const fadeMs = 340;
       window.setInterval(() => {
-        i = (i + 1) % heroShots.length;
+        const next = (i + 1) % heroShots.length;
         heroRotatorImg.classList.add("is-switching");
         window.setTimeout(() => {
-          setHeroShot(heroShots[i]);
-          heroRotatorImg.classList.remove("is-switching");
+          // Swap while fully faded out.
+          setHeroShot(heroShots[next]);
+          i = next;
+          // Let the browser paint the new src before fading back in.
+          window.requestAnimationFrame(() => {
+            window.requestAnimationFrame(() => {
+              heroRotatorImg.classList.remove("is-switching");
+            });
+          });
         }, fadeMs);
       }, rotateMs);
     }
