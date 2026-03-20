@@ -42,6 +42,31 @@
   const initialThemeKey = getStoredThemeKey();
   applySiteThemeClass(initialThemeKey);
 
+  const SITE_BASE_URL = "https://pivotapp.com";
+  const currentPath = window.location.pathname.split("/").pop() || "index.html";
+
+  // Lightweight analytics hook: emits to dataLayer and custom event.
+  const emitAnalyticsEvent = (eventName, payload = {}) => {
+    const data = {
+      event: eventName,
+      page: currentPath,
+      ts: Date.now(),
+      ...payload
+    };
+
+    if (Array.isArray(window.dataLayer)) {
+      window.dataLayer.push(data);
+    }
+    window.dispatchEvent(new CustomEvent("pivot:analytics", { detail: data }));
+  };
+
+  // Lazy-load non-critical screenshots.
+  $$(".shot-img").forEach((img) => {
+    if (!img || img.id === "heroShotImg") return;
+    if (!img.hasAttribute("loading")) img.setAttribute("loading", "lazy");
+    if (!img.hasAttribute("decoding")) img.setAttribute("decoding", "async");
+  });
+
   // If the user drags a gallery, we suppress the next click so it doesn't
   // accidentally open the screenshot lightbox.
   let suppressShotClick = false;
@@ -95,6 +120,25 @@
     });
   });
 
+  // CTA tracking: prepares event hooks for analytics tools.
+  $$("a, button").forEach((el) => {
+    el.addEventListener("click", () => {
+      const href = (el.getAttribute("href") || "").trim();
+      const label = (el.textContent || "").trim().replace(/\s+/g, " ").slice(0, 120);
+      const isAppStore = href.includes("app-store") || /app store/i.test(label);
+      const isTestFlight = href.includes("testflight.apple.com") || /testflight/i.test(label);
+      const isDownload = isAppStore || isTestFlight || href.includes("#download") || /download pivot/i.test(label);
+
+      if (!isDownload) return;
+
+      emitAnalyticsEvent("cta_click", {
+        cta_type: isAppStore ? "app_store" : isTestFlight ? "testflight" : "download",
+        cta_label: label || "Download",
+        href: href || null
+      });
+    });
+  });
+
   // Contact form placeholder behavior (no backend required)
   const form = $("#contactForm");
   const status = $("#contactStatus");
@@ -116,12 +160,14 @@
 
       if (isPlaceholder) {
         window.location.href = `mailto:hello@pivotapp.com?subject=${subject}&body=${body}`;
+        emitAnalyticsEvent("contact_submit_mailto_fallback", { email });
         if (status) status.textContent = "Opening your email app…";
         return;
       }
 
       // Otherwise, submit normally (third-party endpoint / Formspree-like).
       if (status) status.textContent = "Sending…";
+      emitAnalyticsEvent("contact_submit", { has_name: Boolean(name), email_domain: email.includes("@") ? email.split("@")[1] : null });
       form.submit();
     });
   }
@@ -377,6 +423,7 @@
 
       setShowcaseShot(activeStep);
       if (heroShots[normalized]) setHeroShot(heroShots[normalized]);
+      emitAnalyticsEvent("theme_change", { theme: resolvedThemeKey, source: "home_theme_cards" });
     };
 
     // Prefer persisted theme index when available.
@@ -424,6 +471,11 @@
       if (appPartComingSoon) {
         appPartComingSoon.hidden = !isComingSoon;
       }
+
+      emitAnalyticsEvent("app_part_select", {
+        app_part: (stepEl.getAttribute("data-app-part") || "").toLowerCase(),
+        coming_soon: isComingSoon
+      });
     };
 
     setAppPart(appPartSteps[0]);
@@ -459,8 +511,39 @@
         applySiteThemeClass(key);
         setStoredThemeKey(key);
         refreshThemePickerState(key);
+        emitAnalyticsEvent("theme_change", { theme: key, source: "legal_theme_picker" });
       });
     });
+  }
+
+  // Mobile sticky download CTA (site-wide).
+  if (!document.getElementById("mobileStickyCta")) {
+    const appStoreHref =
+      document.querySelector('a[href*="app-store"]')?.getAttribute("href") ||
+      "https://example.com/app-store-link";
+    const testFlightHref =
+      document.querySelector('a[href*="testflight.apple.com"]')?.getAttribute("href") ||
+      "https://testflight.apple.com/join/REPLACE_ME";
+
+    const bar = document.createElement("div");
+    bar.id = "mobileStickyCta";
+    bar.className = "mobileStickyCta";
+    bar.innerHTML = `
+      <a class="mobileStickyBtn primary" href="${appStoreHref}" target="_blank" rel="noopener noreferrer">App Store</a>
+      <a class="mobileStickyBtn" href="${testFlightHref}" target="_blank" rel="noopener noreferrer">TestFlight</a>
+    `;
+    document.body.appendChild(bar);
+  }
+
+  // Footer year helper.
+  const footerBrand = document.querySelector(".footerBrandTag");
+  if (footerBrand && !document.getElementById("footerYear")) {
+    const year = new Date().getFullYear();
+    const yearEl = document.createElement("div");
+    yearEl.id = "footerYear";
+    yearEl.className = "footerYear";
+    yearEl.textContent = `© ${year} Pivot`;
+    footerBrand.insertAdjacentElement("afterend", yearEl);
   }
 
 })();
