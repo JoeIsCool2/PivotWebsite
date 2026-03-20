@@ -20,7 +20,7 @@
   <body class="theme-contact">
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <header class="nav">
+    <header class="nav navLanding">
       <div class="wrap nav-inner">
         <a class="brand" href="index.html" aria-label="Pivot home">
           <img class="brand-mark" src="assets/logo.svg" alt="" />
@@ -30,29 +30,7 @@
           </div>
         </a>
 
-        <nav class="nav-links" aria-label="Primary">
-          <a href="index.html">Home</a>
-          <a href="features.html">Features</a>
-          <a href="pro.html">Pro</a>
-          <a href="journal.html">Journal</a>
-          <a href="contact.html" aria-current="page">Contact</a>
-        </nav>
-
-        <button id="burger" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" type="button">
-          Menu
-        </button>
-      </div>
-
-      <div class="wrap">
-        <div id="mobileMenu" class="mobile-menu" role="region" aria-label="Mobile menu">
-          <a href="index.html" data-mobile-link="true">Home</a>
-          <a href="features.html" data-mobile-link="true">Features</a>
-          <a href="pro.html" data-mobile-link="true">Pro</a>
-          <a href="journal.html" data-mobile-link="true">Journal</a>
-          <a href="contact.html" data-mobile-link="true" aria-current="page">Contact</a>
-          <a href="privacy.html" data-mobile-link="true">Privacy</a>
-          <a href="terms.html" data-mobile-link="true">Terms</a>
-        </div>
+        <a class="btn btn-ctaStrong nav-cta" href="index.html#download">Download Pivot</a>
       </div>
     </header>
 
@@ -98,14 +76,15 @@
       </div>
     </main>
 
-    <footer>
-      <div class="wrap footer-inner">
+    <footer class="footerFinal">
+      <div class="wrap footer-inner footerFinalInner">
         <div>
           <div class="footerBrandName">Pivot</div>
           <div class="footerBrandTag">Focus • Vent • Move • Journal</div>
         </div>
-        <div class="footerRight">
-          <div class="downloadBadges footerDownloadBadges" aria-label="Download options">
+
+        <div class="footerFinalRight">
+          <div class="downloadBadges footerDownloadBadges" aria-label="Final download options">
             <a
               class="downloadBadge"
               href="https://example.com/app-store-link"
@@ -125,6 +104,21 @@
               TestFlight build
             </a>
           </div>
+
+          <div class="qrBlock" data-qr-url="https://example.com/app-store-link">
+            <div class="qrTitle">Scan to download</div>
+            <img
+              id="qrCode"
+              class="qrImg"
+              src=""
+              alt="Scan QR code to download Pivot"
+              loading="lazy"
+            />
+            <div class="muted fs13 mt10">
+              Desktop users: scan, then install.
+            </div>
+          </div>
+
           <div class="footer-links">
             <a href="privacy.html">Privacy</a>
             <a href="terms.html">Terms</a>
