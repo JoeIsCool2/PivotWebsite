@@ -393,17 +393,5 @@
     });
   }
 
-  // Footer QR code: use a simple QR API so the page is still static (no build step).
-  // QR content points at the App Store placeholder URL until you replace it.
-  const qrCodeImg = document.getElementById("qrCode");
-  if (qrCodeImg) {
-    const qrBlock = qrCodeImg.closest(".qrBlock");
-    const qrData = (qrBlock && qrBlock.getAttribute("data-qr-url")) || "";
-    if (qrData) {
-      const size = 210;
-      const encoded = encodeURIComponent(qrData);
-      qrCodeImg.src = `https://chart.googleapis.com/chart?cht=qr&chs=${size}x${size}&chl=${encoded}`;
-    }
-  }
 })();
 

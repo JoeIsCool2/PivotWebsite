@@ -830,31 +830,8 @@ input:focus, textarea:focus{
 }
 .footerFinalRight{
   display: grid;
-  gap: 14px;
+  gap: 8px;
   justify-items: end;
-}
-.footerDownloadBadges{
-  justify-content: flex-end;
-}
-.qrBlock{
-  display: none;
-  width: 210px;
-}
-.qrTitle{
-  font-weight: 950;
-  margin-bottom: 8px;
-}
-.qrImg{
-  width: 210px;
-  height: 210px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,.18);
-  background: rgba(0,0,0,.10);
-  object-fit: contain;
-}
-
-@media (min-width: 901px){
-  .qrBlock{ display: block; }
 }
 
 @media (max-width: 900px){
@@ -875,7 +852,6 @@ input:focus, textarea:focus{
   .showcaseGrid{ grid-template-columns: 1fr; }
   .stickyPhone{ position: relative; top: auto; }
   .socialProofGrid{ grid-template-columns: 1fr; }
-  .qrBlock{ display: none; }
 
   .footerRight{ justify-items: start; }
 }
