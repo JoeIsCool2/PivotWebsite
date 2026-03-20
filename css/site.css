@@ -7,6 +7,7 @@
   --surface-2: rgba(255,255,255,.14);
   --surface-3: rgba(0,0,0,.12);
   --surface-stroke: rgba(255,255,255,.18);
+  --active-accent: #8B5CF6;
   --nav-bg-top: rgba(0,0,0,.45);
   --nav-bg-bottom: rgba(0,0,0,.16);
   --nav-border: rgba(255,255,255,.14);
@@ -61,6 +62,7 @@ body.site-theme-breathe{
   --nav-bg-top: rgba(255,255,255,.82);
   --nav-bg-bottom: rgba(255,255,255,.62);
   --nav-border: rgba(15,23,42,.12);
+  --active-accent: #005B9F;
   --grad-a: #E0F7FA;
   --grad-b: #80DEEA;
 }
@@ -75,6 +77,7 @@ body.site-theme-grounded-earth{
   --nav-bg-top: rgba(255,255,255,.82);
   --nav-bg-bottom: rgba(255,255,255,.62);
   --nav-border: rgba(62,39,35,.12);
+  --active-accent: #2E4F4F;
   --grad-a: #F5F5DC;
   --grad-b: #DEDEBC;
 }
@@ -89,6 +92,7 @@ body.site-theme-sunset-wind-down{
   --nav-bg-top: rgba(28,14,56,.62);
   --nav-bg-bottom: rgba(74,0,224,.30);
   --nav-border: rgba(255,255,255,.18);
+  --active-accent: #FFB300;
   --grad-a: #4A00E0;
   --grad-b: #FF9A9E;
 }
@@ -103,6 +107,7 @@ body.site-theme-zen-garden{
   --nav-bg-top: rgba(255,255,255,.86);
   --nav-bg-bottom: rgba(255,255,255,.66);
   --nav-border: rgba(31,41,55,.10);
+  --active-accent: #607D8B;
   --grad-a: #ECE9E6;
   --grad-b: #FFFFFF;
 }
@@ -570,7 +575,14 @@ input:focus, textarea:focus{
 }
 .themeChip.is-active{
   background: var(--surface-2);
-  box-shadow: 0 0 0 2px var(--surface-1) inset;
+  border-color: var(--active-accent);
+  color: var(--text-strong);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--active-accent) 30%, transparent) inset;
+}
+.themeChip.is-active::before{
+  content: "●";
+  color: var(--active-accent);
+  margin-right: 6px;
 }
 
 .pill{
@@ -877,9 +889,24 @@ input:focus, textarea:focus{
   font-size: 14px;
 }
 .showcaseStep.is-active{
-  border-color: var(--surface-stroke);
+  border-color: var(--active-accent);
   background: var(--surface-2);
   transform: translateY(-1px);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--active-accent) 28%, transparent) inset;
+}
+.showcaseStep.is-active h3{
+  color: var(--text-strong);
+}
+.showcaseStep.is-active::before{
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 999px;
+  background: var(--active-accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--active-accent) 30%, transparent);
+  vertical-align: middle;
 }
 
 .showcaseStep:focus-visible{
