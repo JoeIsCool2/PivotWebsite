@@ -397,6 +397,48 @@
 
   }
 
+  // App parts explorer (Focus / Vent / Journal / Move / Pro).
+  const appPartSteps = $$("[data-app-part]");
+  const appPartImg = document.getElementById("appPartShotImg");
+  const appPartComingSoon = document.getElementById("appPartComingSoon");
+
+  if (appPartSteps.length > 0 && appPartImg) {
+    const setAppPart = (stepEl) => {
+      if (!stepEl) return;
+      const src = stepEl.getAttribute("data-app-src");
+      const title = stepEl.getAttribute("data-app-title") || "App part";
+      const isComingSoon = stepEl.getAttribute("data-app-coming-soon") === "true";
+
+      appPartSteps.forEach((el) => {
+        const isActive = el === stepEl;
+        el.classList.toggle("is-active", isActive);
+        el.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+
+      if (src) {
+        appPartImg.src = src;
+        appPartImg.alt = `${title} preview`;
+        appPartImg.setAttribute("data-shot-title", title);
+      }
+
+      if (appPartComingSoon) {
+        appPartComingSoon.hidden = !isComingSoon;
+      }
+    };
+
+    setAppPart(appPartSteps[0]);
+
+    appPartSteps.forEach((stepEl) => {
+      stepEl.addEventListener("click", () => setAppPart(stepEl));
+      stepEl.addEventListener("keydown", (ev) => {
+        if (ev.key === "Enter" || ev.key === " ") {
+          ev.preventDefault();
+          setAppPart(stepEl);
+        }
+      });
+    });
+  }
+
   // Theme picker controls for non-landing pages.
   const themePickers = $$("[data-theme-select]");
   if (themePickers.length > 0) {
