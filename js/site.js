@@ -7,18 +7,37 @@
     "site-theme-sunset-wind-down",
     "site-theme-zen-garden"
   ];
+  const darkThemeKeys = new Set(["sunset-wind-down"]);
   const themeKeys = ["breathe", "grounded-earth", "sunset-wind-down", "zen-garden"];
   const THEME_STORAGE_KEY = "pivotSiteTheme";
+  const ICON_LIGHT_PATH = "assets/app-icon.png";
+  const ICON_DARK_PATH = "assets/app-icon-dark.png";
 
   const normalizeThemeKey = (raw) => {
     const key = (raw || "").toLowerCase().trim();
     return themeKeys.includes(key) ? key : "breathe";
   };
 
+  const updateThemeIconAssets = (themeKey) => {
+    const useDarkIcon = darkThemeKeys.has(themeKey);
+    const iconPath = useDarkIcon ? ICON_DARK_PATH : ICON_LIGHT_PATH;
+
+    document.querySelectorAll(".brand-mark").forEach((img) => {
+      if (img.getAttribute("src") !== iconPath) img.setAttribute("src", iconPath);
+    });
+
+    const favicon = document.querySelector("link[rel='icon']");
+    if (favicon && favicon.getAttribute("href") !== iconPath) {
+      favicon.setAttribute("href", iconPath);
+      favicon.setAttribute("type", "image/png");
+    }
+  };
+
   const applySiteThemeClass = (themeKey) => {
     const normalized = normalizeThemeKey(themeKey);
     document.body.classList.remove(...siteThemeClasses);
     document.body.classList.add(`site-theme-${normalized}`);
+    updateThemeIconAssets(normalized);
     return normalized;
   };
 

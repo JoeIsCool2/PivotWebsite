@@ -106,11 +106,12 @@ html, body{
 /* Footer brand helpers */
 .footerBrandName{
   font-weight: 800;
-  color: rgba(255,255,255,.88);
+  color: var(--text-strong);
 }
 .footerBrandTag{
   font-size: 13px;
   margin-top: 6px;
+  color: var(--muted);
 }
 
 /* Legal page titles */
@@ -148,16 +149,17 @@ h1,h2,h3,p{ margin: 0; }
   gap: 10px;
   border-radius: 16px;
   padding: 12px 14px;
-  border: 1px solid rgba(255,255,255,.16);
-  background: rgba(255,255,255,.06);
+  border: 1px solid var(--surface-stroke);
+  background: var(--surface-1);
   text-decoration: none;
-  color: var(--text);
+  color: var(--text-strong);
   font-weight: 800;
   letter-spacing: -0.01em;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .downloadBadge:hover{
-  background: rgba(255,255,255,.09);
+  background: var(--surface-2);
 }
 
 .downloadBadge .small{
