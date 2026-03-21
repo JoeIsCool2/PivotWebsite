@@ -802,8 +802,7 @@ input:focus, textarea:focus{
 }
 
 /* Landing phone screenshots are decorative (lightbox is disabled for these). */
-#heroShotImg,
-#showcaseShotImg{
+#heroShotImg{
   cursor: default;
 }
 .shot-caption{
@@ -960,14 +959,44 @@ input:focus, textarea:focus{
   margin-top: 18px;
 }
 .landingHeroPhone{
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+.heroThemeSteps{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  max-width: min(360px, 100%);
+}
+.heroThemeStep{
+  flex: 1 1 calc(50% - 4px);
+  min-width: min(140px, 42vw);
+  max-width: 100%;
+  padding: 10px 12px;
+  text-align: center;
+}
+.heroThemeStep h3{
+  margin: 0;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+.heroThemeStep p{
+  display: none;
+}
+.heroThemeStep.is-active::before{
+  vertical-align: middle;
 }
 .heroShotsPreload{
   display: none;
 }
 #heroShotImg,
-#showcaseShotImg,
 #appPartShotImg{
   transition: opacity 0.3s ease;
 }
@@ -1312,7 +1341,6 @@ input:focus, textarea:focus{
 @media (prefers-reduced-motion: reduce){
   .fade{ transition: none; }
   #heroShotImg,
-  #showcaseShotImg,
   #appPartShotImg{
     transition: none;
   }

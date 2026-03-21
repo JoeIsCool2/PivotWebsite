@@ -396,8 +396,8 @@
       // Landing hero/sticky phones are decorative in this setup and should not open the lightbox.
       // (Only screenshot galleries should.)
       const imgId = imgEl.getAttribute("id") || "";
-      if (imgId === "heroShotImg" || imgId === "showcaseShotImg") return;
-      if (imgEl.closest(".landingHeroPhone") || imgEl.closest("#showcase")) return;
+      if (imgId === "heroShotImg") return;
+      if (imgEl.closest(".landingHeroPhone")) return;
 
       const shotSrc = imgEl.getAttribute("src");
       const shotTitle = imgEl.getAttribute("data-shot-title") || imgEl.getAttribute("alt") || "Screenshot";
@@ -464,22 +464,10 @@
     });
   };
 
-  // Sticky showcase: click-driven, and synced with hero + page theme.
+  // Hero theme picker: click-driven, synced with hero screenshot + page theme.
   const showcaseSteps = $$("[data-showcase-step][data-showcase-src]");
-  const showcaseImg = document.getElementById("showcaseShotImg");
 
-  const setShowcaseShot = (stepEl) => {
-    if (!showcaseImg || !stepEl) return;
-    const src = stepEl.getAttribute("data-showcase-src");
-    const title = stepEl.getAttribute("data-showcase-title") || "Screenshot";
-    if (!src) return;
-    fadeSwapShot(showcaseImg, src, (el) => {
-      el.setAttribute("alt", title);
-      el.setAttribute("data-shot-title", title);
-    });
-  };
-
-  if (showcaseSteps.length > 0 && showcaseImg && heroRotatorImg && heroShots.length > 0) {
+  if (showcaseSteps.length > 0 && heroRotatorImg && heroShots.length > 0) {
     const applyThemeByIndex = (index) => {
       const normalized = ((index % showcaseSteps.length) + showcaseSteps.length) % showcaseSteps.length;
 
@@ -495,7 +483,6 @@
       applySiteThemeClass(resolvedThemeKey);
       setStoredThemeKey(resolvedThemeKey);
 
-      setShowcaseShot(activeStep);
       if (heroShots[normalized]) setHeroShot(heroShots[normalized]);
       emitAnalyticsEvent("theme_change", { theme: resolvedThemeKey, source: "home_theme_cards" });
     };
