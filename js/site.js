@@ -425,14 +425,43 @@
     );
   }
 
+  let shotSwapId = 0;
+  const fadeSwapShot = (img, newSrc, setAttrs) => {
+    if (!img || !newSrc || img.getAttribute("src") === newSrc) return;
+    const id = ++shotSwapId;
+    if (prefersReducedMotion()) {
+      img.src = newSrc;
+      if (setAttrs) setAttrs(img);
+      return;
+    }
+    const done = () => {
+      if (id !== shotSwapId) return;
+      img.src = newSrc;
+      if (setAttrs) setAttrs(img);
+      img.style.opacity = "1";
+    };
+    img.style.opacity = "0";
+    const onEnd = (e) => {
+      if (e.target !== img) return;
+      img.removeEventListener("transitionend", onEnd);
+      done();
+    };
+    img.addEventListener("transitionend", onEnd);
+    window.setTimeout(() => {
+      img.removeEventListener("transitionend", onEnd);
+      if (id === shotSwapId && img.style.opacity === "0") done();
+    }, 350);
+  };
+
   const setHeroShot = (shotEl) => {
     if (!heroRotatorImg || !shotEl) return;
     const src = shotEl.getAttribute("data-hero-shot-src");
     const title = shotEl.getAttribute("data-hero-shot-title") || "Screenshot";
     if (!src) return;
-    heroRotatorImg.src = src;
-    heroRotatorImg.setAttribute("alt", title);
-    heroRotatorImg.setAttribute("data-shot-title", title);
+    fadeSwapShot(heroRotatorImg, src, (el) => {
+      el.setAttribute("alt", title);
+      el.setAttribute("data-shot-title", title);
+    });
   };
 
   // Sticky showcase: click-driven, and synced with hero + page theme.
@@ -444,9 +473,10 @@
     const src = stepEl.getAttribute("data-showcase-src");
     const title = stepEl.getAttribute("data-showcase-title") || "Screenshot";
     if (!src) return;
-    showcaseImg.src = src;
-    showcaseImg.setAttribute("alt", title);
-    showcaseImg.setAttribute("data-shot-title", title);
+    fadeSwapShot(showcaseImg, src, (el) => {
+      el.setAttribute("alt", title);
+      el.setAttribute("data-shot-title", title);
+    });
   };
 
   if (showcaseSteps.length > 0 && showcaseImg && heroRotatorImg && heroShots.length > 0) {
@@ -507,9 +537,10 @@
       });
 
       if (src) {
-        appPartImg.src = src;
-        appPartImg.alt = `${title} preview`;
-        appPartImg.setAttribute("data-shot-title", title);
+        fadeSwapShot(appPartImg, src, (el) => {
+          el.alt = `${title} preview`;
+          el.setAttribute("data-shot-title", title);
+        });
       }
 
       if (appPartComingSoon) {
