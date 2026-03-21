@@ -18,12 +18,37 @@
     return themeKeys.includes(key) ? key : "breathe";
   };
 
+  const prefersReducedMotion = () =>
+    window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)").matches : false;
+
   const updateThemeIconAssets = (themeKey) => {
     const useDarkIcon = darkThemeKeys.has(themeKey);
     const iconPath = useDarkIcon ? ICON_DARK_PATH : ICON_LIGHT_PATH;
 
     document.querySelectorAll(".brand-mark").forEach((img) => {
-      if (img.getAttribute("src") !== iconPath) img.setAttribute("src", iconPath);
+      if (img.getAttribute("src") === iconPath) return;
+
+      const swapSrc = () => {
+        img.setAttribute("src", iconPath);
+        const finish = () => {
+          img.style.opacity = "1";
+          img.removeEventListener("load", finish);
+          img.removeEventListener("error", finish);
+        };
+        img.addEventListener("load", finish, { once: true });
+        img.addEventListener("error", finish, { once: true });
+        if (img.complete) finish();
+      };
+
+      if (prefersReducedMotion()) {
+        swapSrc();
+        return;
+      }
+
+      img.style.opacity = "0";
+      window.setTimeout(() => {
+        swapSrc();
+      }, 200);
     });
 
     const favicon = document.querySelector("link[rel='icon']");

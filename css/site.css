@@ -1,4 +1,72 @@
 /* Pivot marketing site styles (static). */
+
+/* Animate theme tokens smoothly (supported in modern Safari / Chrome / Firefox). */
+@property --grad-a {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #1d4ed8;
+}
+@property --grad-b {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #2dd4bf;
+}
+@property --text {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(255, 255, 255, 0.92);
+}
+@property --muted {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(255, 255, 255, 0.72);
+}
+@property --text-strong {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(255, 255, 255, 0.96);
+}
+@property --surface-1 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(255, 255, 255, 0.08);
+}
+@property --surface-2 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(255, 255, 255, 0.14);
+}
+@property --surface-3 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(0, 0, 0, 0.12);
+}
+@property --surface-stroke {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(255, 255, 255, 0.18);
+}
+@property --nav-bg-top {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(0, 0, 0, 0.45);
+}
+@property --nav-bg-bottom {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(0, 0, 0, 0.16);
+}
+@property --nav-border {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(255, 255, 255, 0.14);
+}
+@property --active-accent {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #8b5cf6;
+}
+
 :root{
   --text: rgba(255,255,255,.92);
   --muted: rgba(255,255,255,.72);
@@ -54,6 +122,41 @@ body:before{
   z-index: -1;
   pointer-events: none;
   background: linear-gradient(120deg, var(--grad-a), var(--grad-b));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body {
+    transition:
+      --grad-a 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+      --grad-b 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+      --text 0.45s ease,
+      --muted 0.45s ease,
+      --text-strong 0.45s ease,
+      --surface-1 0.45s ease,
+      --surface-2 0.45s ease,
+      --surface-3 0.45s ease,
+      --surface-stroke 0.45s ease,
+      --nav-bg-top 0.45s ease,
+      --nav-bg-bottom 0.45s ease,
+      --nav-border 0.45s ease,
+      --active-accent 0.45s ease;
+  }
+
+  .nav {
+    transition:
+      background 0.45s ease,
+      border-color 0.45s ease;
+  }
+
+  .brand-mark {
+    transition: opacity 0.28s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-mark {
+    transition: none;
+  }
 }
 
 body.site-theme-breathe{
