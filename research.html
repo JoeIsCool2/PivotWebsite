@@ -81,22 +81,41 @@
             planning, expression, movement, and self-monitoring. This page is designed so you can quickly see study type, strength, and practical product
             relevance.
           </p>
-          <div class="researchJump">
-            <a href="#howShown">How research is shown</a>
-            <a href="#focusEvidence">Focus evidence</a>
-            <a href="#ventEvidence">Vent evidence</a>
-            <a href="#moveEvidence">Move evidence</a>
-            <a href="#journalEvidence">Journal evidence</a>
-          </div>
         </div>
-
-        <section id="howShown" class="glassCard fade mt14">
+        <div class="researchLayout mt14">
+          <aside class="researchToc fade" aria-label="Research table of contents">
+            <h2>On this page</h2>
+            <ul>
+              <li><a href="#howShown">How to read this page</a></li>
+              <li><a href="#focusEvidence">Focus evidence</a></li>
+              <li><a href="#ventEvidence">Vent evidence</a></li>
+              <li><a href="#moveEvidence">Move evidence</a></li>
+              <li><a href="#journalEvidence">Journal evidence</a></li>
+              <li><a href="#methodology">Methodology</a></li>
+            </ul>
+          </aside>
+          <div class="researchMain">
+        <section id="howShown" class="glassCard fade">
           <div class="section-head">
-            <h2>How research is presented here</h2>
+            <h2>How to read this page</h2>
             <p>
               We use transparent evidence communication: balanced claims, explicit uncertainty, and clear study-type labeling instead of one-sided persuasion.
             </p>
           </div>
+          <div class="evidenceBadgeRow">
+            <span class="evidenceStrength strong">Strong support</span>
+            <span class="evidenceStrength moderate">Moderate support</span>
+            <span class="evidenceStrength emerging">Emerging support</span>
+          </div>
+          <div class="researchFilterBar" role="group" aria-label="Filter evidence cards by support strength">
+            <button class="researchFilterBtn is-active" type="button" data-filter-strength="all" aria-pressed="true">All</button>
+            <button class="researchFilterBtn" type="button" data-filter-strength="strong" aria-pressed="false">Strong</button>
+            <button class="researchFilterBtn" type="button" data-filter-strength="moderate" aria-pressed="false">Moderate</button>
+            <button class="researchFilterBtn" type="button" data-filter-strength="emerging" aria-pressed="false">Emerging</button>
+          </div>
+          <p class="muted mt10 fs13">
+            Each source block follows the same structure: claim -> evidence summary -> limits -> direct relevance to Pivot.
+          </p>
           <ul class="list">
             <li>
               Kerr JR, et al. (2022). <b>Transparent communication of evidence does not undermine public trust in evidence</b>.
@@ -119,10 +138,16 @@
         <section id="focusEvidence" class="card callout fade mt14">
           <h2 class="sectionTitle">Focus evidence (planning and follow-through)</h2>
           <div class="evidenceGrid mt12">
-            <article class="evidenceCard">
+            <article class="evidenceCard" data-evidence-strength="strong">
               <div class="evidenceTop">
                 <span class="evidenceTag">Meta-analysis</span>
                 <span class="fs13 muted">High synthesis strength</span>
+              </div>
+              <div class="claimBlock">
+                <p><b>Pivot claim:</b> If users set a specific "if-then" action, they are more likely to follow through offline.</p>
+              </div>
+              <div class="evidenceBadgeRow">
+                <span class="evidenceStrength strong">Strong support</span>
               </div>
               <h3>Implementation intentions improve goal attainment</h3>
               <p class="evidenceMeta">Gollwitzer PM, Sheeran P. Advances in Experimental Social Psychology (2006)</p>
@@ -161,10 +186,16 @@
         <section id="ventEvidence" class="card callout fade mt14">
           <h2 class="sectionTitle">Vent evidence (structured expression)</h2>
           <div class="evidenceGrid mt12">
-            <article class="evidenceCard">
+            <article class="evidenceCard" data-evidence-strength="moderate">
               <div class="evidenceTop">
                 <span class="evidenceTag">Meta-analysis</span>
                 <span class="fs13 muted">Longitudinal follow-up included</span>
+              </div>
+              <div class="claimBlock">
+                <p><b>Pivot claim:</b> Short, repeated vent/reflection sessions can support emotional processing over time.</p>
+              </div>
+              <div class="evidenceBadgeRow">
+                <span class="evidenceStrength moderate">Moderate support</span>
               </div>
               <h3>Expressive writing shows delayed, durable symptom reduction</h3>
               <p class="evidenceMeta">Meta-analysis of 31 RCT studies (N=4012), British Journal of Clinical Psychology (2022)</p>
@@ -197,10 +228,16 @@
                 </div>
               </details>
             </article>
-            <article class="evidenceCard">
+            <article class="evidenceCard" data-evidence-strength="moderate">
               <div class="evidenceTop">
                 <span class="evidenceTag">Foundational meta-analysis</span>
                 <span class="fs13 muted">Broad outcome coverage</span>
+              </div>
+              <div class="claimBlock">
+                <p><b>Pivot claim:</b> Guided emotional expression is more useful than unstructured mental rumination.</p>
+              </div>
+              <div class="evidenceBadgeRow">
+                <span class="evidenceStrength moderate">Moderate support</span>
               </div>
               <h3>Written emotional expression is linked to improved health outcomes</h3>
               <p class="evidenceMeta">Smyth JM (1998); Frattaroli J (2006)</p>
@@ -241,10 +278,16 @@
         <section id="moveEvidence" class="card callout fade mt14">
           <h2 class="sectionTitle">Move evidence (walking and mood)</h2>
           <div class="evidenceGrid mt12">
-            <article class="evidenceCard">
+            <article class="evidenceCard" data-evidence-strength="moderate">
               <div class="evidenceTop">
                 <span class="evidenceTag">Experimental study</span>
                 <span class="fs13 muted">Nature walk vs urban walk</span>
+              </div>
+              <div class="claimBlock">
+                <p><b>Pivot claim:</b> Outdoor walking + short reflection can interrupt rumination better than staying screen-bound.</p>
+              </div>
+              <div class="evidenceBadgeRow">
+                <span class="evidenceStrength moderate">Moderate support</span>
               </div>
               <h3>Nature walking reduced rumination markers</h3>
               <p class="evidenceMeta">Bratman GN, et al. PNAS (2015)</p>
@@ -277,10 +320,16 @@
                 </div>
               </details>
             </article>
-            <article class="evidenceCard">
+            <article class="evidenceCard" data-evidence-strength="moderate">
               <div class="evidenceTop">
                 <span class="evidenceTag">Systematic review</span>
                 <span class="fs13 muted">Prospective cohorts</span>
+              </div>
+              <div class="claimBlock">
+                <p><b>Pivot claim:</b> Encouraging regular movement is a reasonable strategy for protecting mood over time.</p>
+              </div>
+              <div class="evidenceBadgeRow">
+                <span class="evidenceStrength moderate">Moderate support</span>
               </div>
               <h3>Physical activity is associated with lower future depression risk</h3>
               <p class="evidenceMeta">Mammen G, Faulkner G. AJPM (2013)</p>
@@ -311,10 +360,16 @@
                 </div>
               </details>
             </article>
-            <article class="evidenceCard">
+            <article class="evidenceCard" data-evidence-strength="strong">
               <div class="evidenceTop">
                 <span class="evidenceTag">Meta-analysis</span>
                 <span class="fs13 muted">49 cohorts, 266,939 participants</span>
+              </div>
+              <div class="claimBlock">
+                <p><b>Pivot claim:</b> Move should be a core behavior loop, not an optional novelty feature.</p>
+              </div>
+              <div class="evidenceBadgeRow">
+                <span class="evidenceStrength strong">Strong support</span>
               </div>
               <h3>Higher activity levels linked to lower incident depression</h3>
               <p class="evidenceMeta">Schuch FB, et al. American Journal of Psychiatry (2018)</p>
@@ -354,10 +409,16 @@
         <section id="journalEvidence" class="card callout fade mt14">
           <h2 class="sectionTitle">Journal evidence (self-monitoring and review)</h2>
           <div class="evidenceGrid mt12">
-            <article class="evidenceCard">
+            <article class="evidenceCard" data-evidence-strength="emerging">
               <div class="evidenceTop">
                 <span class="evidenceTag">Systematic review + meta-analysis</span>
                 <span class="fs13 muted">Digital self-monitoring</span>
+              </div>
+              <div class="claimBlock">
+                <p><b>Pivot claim:</b> Journal should provide active summaries and tailored prompts, not passive logs.</p>
+              </div>
+              <div class="evidenceBadgeRow">
+                <span class="evidenceStrength moderate">Moderate support</span>
               </div>
               <h3>Self-monitoring + tailored feedback improves behavior outcomes</h3>
               <p class="evidenceMeta">Review of RCTs in adults with overweight/obesity (2021)</p>
@@ -411,6 +472,23 @@
             do not by themselves prove the full app will work equally for every individual.
           </p>
         </section>
+        <section id="methodology" class="glassCard fade methodologyBlock">
+          <div class="section-head">
+            <h2>Methodology and scope</h2>
+            <p>How we selected and interpreted sources for this page.</p>
+          </div>
+          <ul class="list">
+            <li>Priority was given to meta-analyses, systematic reviews, and well-powered prospective studies.</li>
+            <li>Sources were selected for relevance to Pivot mechanisms: planning, expression, movement, and self-monitoring.</li>
+            <li>Evidence labels describe support for design direction, not guaranteed individual outcomes.</li>
+            <li>Research interpretation is updated over time as newer high-quality evidence is published.</li>
+          </ul>
+          <p class="muted fs13 mt10">
+            Last reviewed: March 2026.
+          </p>
+        </section>
+          </div>
+        </div>
       </div>
     </main>
 
@@ -431,6 +509,32 @@
       </div>
     </footer>
 
+    <script>
+      (() => {
+        const filterButtons = Array.from(document.querySelectorAll(".researchFilterBtn[data-filter-strength]"));
+        const evidenceCards = Array.from(document.querySelectorAll(".evidenceCard[data-evidence-strength]"));
+        if (filterButtons.length === 0 || evidenceCards.length === 0) return;
+
+        const applyFilter = (strength) => {
+          const normalized = (strength || "all").toLowerCase();
+          filterButtons.forEach((btn) => {
+            const active = btn.getAttribute("data-filter-strength") === normalized;
+            btn.classList.toggle("is-active", active);
+            btn.setAttribute("aria-pressed", active ? "true" : "false");
+          });
+
+          evidenceCards.forEach((card) => {
+            const cardStrength = (card.getAttribute("data-evidence-strength") || "").toLowerCase();
+            const show = normalized === "all" || cardStrength === normalized;
+            card.classList.toggle("is-filter-hidden", !show);
+          });
+        };
+
+        filterButtons.forEach((btn) => {
+          btn.addEventListener("click", () => applyFilter(btn.getAttribute("data-filter-strength")));
+        });
+      })();
+    </script>
     <script src="js/site.js"></script>
   </body>
 </html>

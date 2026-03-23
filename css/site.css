@@ -1274,6 +1274,115 @@ input:focus, textarea:focus{
   line-height: 1.6;
   font-size: 14px;
 }
+.researchLayout{
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+.researchToc{
+  position: sticky;
+  top: calc(var(--navH, 84px) + 12px);
+  border: 1px solid var(--surface-stroke);
+  border-radius: 14px;
+  background: var(--surface-1);
+  padding: 12px;
+}
+.researchToc h2{
+  font-size: 14px;
+  margin: 0;
+}
+.researchToc ul{
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+.researchToc a{
+  text-decoration: none;
+  font-size: 13px;
+  color: var(--text-strong);
+  padding: 8px 9px;
+  border-radius: 10px;
+}
+.researchToc a:hover{
+  background: var(--surface-2);
+}
+.researchMain{
+  min-width: 0;
+}
+.evidenceBadgeRow{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.evidenceStrength{
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid var(--surface-stroke);
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+.evidenceStrength.strong{
+  background: rgba(34,197,94,.18);
+}
+.evidenceStrength.moderate{
+  background: rgba(245,158,11,.22);
+}
+.evidenceStrength.emerging{
+  background: rgba(59,130,246,.2);
+}
+.claimBlock{
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--surface-stroke);
+  background: color-mix(in srgb, var(--surface-2) 80%, transparent);
+}
+.claimBlock p{
+  margin: 0;
+  color: var(--text);
+}
+.methodologyBlock{
+  margin-top: 14px;
+}
+.methodologyBlock p{
+  margin-top: 10px;
+}
+.researchFilterBar{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.researchFilterBtn{
+  border: 1px solid var(--surface-stroke);
+  background: var(--surface-1);
+  color: var(--text-strong);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.researchFilterBtn:hover{
+  background: var(--surface-2);
+}
+.researchFilterBtn.is-active{
+  background: var(--surface-2);
+  border-color: var(--active-accent);
+}
+.evidenceCard.is-filter-hidden{
+  display: none;
+}
 
 /* QR + final push footer */
 .footerFinal{
@@ -1336,6 +1445,11 @@ input:focus, textarea:focus{
   .grid3{ grid-template-columns: 1fr; }
   .two-col{ grid-template-columns: 1fr; }
   .shot-grid{ grid-template-columns: 1fr; }
+  .researchLayout{ grid-template-columns: 1fr; }
+  .researchToc{
+    position: relative;
+    top: auto;
+  }
   .stepper{ grid-template-columns: 1fr; }
   .lead{ max-width: 100%; font-size: 16px; }
   .section-head p{ max-width: 100%; }
