@@ -12,7 +12,7 @@
   const THEME_STORAGE_KEY = "pivotSiteTheme";
   const ICON_LIGHT_PATH = "assets/app-icon.png";
   const ICON_DARK_PATH = "assets/app-icon.png";
-  const SITE_SOCIAL_IMAGE = "assets/screenshots/focus-mock.svg";
+  const SITE_SOCIAL_IMAGE = "ScreenShots/Focus.PNG";
   const APP_STORE_URL = "https://apps.apple.com";
   const TESTFLIGHT_URL = "https://testflight.apple.com";
 
