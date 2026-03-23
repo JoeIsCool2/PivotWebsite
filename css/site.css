@@ -1239,6 +1239,41 @@ input:focus, textarea:focus{
   color: var(--text);
   line-height: 1.6;
 }
+.sourceDetails{
+  margin-top: 10px;
+  border: 1px solid var(--surface-stroke);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--surface-1) 86%, transparent);
+  overflow: hidden;
+}
+.sourceDetails summary{
+  cursor: pointer;
+  list-style: none;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-strong);
+}
+.sourceDetails summary::-webkit-details-marker{
+  display: none;
+}
+.sourceDetails summary::after{
+  content: " +";
+  float: right;
+}
+.sourceDetails[open] summary::after{
+  content: " -";
+}
+.sourceDetailsBody{
+  padding: 0 12px 12px;
+  border-top: 1px solid var(--surface-stroke);
+}
+.sourceDetailsBody p{
+  margin-top: 10px;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 14px;
+}
 
 /* QR + final push footer */
 .footerFinal{
