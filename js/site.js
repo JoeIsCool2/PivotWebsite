@@ -11,7 +11,10 @@
   const themeKeys = ["breathe", "grounded-earth", "sunset-wind-down", "zen-garden"];
   const THEME_STORAGE_KEY = "pivotSiteTheme";
   const ICON_LIGHT_PATH = "assets/app-icon.png";
-  const ICON_DARK_PATH = "assets/app-icon-dark.png";
+  const ICON_DARK_PATH = "assets/app-icon.png";
+  const SITE_SOCIAL_IMAGE = "assets/screenshots/focus-mock.svg";
+  const APP_STORE_URL = "https://apps.apple.com";
+  const TESTFLIGHT_URL = "https://testflight.apple.com";
 
   const normalizeThemeKey = (raw) => {
     const key = (raw || "").toLowerCase().trim();
@@ -205,12 +208,12 @@
       if (isPlaceholder) {
         window.location.href = `mailto:hello@pivotapp.com?subject=${subject}&body=${body}`;
         emitAnalyticsEvent("contact_submit_mailto_fallback", { email });
-        if (status) status.textContent = "Opening your email app…";
+        if (status) status.textContent = "Opening your email app with a prefilled message.";
         return;
       }
 
       // Otherwise, submit normally (third-party endpoint / Formspree-like).
-      if (status) status.textContent = "Sending…";
+      if (status) status.textContent = "Sending your message...";
       emitAnalyticsEvent("contact_submit", { has_name: Boolean(name), email_domain: email.includes("@") ? email.split("@")[1] : null });
       form.submit();
     });
@@ -581,21 +584,37 @@
   // Mobile sticky download CTA (site-wide).
   if (!document.getElementById("mobileStickyCta")) {
     const appStoreHref =
-      document.querySelector('a[href*="app-store"]')?.getAttribute("href") ||
-      "https://example.com/app-store-link";
+      document.querySelector('a[data-download="app-store"]')?.getAttribute("href") ||
+      APP_STORE_URL;
     const testFlightHref =
-      document.querySelector('a[href*="testflight.apple.com"]')?.getAttribute("href") ||
-      "https://testflight.apple.com/join/REPLACE_ME";
+      document.querySelector('a[data-download="testflight"]')?.getAttribute("href") ||
+      TESTFLIGHT_URL;
 
     const bar = document.createElement("div");
     bar.id = "mobileStickyCta";
     bar.className = "mobileStickyCta";
     bar.innerHTML = `
-      <a class="mobileStickyBtn primary" href="${appStoreHref}" target="_blank" rel="noopener noreferrer">App Store</a>
-      <a class="mobileStickyBtn" href="${testFlightHref}" target="_blank" rel="noopener noreferrer">TestFlight</a>
+      <a class="mobileStickyBtn primary" href="${appStoreHref}" target="_blank" rel="noopener noreferrer">View on App Store</a>
+      <a class="mobileStickyBtn" href="${testFlightHref}" target="_blank" rel="noopener noreferrer">Join TestFlight</a>
     `;
     document.body.appendChild(bar);
   }
+
+  // Keep social image metadata and favicon deterministic for all pages.
+  const ensureHeadAssets = () => {
+    const socialSelectors = [
+      'meta[property="og:image"]',
+      'meta[name="twitter:image"]'
+    ];
+    socialSelectors.forEach((selector) => {
+      document.querySelectorAll(selector).forEach((node) => {
+        if (node.getAttribute("content") !== SITE_SOCIAL_IMAGE) {
+          node.setAttribute("content", SITE_SOCIAL_IMAGE);
+        }
+      });
+    });
+  };
+  ensureHeadAssets();
 
   // Footer year helper.
   const footerBrand = document.querySelector(".footerBrandTag");

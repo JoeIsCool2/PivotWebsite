@@ -222,6 +222,15 @@ body.site-theme-zen-garden{
 
 a{ color: inherit; }
 
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+.downloadBadge:focus-visible,
+.mobileStickyBtn:focus-visible{
+  outline: 3px solid color-mix(in srgb, var(--active-accent) 45%, transparent);
+  outline-offset: 3px;
+}
+
 img{ max-width: 100%; height: auto; }
 
 .skip-link{
@@ -399,9 +408,14 @@ img{ max-width: 100%; height: auto; }
   text-decoration: none;
   font-weight: 750;
   font-size: 14px;
+  transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
 }
 .btn:hover{
   background: var(--surface-2);
+  transform: translateY(-1px);
+}
+.btn:active{
+  transform: translateY(0);
 }
 .btn-primary{
   border-color: var(--surface-stroke);
@@ -1033,6 +1047,7 @@ input:focus, textarea:focus{
   background: var(--surface-3);
   transition: border-color .2s ease, background .2s ease, transform .2s ease;
   cursor: pointer;
+  min-height: 52px;
 }
 .showcaseStep h3{
   font-size: 18px;
@@ -1195,10 +1210,17 @@ input:focus, textarea:focus{
   align-items: center;
   display: inline-flex;
   justify-content: center;
+  transition: transform .18s ease, background .18s ease, border-color .18s ease;
 }
 .mobileStickyBtn.primary{
   background: var(--surface-2);
   border-color: var(--active-accent);
+}
+.mobileStickyBtn:hover{
+  transform: translateY(-1px);
+}
+.mobileStickyBtn:active{
+  transform: translateY(0);
 }
 
 @media (max-width: 900px){
