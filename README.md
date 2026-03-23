@@ -8,6 +8,7 @@ This folder contains the Pivot marketing site as a static multi-page website (no
 - `features.html` (Focus / Vent / Move)
 - `pro.html` (Pivot Pro)
 - `journal.html` (Journal + weekly analysis overview)
+- `research.html` (scholarly evidence behind Pivot)
 - `privacy.html` and `terms.html` (placeholders)
 - `contact.html` (contact form UI)
 - Shared assets:

@@ -957,6 +957,14 @@ input:focus, textarea:focus{
 .navLanding .nav-cta{
   text-decoration: none;
 }
+.navLandingActions{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-ghost{
+  background: color-mix(in srgb, var(--surface-1) 82%, transparent);
+}
 
 /* Above-the-fold hero */
 .landingHeroGrid{
@@ -1284,6 +1292,9 @@ input:focus, textarea:focus{
   .navLanding .nav-inner{
     gap: 8px;
     padding: 10px 0;
+  }
+  .navLandingActions{
+    gap: 6px;
   }
   .navLanding .nav-cta{
     flex: 0 0 auto;
