@@ -10,6 +10,7 @@
   const darkThemeKeys = new Set(["sunset-wind-down"]);
   const themeKeys = ["breathe", "grounded-earth", "sunset-wind-down", "zen-garden"];
   const THEME_STORAGE_KEY = "pivotSiteTheme";
+  const CTA_VARIANT_STORAGE_KEY = "pivotCtaVariant";
   const ICON_LIGHT_PATH = "assets/app-icon.png";
   const ICON_DARK_PATH = "assets/app-icon.png";
   const SITE_SOCIAL_IMAGE = "ScreenShots/Focus.PNG";
@@ -83,6 +84,60 @@
     } catch {
       return "breathe";
     }
+  };
+
+  const getCtaVariantFromUrl = () => {
+    const params = new URLSearchParams(window.location.search);
+    const raw = (params.get("cta") || "").toLowerCase().trim();
+    if (raw === "a" || raw === "b") return raw;
+    return null;
+  };
+
+  const getStoredCtaVariant = () => {
+    try {
+      const value = (window.localStorage.getItem(CTA_VARIANT_STORAGE_KEY) || "").toLowerCase().trim();
+      return value === "a" || value === "b" ? value : null;
+    } catch {
+      return null;
+    }
+  };
+
+  const setStoredCtaVariant = (variant) => {
+    if (variant !== "a" && variant !== "b") return;
+    try {
+      window.localStorage.setItem(CTA_VARIANT_STORAGE_KEY, variant);
+    } catch {
+      // Ignore storage failures.
+    }
+  };
+
+  const resolveCtaVariant = () => {
+    const forced = getCtaVariantFromUrl();
+    if (forced) {
+      setStoredCtaVariant(forced);
+      return forced;
+    }
+
+    const stored = getStoredCtaVariant();
+    if (stored) return stored;
+
+    const assigned = Math.random() < 0.5 ? "a" : "b";
+    setStoredCtaVariant(assigned);
+    return assigned;
+  };
+
+  const applyCtaVariantCopy = (variant) => {
+    const nodes = document.querySelectorAll("[data-cta-a][data-cta-b]");
+    nodes.forEach((node) => {
+      const text = node.getAttribute(variant === "b" ? "data-cta-b" : "data-cta-a");
+      if (!text) return;
+      const target = node.querySelector(".small");
+      if (target) {
+        target.textContent = text;
+      } else {
+        node.textContent = text;
+      }
+    });
   };
 
   // Apply persisted theme as early as possible on every page.
@@ -185,6 +240,11 @@
       });
     });
   });
+
+  // Copy experiment hook for download-focused CTAs.
+  const activeCtaVariant = resolveCtaVariant();
+  applyCtaVariantCopy(activeCtaVariant);
+  emitAnalyticsEvent("cta_variant_assigned", { cta_variant: activeCtaVariant });
 
   // Contact form placeholder behavior (no backend required)
   const form = $("#contactForm");
