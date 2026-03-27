@@ -11,6 +11,7 @@
   const themeKeys = ["breathe", "grounded-earth", "sunset-wind-down", "zen-garden"];
   const THEME_STORAGE_KEY = "pivotSiteTheme";
   const CTA_VARIANT_STORAGE_KEY = "pivotCtaVariant";
+  const APP_PART_PREFS_KEY = "pivotAppPartPrefsV2";
   const ICON_LIGHT_PATH = "assets/app-icon.png";
   const ICON_DARK_PATH = "assets/app-icon.png";
   const SITE_SOCIAL_IMAGE = "ScreenShots/Focus.PNG";
@@ -245,6 +246,198 @@
   const activeCtaVariant = resolveCtaVariant();
   applyCtaVariantCopy(activeCtaVariant);
   emitAnalyticsEvent("cta_variant_assigned", { cta_variant: activeCtaVariant });
+
+  // Reflection-only Journal insights (deterministic, no AI).
+  const reflectionTimeline = document.getElementById("reflectionTimeline");
+  if (reflectionTimeline) {
+    const reflectionEmpty = document.getElementById("reflectionEmpty");
+    const entries = Array.from(reflectionTimeline.querySelectorAll("[data-reflection-entry='true']"));
+
+    const formatDateLabel = (date) =>
+      date.toLocaleString("en-US", {
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit"
+      });
+
+    const getWordCount = (text) => {
+      if (!text) return 0;
+      return text.trim().split(/\s+/).filter(Boolean).length;
+    };
+
+    const getTimeBucket = (hour) => {
+      if (hour < 12) return "Morning";
+      if (hour < 18) return "Afternoon";
+      return "Evening";
+    };
+
+    const renderChips = (targetId, chips, fallback) => {
+      const el = document.getElementById(targetId);
+      if (!el) return;
+      el.innerHTML = "";
+      if (!chips || chips.length === 0) {
+        const chip = document.createElement("span");
+        chip.className = "patternChip muted";
+        chip.textContent = fallback;
+        el.appendChild(chip);
+        return;
+      }
+      chips.forEach((text) => {
+        const chip = document.createElement("span");
+        chip.className = "patternChip";
+        chip.textContent = text;
+        el.appendChild(chip);
+      });
+    };
+
+    if (entries.length === 0) {
+      if (reflectionEmpty) reflectionEmpty.hidden = false;
+      reflectionTimeline.hidden = true;
+    } else {
+      if (reflectionEmpty) reflectionEmpty.hidden = true;
+      reflectionTimeline.hidden = false;
+    }
+
+    const now = new Date();
+    const last7Start = new Date(now);
+    last7Start.setDate(now.getDate() - 6);
+    last7Start.setHours(0, 0, 0, 0);
+
+    const parsedEntries = entries
+      .map((entry) => {
+        const ts = entry.getAttribute("data-reflection-ts") || "";
+        const source = entry.getAttribute("data-reflection-source") || "Journal";
+        const text = entry.getAttribute("data-reflection-text") || "";
+        const date = new Date(ts);
+        if (Number.isNaN(date.getTime())) return null;
+        return { entry, ts, source, text, date };
+      })
+      .filter(Boolean)
+      .sort((a, b) => b.date - a.date);
+
+    parsedEntries.forEach(({ entry, source, text, date }) => {
+      const topSource = entry.querySelector(".entryPill");
+      const topMeta = entry.querySelector(".entryMeta");
+      const body = entry.querySelector(".reflectionBody");
+      const toggle = entry.querySelector(".entryToggle");
+      const cleanText = text.trim();
+      const previewLimit = 140;
+      const isLong = cleanText.length > previewLimit;
+      const preview = isLong ? `${cleanText.slice(0, previewLimit).trimEnd()}...` : cleanText;
+
+      if (topSource) topSource.textContent = source;
+      if (topMeta) topMeta.textContent = formatDateLabel(date);
+      if (body) body.textContent = preview;
+
+      if (toggle && isLong && body) {
+        toggle.hidden = false;
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.addEventListener("click", () => {
+          const isOpen = toggle.getAttribute("aria-expanded") === "true";
+          toggle.setAttribute("aria-expanded", isOpen ? "false" : "true");
+          toggle.textContent = isOpen ? "Read more" : "Show less";
+          body.textContent = isOpen ? preview : cleanText;
+        });
+      } else if (toggle) {
+        toggle.hidden = true;
+      }
+    });
+
+    const thisWeekEntries = parsedEntries.filter(({ date }) => date >= last7Start && date <= now);
+    const thisWeekCount = thisWeekEntries.length;
+    const avgWords = thisWeekCount > 0
+      ? Math.round(thisWeekEntries.reduce((sum, item) => sum + getWordCount(item.text), 0) / thisWeekCount)
+      : 0;
+
+    const dayWindowCounts = new Map();
+    thisWeekEntries.forEach(({ date }) => {
+      const day = date.toLocaleDateString("en-US", { weekday: "short" });
+      const windowLabel = getTimeBucket(date.getHours());
+      const key = `${day} ${windowLabel}`;
+      dayWindowCounts.set(key, (dayWindowCounts.get(key) || 0) + 1);
+    });
+    const mostActiveWindow = dayWindowCounts.size > 0
+      ? [...dayWindowCounts.entries()].sort((a, b) => b[1] - a[1])[0][0]
+      : "-";
+
+    const daySet = new Set(
+      parsedEntries.map(({ date }) => date.toISOString().slice(0, 10))
+    );
+    let streak = 0;
+    const cursor = new Date(now);
+    cursor.setHours(0, 0, 0, 0);
+    while (daySet.has(cursor.toISOString().slice(0, 10))) {
+      streak += 1;
+      cursor.setDate(cursor.getDate() - 1);
+    }
+
+    const statEntriesWeek = document.getElementById("statEntriesWeek");
+    const statStreakDays = document.getElementById("statStreakDays");
+    const statAvgWords = document.getElementById("statAvgWords");
+    const statActiveWindow = document.getElementById("statActiveWindow");
+    if (statEntriesWeek) statEntriesWeek.textContent = String(thisWeekCount);
+    if (statStreakDays) statStreakDays.textContent = `${streak} day${streak === 1 ? "" : "s"}`;
+    if (statAvgWords) statAvgWords.textContent = `${avgWords} words`;
+    if (statActiveWindow) statActiveWindow.textContent = mostActiveWindow;
+
+    const shortCount = thisWeekEntries.filter((item) => getWordCount(item.text) < 25).length;
+    const mediumCount = thisWeekEntries.filter((item) => {
+      const count = getWordCount(item.text);
+      return count >= 25 && count < 60;
+    }).length;
+    const longCount = thisWeekEntries.filter((item) => getWordCount(item.text) >= 60).length;
+    renderChips(
+      "lengthPatternChips",
+      thisWeekCount > 0 ? [`Short ${shortCount}`, `Medium ${mediumCount}`, `Long ${longCount}`] : [],
+      "No entries yet"
+    );
+
+    const timeCounts = { Morning: 0, Afternoon: 0, Evening: 0 };
+    thisWeekEntries.forEach(({ date }) => {
+      const bucket = getTimeBucket(date.getHours());
+      timeCounts[bucket] += 1;
+    });
+    renderChips(
+      "timePatternChips",
+      thisWeekCount > 0 ? Object.keys(timeCounts).map((key) => `${key} ${timeCounts[key]}`) : [],
+      "No entries yet"
+    );
+
+    const keywordMap = {
+      focus: /\bfocus|task|priority\b/i,
+      stress: /\bstress|overwhelm|anxious\b/i,
+      sleep: /\bsleep|tired|rest\b/i,
+      walk: /\bwalk|outside|move\b/i,
+      work: /\bwork|project|study\b/i
+    };
+    const keywordCounts = new Map();
+    thisWeekEntries.forEach(({ text }) => {
+      Object.entries(keywordMap).forEach(([key, regex]) => {
+        if (regex.test(text)) {
+          keywordCounts.set(key, (keywordCounts.get(key) || 0) + 1);
+        }
+      });
+    });
+    const keywordChips = [...keywordCounts.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 4)
+      .map(([key, count]) => `${key} ${count}`);
+    renderChips("keywordPatternChips", keywordChips, "No common topics yet");
+
+    const reflectionPrompt = document.getElementById("reflectionPrompt");
+    if (reflectionPrompt) {
+      if (thisWeekCount === 0) {
+        reflectionPrompt.textContent = "Start with one short reflection today. A simple daily habit gives your timeline real signal.";
+      } else if (streak >= 4) {
+        reflectionPrompt.textContent = `You are on a ${streak}-day streak. What specific habit is helping you stay consistent?`;
+      } else if (thisWeekCount >= 5) {
+        reflectionPrompt.textContent = `You wrote ${thisWeekCount} times this week. What pattern do you want to keep next week?`;
+      } else {
+        reflectionPrompt.textContent = `You logged ${thisWeekCount} entries this week. Add one more reflection tonight to strengthen your pattern.`;
+      }
+    }
+  }
 
   // Contact form placeholder behavior (no backend required)
   const form = $("#contactForm");
@@ -572,15 +765,143 @@
   const appPartSteps = $$("[data-app-part]");
   const appPartImg = document.getElementById("appPartShotImg");
   const appPartComingSoon = document.getElementById("appPartComingSoon");
+  const appPartsContextCopy = document.getElementById("appPartsContextCopy");
+  const appPartsRail = document.querySelector(".appPartsRail");
+  const appPartsContextStrip = document.getElementById("appPartsContextStrip");
+  const appPartsPreviewPhone = document.querySelector(".appPartsPreviewPhone");
 
   if (appPartSteps.length > 0 && appPartImg) {
+    const getDayBucket = () => {
+      const hour = new Date().getHours();
+      if (hour < 12) return "morning";
+      if (hour < 18) return "afternoon";
+      return "evening";
+    };
+
+    const getStoredAppPartPrefs = () => {
+      try {
+        const raw = window.localStorage.getItem(APP_PART_PREFS_KEY);
+        if (!raw) return { history: [], lastTopPart: null, lastRankTs: 0 };
+        const parsed = JSON.parse(raw);
+        const history = Array.isArray(parsed.history) ? parsed.history.slice(-18) : [];
+        return {
+          history,
+          lastTopPart: typeof parsed.lastTopPart === "string" ? parsed.lastTopPart : null,
+          lastRankTs: Number(parsed.lastRankTs) || 0
+        };
+      } catch {
+        return { history: [], lastTopPart: null, lastRankTs: 0 };
+      }
+    };
+
+    const setStoredAppPartPrefs = (nextState) => {
+      try {
+        window.localStorage.setItem(APP_PART_PREFS_KEY, JSON.stringify(nextState));
+      } catch {
+        // Ignore storage write failures.
+      }
+    };
+
+    const resolveAppPartContext = (part, reasonFromCard, score) => {
+      if (reasonFromCard) return reasonFromCard;
+      const bucket = getDayBucket();
+      const genericByPart = {
+        focus: "Showing Focus first to help you start with one clear offline action.",
+        vent: "Showing Vent first so you can clear mental load before acting.",
+        journal: "Showing Journal first to capture patterns and sharpen your next step.",
+        move: "Showing Move first to convert screen energy into real-world motion.",
+        pro: "Showing Pro first for deeper guidance and long-term momentum."
+      };
+      if (bucket === "evening" && part === "vent") {
+        return "Evening mode detected, so Vent is surfaced first for a lighter reset.";
+      }
+      if (score >= 8) {
+        return `This match is high confidence for right now, so ${part} is surfaced first.`;
+      }
+      return genericByPart[part] || "Showing the feature most likely to fit your current rhythm.";
+    };
+
+    const persistedPrefs = getStoredAppPartPrefs();
+    const contextSignals = {
+      theme: getStoredThemeKey(),
+      ctaVariant: activeCtaVariant,
+      dayBucket: getDayBucket(),
+      history: persistedPrefs.history
+    };
+
+    const scoreAppPart = (part) => {
+      let score = 0;
+      const historyBoost = contextSignals.history
+        .slice(-8)
+        .reduce((sum, item, idx) => sum + (item === part ? 3 - Math.min(2, idx * 0.2) : 0), 0);
+      score += historyBoost;
+
+      if (contextSignals.dayBucket === "morning" && part === "focus") score += 2.2;
+      if (contextSignals.dayBucket === "afternoon" && part === "journal") score += 1.7;
+      if (contextSignals.dayBucket === "evening" && part === "vent") score += 2.3;
+
+      if (contextSignals.theme === "breathe" && part === "vent") score += 1.2;
+      if (contextSignals.theme === "grounded-earth" && part === "move") score += 1.5;
+      if (contextSignals.theme === "sunset-wind-down" && part === "journal") score += 1.5;
+      if (contextSignals.theme === "zen-garden" && part === "focus") score += 1.2;
+
+      if (contextSignals.ctaVariant === "b" && part === "pro") score += 1.3;
+      if (contextSignals.ctaVariant === "a" && part === "focus") score += 1.1;
+
+      if (part === "focus") score += 0.25;
+      return score;
+    };
+
+    const rankSteps = appPartSteps
+      .map((step) => ({
+        step,
+        part: (step.getAttribute("data-app-part") || "").toLowerCase(),
+        score: scoreAppPart((step.getAttribute("data-app-part") || "").toLowerCase())
+      }))
+      .sort((a, b) => b.score - a.score);
+
+    const bestScore = rankSteps[0]?.score || 0;
+    const secondScore = rankSteps[1]?.score || 0;
+    const hasStrongConfidence = bestScore - secondScore >= 0.65;
+    const rankCooldownMs = 1000 * 60 * 60 * 12;
+    const canReorder = hasStrongConfidence && Date.now() - persistedPrefs.lastRankTs > rankCooldownMs;
+
+    if (canReorder) {
+      const parent = appPartSteps[0].parentElement;
+      if (parent) {
+        rankSteps.forEach(({ step }) => parent.appendChild(step));
+      }
+      persistedPrefs.lastRankTs = Date.now();
+      persistedPrefs.lastTopPart = rankSteps[0]?.part || null;
+      setStoredAppPartPrefs(persistedPrefs);
+      emitAnalyticsEvent("app_part_rank_applied", {
+        top_part: rankSteps[0]?.part || null,
+        score_gap: Number((bestScore - secondScore).toFixed(3)),
+        reordered: true
+      });
+    } else {
+      emitAnalyticsEvent("app_part_rank_applied", {
+        top_part: rankSteps[0]?.part || null,
+        score_gap: Number((bestScore - secondScore).toFixed(3)),
+        reordered: false
+      });
+    }
+
+    const orderedSteps = $$("[data-app-part]");
+
     const setAppPart = (stepEl) => {
       if (!stepEl) return;
       const src = stepEl.getAttribute("data-app-src");
       const title = stepEl.getAttribute("data-app-title") || "App part";
       const isComingSoon = stepEl.getAttribute("data-app-coming-soon") === "true";
+      const selectedPart = (stepEl.getAttribute("data-app-part") || "").toLowerCase();
+      const reason = resolveAppPartContext(
+        selectedPart,
+        stepEl.getAttribute("data-app-reason") || "",
+        scoreAppPart(selectedPart)
+      );
 
-      appPartSteps.forEach((el) => {
+      orderedSteps.forEach((el) => {
         const isActive = el === stepEl;
         el.classList.toggle("is-active", isActive);
         el.setAttribute("aria-pressed", isActive ? "true" : "false");
@@ -597,15 +918,48 @@
         appPartComingSoon.hidden = !isComingSoon;
       }
 
+      if (appPartsContextStrip) {
+        appPartsContextStrip.classList.add("is-updating");
+      }
+      if (appPartsContextCopy) {
+        appPartsContextCopy.textContent = reason;
+      }
+      if (appPartsContextStrip) {
+        window.setTimeout(() => appPartsContextStrip.classList.remove("is-updating"), 220);
+      }
+
+      if (appPartsPreviewPhone) {
+        appPartsPreviewPhone.style.transform = "translateY(-2px)";
+        window.setTimeout(() => {
+          appPartsPreviewPhone.style.transform = "";
+        }, 180);
+      }
+
+      const nextPrefs = getStoredAppPartPrefs();
+      nextPrefs.history = [...nextPrefs.history, selectedPart].filter(Boolean).slice(-18);
+      nextPrefs.lastTopPart = nextPrefs.lastTopPart || selectedPart;
+      nextPrefs.lastRankTs = nextPrefs.lastRankTs || 0;
+      setStoredAppPartPrefs(nextPrefs);
+
       emitAnalyticsEvent("app_part_select", {
-        app_part: (stepEl.getAttribute("data-app-part") || "").toLowerCase(),
-        coming_soon: isComingSoon
+        app_part: selectedPart,
+        coming_soon: isComingSoon,
+        context_bucket: contextSignals.dayBucket,
+        context_reason: reason
       });
     };
 
-    setAppPart(appPartSteps[0]);
+    const defaultStep =
+      orderedSteps.find((step) => (step.getAttribute("data-app-part") || "").toLowerCase() === rankSteps[0]?.part) ||
+      orderedSteps[0];
+    setAppPart(defaultStep);
+    emitAnalyticsEvent("app_part_default_reason", {
+      app_part: (defaultStep?.getAttribute("data-app-part") || "").toLowerCase(),
+      source: hasStrongConfidence ? "ranked_confident" : "ranked_soft",
+      day_bucket: contextSignals.dayBucket
+    });
 
-    appPartSteps.forEach((stepEl) => {
+    orderedSteps.forEach((stepEl) => {
       stepEl.addEventListener("click", () => setAppPart(stepEl));
       stepEl.addEventListener("keydown", (ev) => {
         if (ev.key === "Enter" || ev.key === " ") {
@@ -614,6 +968,19 @@
         }
       });
     });
+
+    if (appPartsRail && "IntersectionObserver" in window) {
+      const railObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          appPartsRail.classList.add("is-visible");
+          observer.disconnect();
+        });
+      }, { threshold: 0.2 });
+      railObserver.observe(appPartsRail);
+    } else if (appPartsRail) {
+      appPartsRail.classList.add("is-visible");
+    }
   }
 
   // Theme picker controls for non-landing pages.

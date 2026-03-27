@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Pivot Journal - Weekly Review & Insights</title>
-    <meta name="description" content="Your Pivot Journal organizes Focus, Vent, and Move entries. Pro can add a short weekly AI analysis." />
+    <title>Pivot Journal - Reflection Timeline & Weekly Patterns</title>
+    <meta name="description" content="Your Pivot Journal turns reflections into a clear weekly timeline with simple, non-AI insights you can act on." />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://pivotapp.com/journal.html" />
-    <meta property="og:title" content="Pivot Journal - Weekly Review & Insights" />
-    <meta property="og:description" content="Your Pivot Journal organizes Focus, Vent, and Move entries. Pro can add a short weekly AI analysis." />
+    <meta property="og:title" content="Pivot Journal - Reflection Timeline & Weekly Patterns" />
+    <meta property="og:description" content="Your Pivot Journal turns reflections into a clear weekly timeline with simple, non-AI insights you can act on." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://pivotapp.com/journal.html" />
     <meta property="og:image" content="ScreenShots/Focus.PNG" />
     <meta property="og:image:alt" content="Pivot app preview (Focus)" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Pivot Journal - Weekly Review & Insights" />
-    <meta name="twitter:description" content="Your Pivot Journal organizes Focus, Vent, and Move entries. Pro can add a short weekly AI analysis." />
+    <meta name="twitter:title" content="Pivot Journal - Reflection Timeline & Weekly Patterns" />
+    <meta name="twitter:description" content="Your Pivot Journal turns reflections into a clear weekly timeline with simple, non-AI insights you can act on." />
     <meta name="twitter:image" content="ScreenShots/Focus.PNG" />
     <meta name="theme-color" content="#E0F7FA" />
     <link rel="icon" type="image/png" href="assets/app-icon.png" />
@@ -66,63 +66,144 @@
     <main id="main" class="section page">
       <div class="wrap">
         <div class="section-head pageIntro fade">
-          <h2>Your week, clearly organized</h2>
-          <p>Review Focus, Vent, and Move in one place so patterns are easier to spot and act on.</p>
+          <h2>Your reflections, made useful</h2>
+          <p>See your week in one timeline with clear patterns based only on what you wrote. No AI summary, just your own entries.</p>
         </div>
 
-        <div class="card callout fade mt14">
-          <div class="shot-frame">
-            <img
-              src="ScreenShots/Journal.PNG"
-              alt="Journal screen preview"
-              class="shot-img"
-              data-shot="true"
-              data-shot-title="Journal"
-            />
+        <section class="glassCard fade">
+          <div class="section-head">
+            <h2>Reflection insights</h2>
+            <p>Based on your entries this week.</p>
           </div>
-          <div class="shot-caption">Journal</div>
-        </div>
+          <div class="reflectionStats" id="reflectionStats">
+            <article class="reflectionStat">
+              <span class="reflectionStatLabel">Entries this week</span>
+              <b id="statEntriesWeek">0</b>
+            </article>
+            <article class="reflectionStat">
+              <span class="reflectionStatLabel">Current streak</span>
+              <b id="statStreakDays">0 days</b>
+            </article>
+            <article class="reflectionStat">
+              <span class="reflectionStatLabel">Avg entry length</span>
+              <b id="statAvgWords">0 words</b>
+            </article>
+            <article class="reflectionStat">
+              <span class="reflectionStatLabel">Most active slot</span>
+              <b id="statActiveWindow">-</b>
+            </article>
+          </div>
+          <p class="muted fs13 mt12">No AI analysis. These numbers are calculated directly from your reflections.</p>
+        </section>
 
-        <div class="two-col">
-          <section class="card callout fade">
-            <h3>Browse daily, then zoom out</h3>
-            <p>
-              Each day shows the activity you saved from Focus, Vent, and Move. When you expand a day, you can review what you did and
-              what you wrote.
-            </p>
-            <ul class="list">
-              <li>Focus entries include the task and a focused vs scheduled view.</li>
-              <li>Vent entries include whether a reflection exists.</li>
-              <li>Move entries show your walk outcome and reflection.</li>
-            </ul>
-          </section>
+        <section class="section sectionTight8">
+          <div class="two-col">
+            <section class="card callout fade">
+              <h3>Pattern chips</h3>
+              <p class="muted">Simple patterns from your writing habits.</p>
+              <div class="patternGroup">
+                <h4>Length mix</h4>
+                <div class="patternChips" id="lengthPatternChips"></div>
+              </div>
+              <div class="patternGroup">
+                <h4>Time windows</h4>
+                <div class="patternChips" id="timePatternChips"></div>
+              </div>
+              <div class="patternGroup">
+                <h4>Common topics</h4>
+                <div class="patternChips" id="keywordPatternChips"></div>
+              </div>
+            </section>
 
-          <section class="card callout fade">
-            <h3>See this week at a glance</h3>
-            <p>
-              Pivot can generate a compact “This week” snapshot based on your completed activities.
-            </p>
-            <ul class="list">
-              <li>Counts your Focus tasks and groups them by type.</li>
-              <li>Shows how many Vent and Move entries you completed.</li>
-              <li>Sets the stage for Pro’s weekly analysis.</li>
-            </ul>
-          </section>
-        </div>
+            <section class="card callout fade">
+              <h3>This week prompt</h3>
+              <p id="reflectionPrompt" class="textMax">
+                Keep writing one short reflection each day. Consistency reveals patterns faster than intensity.
+              </p>
+              <ul class="list mt12">
+                <li>Use one sentence for what happened.</li>
+                <li>Use one sentence for how you felt.</li>
+                <li>Use one sentence for your next small action.</li>
+              </ul>
+            </section>
+          </div>
+        </section>
 
-        <div class="sp16"></div>
+        <section class="section sectionTight8">
+          <div class="section-head fade">
+            <h2>Reflection timeline</h2>
+            <p>Newest first. Expand any card to read the full entry.</p>
+          </div>
 
-        <section class="card callout fade">
-          <h3>Pro weekly analysis</h3>
-          <p>
-            With Pro enabled, Pivot can create a short weekly summary using your on-device data from Focus, Vent, and Move.
-          </p>
-          <p class="muted mt10">
-            If you’re not on Pro, the card encourages you to complete sessions this week and offers a Pro upgrade path for on-device AI reflection.
-          </p>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="pro.html">Upgrade to Pro</a>
-            <a class="btn" href="contact.html">Ask a question</a>
+          <div id="reflectionEmpty" class="card callout fade reflectionEmpty" hidden>
+            <h3>No reflections yet</h3>
+            <p>Complete one Focus, Vent, or Move session to create your first timeline entry.</p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="features.html">Explore app flows</a>
+              <a class="btn" href="#download">Download Pivot now</a>
+            </div>
+          </div>
+
+          <div id="reflectionTimeline" class="reflectionTimeline">
+            <article
+              class="card callout fade reflectionEntry"
+              data-reflection-entry="true"
+              data-reflection-source="Vent"
+              data-reflection-ts="2026-03-25T20:12:00"
+              data-reflection-text="I caught myself doom scrolling after dinner, paused, and did a five-minute reset walk instead. The walk lowered my stress and made it easier to finish one task before bed."
+            >
+              <div class="reflectionEntryTop">
+                <span class="entryPill">Vent</span>
+                <span class="entryMeta">Mar 25, 8:12 PM</span>
+              </div>
+              <p class="reflectionBody"></p>
+              <button class="entryToggle" type="button" hidden>Read more</button>
+            </article>
+
+            <article
+              class="card callout fade reflectionEntry"
+              data-reflection-entry="true"
+              data-reflection-source="Focus"
+              data-reflection-ts="2026-03-24T07:40:00"
+              data-reflection-text="Started with one offline task: clear my desk and prep tomorrow's list. Keeping the phone face down helped me stay in motion without overthinking."
+            >
+              <div class="reflectionEntryTop">
+                <span class="entryPill">Focus</span>
+                <span class="entryMeta">Mar 24, 7:40 AM</span>
+              </div>
+              <p class="reflectionBody"></p>
+              <button class="entryToggle" type="button" hidden>Read more</button>
+            </article>
+
+            <article
+              class="card callout fade reflectionEntry"
+              data-reflection-entry="true"
+              data-reflection-source="Move"
+              data-reflection-ts="2026-03-23T17:18:00"
+              data-reflection-text="Walked to my marker after work and noticed I was less mentally noisy by the time I arrived. The photo check-in made the walk feel complete, and I returned home with better focus."
+            >
+              <div class="reflectionEntryTop">
+                <span class="entryPill">Move</span>
+                <span class="entryMeta">Mar 23, 5:18 PM</span>
+              </div>
+              <p class="reflectionBody"></p>
+              <button class="entryToggle" type="button" hidden>Read more</button>
+            </article>
+
+            <article
+              class="card callout fade reflectionEntry"
+              data-reflection-entry="true"
+              data-reflection-source="Vent"
+              data-reflection-ts="2026-03-22T12:05:00"
+              data-reflection-text="My sleep was rough and I felt scattered at noon. Writing this made it obvious I need a shorter morning routine with one priority task and no social apps until lunch."
+            >
+              <div class="reflectionEntryTop">
+                <span class="entryPill">Vent</span>
+                <span class="entryMeta">Mar 22, 12:05 PM</span>
+              </div>
+              <p class="reflectionBody"></p>
+              <button class="entryToggle" type="button" hidden>Read more</button>
+            </article>
           </div>
         </section>
 
@@ -157,7 +238,7 @@
                 What does “This week” show?
               </button>
               <div class="accordion-panel" id="faq2" hidden>
-                It’s a compact snapshot of completed Focus, Vent, and Move activity, setting up Pro’s weekly analysis.
+                It shows non-AI insights from your own entries: volume, streak, average length, and active writing windows.
               </div>
             </div>
 
@@ -168,10 +249,10 @@
                 aria-expanded="false"
                 aria-controls="faq3"
               >
-                Do I need Pro to use the Journal?
+                Do I need anything extra to use this view?
               </button>
               <div class="accordion-panel" id="faq3" hidden>
-                No. The Journal works without Pro. Pro adds the short weekly AI summary.
+                No. Journal is useful on its own with reflection timeline cards and deterministic weekly metrics.
               </div>
             </div>
           </div>
@@ -185,7 +266,7 @@
             </div>
             <div class="cta-row">
               <a class="btn btn-primary" href="#download" data-cta-a="Download Pivot now" data-cta-b="Start tracking your week">Download Pivot now</a>
-              <a class="btn" href="pro.html">See Pro analysis</a>
+              <a class="btn" href="features.html">See product features</a>
             </div>
           </div>
         </section>

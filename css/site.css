@@ -1097,8 +1097,198 @@ input:focus, textarea:focus{
 .appParts{
   padding-top: 18px;
 }
+.appPartsRedesign{
+  position: relative;
+  overflow: hidden;
+  padding: 40px 0 30px;
+}
+.appPartsAura{
+  position: absolute;
+  inset: -80px -10% auto;
+  height: 340px;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 80% at 10% 10%, color-mix(in srgb, var(--active-accent) 30%, transparent), transparent 76%),
+    radial-gradient(55% 65% at 92% 0%, color-mix(in srgb, var(--surface-2) 78%, transparent), transparent 70%);
+  opacity: .95;
+  filter: blur(6px);
+}
+.appPartsHead{
+  position: relative;
+  z-index: 1;
+  margin-bottom: 22px;
+}
+.appPartsHead h2{
+  max-width: 16ch;
+  font-size: clamp(30px, 4.5vw, 46px);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.appPartsHead p{
+  max-width: 62ch;
+}
+.appPartsMetaRow{
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.appPartsMeta{
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--surface-stroke) 88%, transparent);
+  background: color-mix(in srgb, var(--surface-2) 84%, transparent);
+  color: var(--text-strong);
+  font-size: 12px;
+  font-weight: 760;
+  letter-spacing: .01em;
+  padding: 7px 11px;
+}
+.appPartsLayout{
+  position: relative;
+  z-index: 1;
+  gap: 30px;
+  grid-template-columns: 1.05fr 1fr;
+}
 .appPartsFrame{
   position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.appPartsFrame::after{
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 34%;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(4, 8, 19, .44), transparent);
+}
+.appPartsPreviewCol{
+  display: grid;
+  gap: 12px;
+}
+.appPartsContextStrip{
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--surface-stroke) 86%, transparent);
+  background: linear-gradient(
+    120deg,
+    color-mix(in srgb, var(--surface-2) 88%, transparent),
+    color-mix(in srgb, var(--surface-1) 84%, transparent)
+  );
+  backdrop-filter: blur(8px);
+  box-shadow: 0 16px 32px rgba(2, 8, 18, .2);
+  padding: 13px 14px;
+  transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+.appPartsContextStrip p{
+  color: color-mix(in srgb, var(--text) 94%, white 6%);
+  line-height: 1.5;
+  font-size: 14px;
+  letter-spacing: -0.005em;
+  transition: opacity .22s ease;
+}
+.appPartsContextStrip.is-updating p{
+  opacity: .78;
+}
+.appPartsPreviewPhone{
+  gap: 10px;
+  background:
+    linear-gradient(155deg, color-mix(in srgb, var(--surface-1) 92%, transparent), color-mix(in srgb, var(--surface-2) 74%, transparent));
+  border-color: color-mix(in srgb, var(--surface-stroke) 85%, transparent);
+  transition: transform .3s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.appPartsPreviewFooter{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 4px;
+}
+.appPartsPreviewLabel{
+  font-size: 12px;
+  font-weight: 760;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted) 95%, white 5%);
+}
+.appPartsPreviewCta{
+  min-height: 42px;
+  padding: 10px 14px;
+  font-size: 13px;
+}
+.appPartsRail{
+  gap: 14px;
+}
+.appPartCard{
+  border-radius: 20px;
+  padding: 16px 16px 17px;
+  background:
+    linear-gradient(160deg, color-mix(in srgb, var(--surface-2) 94%, transparent), color-mix(in srgb, var(--surface-3) 75%, transparent));
+  border: 1px solid color-mix(in srgb, var(--surface-stroke) 86%, transparent);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.06) inset,
+    0 12px 26px rgba(2, 8, 18, .14);
+  transform: translateY(0) scale(1);
+  transition:
+    transform .28s cubic-bezier(.2,.65,.2,1),
+    border-color .24s ease,
+    box-shadow .28s ease,
+    background .28s ease;
+}
+.appPartCard:hover{
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--active-accent) 36%, var(--surface-stroke));
+}
+.appPartCard-primary{
+  background:
+    linear-gradient(155deg, color-mix(in srgb, var(--active-accent) 20%, transparent), color-mix(in srgb, var(--surface-2) 84%, transparent));
+}
+.appPartCard-beta{
+  background:
+    linear-gradient(140deg, color-mix(in srgb, #8b5cf6 15%, var(--surface-3)), color-mix(in srgb, var(--surface-2) 84%, transparent));
+}
+.appPartTopline{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.appPartPill{
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 5px 10px;
+  border: 1px solid color-mix(in srgb, var(--surface-stroke) 88%, transparent);
+  background: color-mix(in srgb, var(--surface-1) 78%, transparent);
+  font-size: 10px;
+  font-weight: 820;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.appPartStat{
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+.appPartCard h3{
+  font-size: 20px;
+}
+.appPartCard p{
+  margin-top: 9px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.appPartCard.is-active{
+  transform: translateY(-4px) scale(1.01);
+  border-color: color-mix(in srgb, var(--active-accent) 48%, var(--surface-stroke));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--active-accent) 52%, transparent) inset,
+    0 22px 42px rgba(5, 16, 34, .24);
+}
+.appPartCard.is-active::before{
+  margin-right: 10px;
 }
 .comingSoonOverlay{
   position: absolute;
@@ -1128,6 +1318,19 @@ input:focus, textarea:focus{
 .appPartStep.is-coming-soon p{
   opacity: .9;
 }
+.appPartsRail .appPartCard{
+  opacity: 0;
+  transform: translateY(18px) scale(.985);
+}
+.appPartsRail.is-visible .appPartCard{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.appPartsRail.is-visible .appPartCard:nth-child(1){ transition-delay: .03s; }
+.appPartsRail.is-visible .appPartCard:nth-child(2){ transition-delay: .08s; }
+.appPartsRail.is-visible .appPartCard:nth-child(3){ transition-delay: .13s; }
+.appPartsRail.is-visible .appPartCard:nth-child(4){ transition-delay: .18s; }
+.appPartsRail.is-visible .appPartCard:nth-child(5){ transition-delay: .23s; }
 
 /* Social proof */
 .socialProof{
@@ -1489,6 +1692,52 @@ input:focus, textarea:focus{
     font-size: clamp(20px, 5.5vw, 24px);
   }
   .showcaseGrid{ grid-template-columns: 1fr; gap: 18px; }
+  .appPartsRedesign{
+    padding-top: 24px;
+  }
+  .appPartsHead h2{
+    max-width: 100%;
+    font-size: clamp(25px, 7.2vw, 34px);
+  }
+  .appPartsMeta{
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+  .appPartsLayout{
+    gap: 18px;
+  }
+  .appPartsContextStrip{
+    border-radius: 14px;
+    padding: 12px;
+  }
+  .appPartsPreviewPhone{
+    padding: 9px;
+  }
+  .appPartsPreviewFooter{
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2px 2px 0;
+  }
+  .appPartsPreviewLabel{
+    width: 100%;
+    text-align: center;
+  }
+  .appPartsPreviewCta{
+    width: 100%;
+    justify-content: center;
+  }
+  .appPartsRail{
+    gap: 10px;
+  }
+  .appPartCard{
+    border-radius: 18px;
+  }
+  .appPartCard h3{
+    font-size: 18px;
+  }
+  .appPartTopline{
+    margin-bottom: 9px;
+  }
   .stickyPhone{ position: relative; top: auto; }
   .showcaseStep{
     min-height: 48px;
@@ -1589,6 +1838,23 @@ input:focus, textarea:focus{
   .fade{ transition: none; }
   #heroShotImg,
   #appPartShotImg{
+    transition: none;
+  }
+  .appPartCard{
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+  .appPartCard:hover{
+    transform: none;
+  }
+  .appPartsAura{
+    filter: none;
+  }
+  .appPartsContextStrip p{
+    transition: none;
+  }
+  .appPartsPreviewPhone{
     transition: none;
   }
 }

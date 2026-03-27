@@ -33,6 +33,12 @@
   --lh-body: 1.65;
 
   --font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+
+  /* Feature section redesign tokens */
+  --feature-surface-1: color-mix(in srgb, var(--surface-1) 84%, transparent);
+  --feature-surface-2: color-mix(in srgb, var(--surface-2) 88%, transparent);
+  --feature-stroke: color-mix(in srgb, var(--surface-stroke) 90%, transparent);
+  --feature-glow: color-mix(in srgb, var(--active-accent) 26%, transparent);
 }
 
 html, body{
@@ -182,6 +188,13 @@ h1,h2,h3,p{ margin: 0; }
   transform: translateY(0);
 }
 
+/* Shared polish token usage for the redesigned home feature section. */
+.appPartsRedesign .glassCard{
+  border-color: var(--feature-stroke);
+  background: linear-gradient(140deg, var(--feature-surface-2), var(--feature-surface-1));
+  box-shadow: 0 18px 44px color-mix(in srgb, var(--feature-glow) 40%, transparent);
+}
+
 /* -------------------------
    Inner page visual polish
 --------------------------*/
@@ -314,6 +327,146 @@ body.inner-page footer{
   margin-top: 20px;
 }
 
+/* Reflection-only Journal modules */
+.reflectionStats{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.reflectionStat{
+  border: 1px solid color-mix(in srgb, var(--surface-stroke) 90%, transparent);
+  background: color-mix(in srgb, var(--surface-1) 90%, transparent);
+  border-radius: 14px;
+  padding: 12px;
+}
+
+.reflectionStatLabel{
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.reflectionStat b{
+  display: block;
+  margin-top: 6px;
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text-strong);
+}
+
+.patternGroup{
+  margin-top: 14px;
+}
+
+.patternGroup h4{
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.patternChips{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.patternChip{
+  border: 1px solid color-mix(in srgb, var(--surface-stroke) 90%, transparent);
+  background: color-mix(in srgb, var(--surface-1) 90%, transparent);
+  border-radius: 999px;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-strong);
+}
+
+.patternChip.muted{
+  color: var(--muted);
+  font-weight: 650;
+}
+
+.reflectionTimeline{
+  display: grid;
+  gap: 12px;
+  position: relative;
+}
+
+.reflectionEntry{
+  position: relative;
+}
+
+.reflectionEntry::before{
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 22px;
+  bottom: -14px;
+  width: 2px;
+  background: color-mix(in srgb, var(--active-accent) 24%, transparent);
+  opacity: 0.7;
+}
+
+.reflectionEntry:last-child::before{
+  bottom: 22px;
+}
+
+.reflectionEntryTop{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.entryPill{
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--surface-stroke) 90%, transparent);
+  background: color-mix(in srgb, var(--surface-2) 85%, transparent);
+  padding: 4px 9px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+
+.entryMeta{
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.reflectionBody{
+  margin-top: 10px;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.entryToggle{
+  margin-top: 10px;
+  border: 1px solid color-mix(in srgb, var(--surface-stroke) 90%, transparent);
+  background: color-mix(in srgb, var(--surface-1) 88%, transparent);
+  color: var(--text-strong);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.entryToggle:hover{
+  background: color-mix(in srgb, var(--surface-2) 88%, transparent);
+}
+
+.reflectionEmpty{
+  text-align: left;
+}
+
 /* Per-page accent personality */
 body.theme-features.inner-page .page::before{
   background:
@@ -385,6 +538,14 @@ body.theme-terms.inner-page .pageIntro::after{
 }
 
 @media (max-width: 900px){
+  .reflectionStats{
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .reflectionEntry::before{
+    left: -8px;
+  }
+
   body.inner-page .section{
     padding: 24px 0;
   }
@@ -515,6 +676,18 @@ body.theme-terms.inner-page .pageIntro::after{
 }
 
 @media (max-width: 520px){
+  .reflectionStats{
+    grid-template-columns: 1fr;
+  }
+
+  .reflectionStat b{
+    font-size: 20px;
+  }
+
+  .entryMeta{
+    font-size: 11px;
+  }
+
   .nav-inner{
     padding: 10px 0;
   }

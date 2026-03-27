@@ -154,15 +154,30 @@
           </div>
         </section>
 
-        <section class="showcase appParts" id="app-parts" aria-label="Explore app parts">
-          <div class="showcaseHead fade">
-            <h2>Explore Pivot parts</h2>
-            <p>Click each part to preview it. Move and Pro are in active beta development.</p>
+        <section class="showcase appParts appPartsRedesign" id="app-parts" aria-label="Explore app parts">
+          <div class="appPartsAura" aria-hidden="true"></div>
+          <div class="showcaseHead appPartsHead fade">
+            <div class="kicker">Your reset, intelligently sequenced</div>
+            <h2>Features that adapt to how life feels today</h2>
+            <p>
+              Pivot blends Focus, Vent, Journal, Move, and Pro into one guided flow.
+              Explore each feature and preview what your next reset could look like.
+            </p>
+            <div class="appPartsMetaRow">
+              <span class="appPartsMeta">Built for short daily resets</span>
+              <span class="appPartsMeta">Consistent, non-random recommendations</span>
+            </div>
           </div>
 
-          <div class="showcaseGrid">
-            <div class="showcasePhone">
-              <div class="devicePhone stickyPhone">
+          <div class="showcaseGrid appPartsLayout">
+            <div class="showcasePhone appPartsPreviewCol">
+              <div class="appPartsContextStrip fade" id="appPartsContextStrip" aria-live="polite">
+                <p id="appPartsContextCopy">
+                  Showing Focus first because users often start with one clear offline task.
+                </p>
+              </div>
+
+              <div class="devicePhone stickyPhone appPartsPreviewPhone">
                 <div class="shot-frame appPartsFrame">
                   <img
                     id="appPartShotImg"
@@ -176,73 +191,102 @@
                     In beta
                   </div>
                 </div>
+                <div class="appPartsPreviewFooter">
+                  <div class="appPartsPreviewLabel">Live app preview</div>
+                  <a class="btn btn-primary appPartsPreviewCta" href="#download">Try this flow</a>
+                </div>
               </div>
             </div>
 
-            <div class="showcaseSteps appPartsSteps">
+            <div class="showcaseSteps appPartsSteps appPartsRail" role="list" aria-label="Pivot feature cards">
               <article
-                class="showcaseStep appPartStep"
+                class="showcaseStep appPartStep appPartCard appPartCard-primary"
                 data-app-part="focus"
+                data-app-reason="Showing Focus first to help you start with one clear offline action."
                 tabindex="0"
                 role="button"
                 aria-pressed="true"
                 data-app-src="ScreenShots/Focus.PNG"
                 data-app-title="Focus"
               >
+                <div class="appPartTopline">
+                  <span class="appPartPill">Core</span>
+                  <span class="appPartStat">Fast start</span>
+                </div>
                 <h3>Focus</h3>
-                <p>Commit to one offline task and stay locked in.</p>
+                <p>Commit to one offline task and lock in before the scroll loop wins.</p>
               </article>
 
               <article
-                class="showcaseStep appPartStep"
+                class="showcaseStep appPartStep appPartCard"
                 data-app-part="vent"
+                data-app-reason="Vent appears when your pattern suggests mental unloading before action."
                 tabindex="0"
                 role="button"
                 aria-pressed="false"
                 data-app-src="ScreenShots/Vent.PNG"
                 data-app-title="Vent"
               >
+                <div class="appPartTopline">
+                  <span class="appPartPill">Core</span>
+                  <span class="appPartStat">Voice or text</span>
+                </div>
                 <h3>Vent</h3>
-                <p>Quickly unload thoughts with voice or typing.</p>
+                <p>Drop mental noise quickly, then return to what actually matters.</p>
               </article>
 
               <article
-                class="showcaseStep appPartStep"
+                class="showcaseStep appPartStep appPartCard"
                 data-app-part="journal"
+                data-app-reason="Journal is prioritized when reflection consistency can compound your progress."
                 tabindex="0"
                 role="button"
                 aria-pressed="false"
                 data-app-src="ScreenShots/Journal.PNG"
                 data-app-title="Journal"
               >
+                <div class="appPartTopline">
+                  <span class="appPartPill">Core</span>
+                  <span class="appPartStat">Weekly clarity</span>
+                </div>
                 <h3>Journal</h3>
-                <p>Turn your week into one clean reflection timeline.</p>
+                <p>Turn scattered moments into one clean timeline you can act on.</p>
               </article>
 
               <article
-                class="showcaseStep appPartStep is-coming-soon"
+                class="showcaseStep appPartStep appPartCard appPartCard-beta is-coming-soon"
                 data-app-part="move"
+                data-app-reason="Move becomes highlighted when momentum and energy are likely the best next step."
                 tabindex="0"
                 role="button"
                 aria-pressed="false"
                 data-app-coming-soon="true"
                 data-app-title="Move"
               >
+                <div class="appPartTopline">
+                  <span class="appPartPill">Beta</span>
+                  <span class="appPartStat">Goal-based walks</span>
+                </div>
                 <h3>Move <span class="comingSoonTag">In beta</span></h3>
-                <p>Goal-based walking is in active development for upcoming releases.</p>
+                <p>Reconnect with your body through simple movement goals and outdoor cues.</p>
               </article>
 
               <article
-                class="showcaseStep appPartStep is-coming-soon"
+                class="showcaseStep appPartStep appPartCard appPartCard-beta is-coming-soon"
                 data-app-part="pro"
+                data-app-reason="Pro appears when you are ready for deeper insight and structured progression."
                 tabindex="0"
                 role="button"
                 aria-pressed="false"
                 data-app-coming-soon="true"
                 data-app-title="Pro"
               >
+                <div class="appPartTopline">
+                  <span class="appPartPill">Beta</span>
+                  <span class="appPartStat">Deeper insights</span>
+                </div>
                 <h3>Pro <span class="comingSoonTag">In beta</span></h3>
-                <p>Premium upgrades and deeper insights are being finalized.</p>
+                <p>Unlock advanced guidance, richer trends, and premium support loops.</p>
               </article>
             </div>
           </div>
