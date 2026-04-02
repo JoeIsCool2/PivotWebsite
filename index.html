@@ -1,407 +1,376 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Pivot | Scroll Less, Live More</title>
-    <meta name="description" content="Pivot helps you break scroll loops with Focus, Vent, and Journal reset flows so you can act in real life." />
-    <meta name="robots" content="index,follow" />
-    <link rel="canonical" href="https://pivotapp.com/" />
-    <meta property="og:title" content="Pivot | Scroll Less, Live More" />
-    <meta property="og:description" content="Break doom-scrolling with a short, structured reset loop." />
+    <title>Pivot — Put your phone down. Do something real.</title>
+    <meta
+      name="description"
+      content="Pivot helps you break passive scrolling with Focus, Vent, and Move—real tasks, honest reflection, and walks that end with you—not the feed. iOS. Join TestFlight."
+    />
+    <!-- Replace YOUR_PRODUCTION_URL with your deployed site URL for social previews. -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://pivotapp.com/" />
-    <meta property="og:image" content="ScreenShots/Focus.PNG" />
+    <meta property="og:title" content="Pivot — Put your phone down. Do something real." />
+    <meta
+      property="og:description"
+      content="Three modes—Focus, Vent, Move—plus a journal that shows your week. Built for iOS. Join TestFlight."
+    />
+    <link rel="canonical" href="https://YOUR_PRODUCTION_URL/" />
+    <meta property="og:url" content="https://YOUR_PRODUCTION_URL/" />
+    <meta property="og:image" content="https://YOUR_PRODUCTION_URL/assets/app-icon.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Pivot | Scroll Less, Live More" />
-    <meta name="twitter:description" content="Break doom-scrolling with a short, structured reset loop." />
-    <meta name="twitter:image" content="ScreenShots/Focus.PNG" />
+    <meta name="twitter:title" content="Pivot — Put your phone down. Do something real." />
+    <meta
+      name="twitter:description"
+      content="Focus with your phone face-down, vent with voice or text, move with a real walk. iOS TestFlight."
+    />
+    <meta name="twitter:image" content="https://YOUR_PRODUCTION_URL/assets/app-icon.png" />
+    <meta name="theme-color" content="#80deea" />
     <link rel="icon" type="image/png" href="assets/app-icon.png" />
-    <link rel="stylesheet" href="css/site.css" />
-    <link rel="stylesheet" href="css/design-system.css" />
+    <link rel="apple-touch-icon" href="assets/app-icon.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <!-- When the app is on the App Store, uncomment and set your numeric app ID:
+    <meta name="apple-itunes-app" content="app-id=0000000000" />
+    -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Pivot",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "iOS",
+        "description": "Put your phone down with Focus, Vent, and Move—real tasks, reflection, and walks. Journal and weekly insights.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "downloadUrl": "https://testflight.apple.com/join/4sYs1Z8y"
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
   </head>
-  <body class="theme-index site-theme-breathe">
+  <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <header class="nav navLanding">
-      <div class="wrap nav-inner">
-        <a class="brand" href="index.html" aria-label="Pivot home">
-          <img class="brand-mark" src="assets/app-icon.png" alt="Pivot app icon" />
-          <div>
-            <div class="brand-name">Pivot</div>
-            <div class="brand-tag">Focus • Vent • Move</div>
-          </div>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="./">
+          <img src="assets/app-icon.png" width="36" height="36" alt="" />
+          Pivot
         </a>
-        <nav class="nav-links" aria-label="Primary">
-          <a href="how-it-works.html">How It Works</a>
-          <a href="features.html">Features</a>
-          <a href="science.html">Science</a>
-          <a href="pricing.html">Pricing</a>
-          <a href="reviews.html">Reviews</a>
-          <a class="btn btn-ctaStrong nav-cta" href="download.html">Download</a>
-        </nav>
-        <button id="burger" class="burger" type="button" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
-      </div>
-      <div class="wrap mobile-menu" id="mobileMenu">
-        <a href="how-it-works.html" data-mobile-link="true">How It Works</a>
-        <a href="features.html" data-mobile-link="true">Features</a>
-        <a href="science.html" data-mobile-link="true">Science</a>
-        <a href="pricing.html" data-mobile-link="true">Pricing</a>
-        <a href="reviews.html" data-mobile-link="true">Reviews</a>
-        <a href="download.html" data-mobile-link="true">Download</a>
-        <a href="contact.html" data-mobile-link="true">Contact</a>
+        <div class="nav-cta">
+          <a class="btn btn-secondary" href="privacy.html">Privacy</a>
+          <a class="btn btn--primary" href="https://testflight.apple.com/join/4sYs1Z8y" rel="noopener noreferrer"
+            >Join TestFlight</a
+          >
+        </div>
       </div>
     </header>
 
-    <main id="main" class="hero landing">
-      <div class="wrap">
-        <section class="landingHero" data-track-section="home_hero">
-          <div class="landingHeroGrid">
-            <div class="landingHeroCopy fade">
-              <div class="kicker">Built from real behavior loops in your app</div>
-              <h1>Stop scrolling. Start moving your life forward.</h1>
-              <p class="lead">
-                Pivot combines <b>Focus</b>, <b>Vent</b>, <b>Move</b>, and <b>Journal</b> so users can regulate attention, release stress, and finish one meaningful action in the real world.
-              </p>
+    <main id="main">
+      <section class="section section--tight-top hero" aria-labelledby="hero-heading">
+        <div>
+          <p class="kicker">iOS · Real life, not endless scroll</p>
+          <h1 id="hero-heading">Pivot off the scroll.</h1>
+          <p class="hero-tagline">Your phone, face-down. Your life, back on.</p>
+          <p class="lead">
+            Your phone goes face-down. You cook, clean, walk, or say what’s on your mind. Pivot turns the urge to
+            scroll into something you can feel good about—and remembers the pattern.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn--primary" href="https://testflight.apple.com/join/4sYs1Z8y" rel="noopener noreferrer"
+              >Join TestFlight</a
+            >
+            <a class="btn btn-secondary" href="#how-it-works">See how it works</a>
+          </div>
+          <p class="hero-note">Free to try on TestFlight. App Store release coming soon. iPhone only.</p>
+        </div>
 
-              <div class="cta-row">
-                <a class="btn btn-primary btn-ctaStrong" href="download.html">Download Pivot</a>
-                <a class="btn" href="how-it-works.html">See the 4-step loop</a>
-              </div>
-
-              <p class="lead muted fs14 mt16">
-                Designed for the moment users catch themselves doom-scrolling: one tap opens a guided reset that turns intention into action.
-              </p>
-            </div>
-
-            <div class="landingHeroPhone fade" aria-label="Pivot app preview">
-              <div class="devicePhone">
-                <div class="shot-frame">
-                  <img
-                    id="heroShotImg"
-                    class="shot-img"
-                    data-shot="true"
-                    data-shot-title="Breathe"
-                    src="ScreenShots/MainTheme1.PNG"
-                    alt="Breathe theme preview"
-                  />
-                </div>
-              </div>
-
-              <div class="heroThemeSteps" role="group" aria-label="Preview app themes and moods">
-                <article
-                  class="showcaseStep heroThemeStep"
-                  data-showcase-step="theme1"
-                  data-theme-key="breathe"
-                  tabindex="0"
-                  role="button"
-                  aria-pressed="true"
-                  data-showcase-src="ScreenShots/MainTheme1.PNG"
-                  data-showcase-title="Breathe"
-                >
-                  <h3>Breathe</h3>
-                </article>
-
-                <article
-                  class="showcaseStep heroThemeStep"
-                  data-showcase-step="theme2"
-                  data-theme-key="grounded-earth"
-                  tabindex="0"
-                  role="button"
-                  aria-pressed="false"
-                  data-showcase-src="ScreenShots/MainTheme2.PNG"
-                  data-showcase-title="Grounded Earth"
-                >
-                  <h3>Grounded Earth</h3>
-                </article>
-
-                <article
-                  class="showcaseStep heroThemeStep"
-                  data-showcase-step="theme3"
-                  data-theme-key="sunset-wind-down"
-                  tabindex="0"
-                  role="button"
-                  aria-pressed="false"
-                  data-showcase-src="ScreenShots/MainTheme3.PNG"
-                  data-showcase-title="Sunset Wind Down"
-                >
-                  <h3>Sunset Wind Down</h3>
-                </article>
-
-                <article
-                  class="showcaseStep heroThemeStep"
-                  data-showcase-step="theme4"
-                  data-theme-key="zen-garden"
-                  tabindex="0"
-                  role="button"
-                  aria-pressed="false"
-                  data-showcase-src="ScreenShots/MainTheme4.PNG"
-                  data-showcase-title="Zen Garden"
-                >
-                  <h3>Zen Garden</h3>
-                </article>
-              </div>
-
-              <div class="heroShotsPreload" hidden>
-                <img data-hero-shot-src="ScreenShots/MainTheme1.PNG" data-hero-shot-title="Breathe" alt="" />
-                <img data-hero-shot-src="ScreenShots/MainTheme2.PNG" data-hero-shot-title="Grounded Earth" alt="" />
-                <img data-hero-shot-src="ScreenShots/MainTheme3.PNG" data-hero-shot-title="Sunset Wind Down" alt="" />
-                <img data-hero-shot-src="ScreenShots/MainTheme4.PNG" data-hero-shot-title="Zen Garden" alt="" />
-              </div>
+        <div class="device-wrap">
+          <div class="device-frame" aria-roledescription="carousel" aria-label="App screenshots">
+            <div class="device-notch" aria-hidden="true"></div>
+            <div class="device-screen">
+              <img
+                class="is-active"
+                data-carousel-slide
+                src="ScreenShots/MainTheme1.PNG"
+                alt="Pivot home screen with Focus, Vent, and Move glass buttons on a soft teal gradient."
+                width="1179"
+                height="2556"
+                fetchpriority="high"
+                decoding="async"
+                aria-hidden="false"
+              />
+              <img
+                data-carousel-slide
+                src="ScreenShots/Focus.PNG"
+                alt="Focus mode showing an active timed session with the phone face-down to count progress."
+                width="1179"
+                height="2556"
+                decoding="async"
+                aria-hidden="true"
+              />
+              <img
+                data-carousel-slide
+                src="ScreenShots/MainTheme2.PNG"
+                alt="Pivot home screen with another theme showing Focus, Vent, and Move."
+                width="1179"
+                height="2556"
+                decoding="async"
+                aria-hidden="true"
+              />
+              <img
+                data-carousel-slide
+                src="ScreenShots/move.PNG"
+                alt="Move mode map with a walking route toward a nearby destination."
+                width="1179"
+                height="2556"
+                decoding="async"
+                aria-hidden="true"
+              />
             </div>
           </div>
-        </section>
+          <ul class="carousel-dots" role="tablist" aria-label="Choose screenshot">
+            <li>
+              <button type="button" data-carousel-dot aria-selected="true" aria-label="Show home screen"></button>
+            </li>
+            <li><button type="button" data-carousel-dot aria-label="Alternate home theme"></button></li>
+            <li><button type="button" data-carousel-dot aria-label="Show Focus"></button></li>
+            <li><button type="button" data-carousel-dot aria-label="Show Move map"></button></li>
+          </ul>
+          <p id="carousel-live" class="visually-hidden" aria-live="polite"></p>
+        </div>
+      </section>
 
-        <section class="section sectionTight8" data-track-section="home_proof">
-          <div class="glassCard fade">
-            <div class="section-head">
-              <h2>Psychology that actually converts to action</h2>
-              <p>Pivot uses commitment cues, emotional unload, and movement completion signals to reduce overwhelm and increase follow-through.</p>
-            </div>
-            <div class="cta-row">
-              <a class="btn btn-primary" href="science.html">Read the evidence</a>
-              <a class="btn" href="download.html">Start your first reset</a>
-            </div>
-          </div>
-        </section>
+      <section id="how-it-works" class="section reveal" aria-labelledby="how-heading">
+        <h2 id="how-heading">How it works</h2>
+        <p class="lead lead--wide">
+          Three ways to pivot—one journal. Pick what fits the moment; Pivot keeps the thread so your week tells a story,
+          not a screen-time chart.
+        </p>
+        <div class="how-grid">
+          <a class="glass-card how-item how-item--focus" href="#focus">
+            <strong>Focus</strong>
+            <span>Real tasks, face-down timer</span>
+          </a>
+          <a class="glass-card how-item how-item--vent" href="#vent">
+            <strong>Vent</strong>
+            <span>Speak or type, get reflection</span>
+          </a>
+          <a class="glass-card how-item how-item--move" href="#move">
+            <strong>Move</strong>
+            <span>Walk somewhere, capture the moment</span>
+          </a>
+        </div>
+      </section>
 
-        <section class="showcase appParts appPartsRedesign" id="app-parts" aria-label="Explore app parts" data-track-section="home_features">
-          <div class="appPartsAura" aria-hidden="true"></div>
-          <div class="showcaseHead appPartsHead fade">
-            <div class="kicker">Your reset, intelligently sequenced</div>
-            <h2>Features that adapt to how life feels today</h2>
+      <section class="section reveal" id="focus" aria-labelledby="focus-heading">
+        <div class="feature">
+          <div class="feature-copy">
+            <span class="feature-tag tag-focus">Focus</span>
+            <h2 id="focus-heading">The timer runs when your phone isn’t.</h2>
             <p>
-              Pivot blends Focus, Vent, Journal, Move, and Pro into one guided flow.
-              Explore each feature and preview what your next reset could look like.
+              Pivot suggests concrete offline tasks—tidy a space, prep food, analog reading, small routines—with clear
+              endpoints. Put your iPhone face-down: time counts. Pick it up, and the session pauses. You’re not fighting
+              willpower alone; you’re changing what your hands are doing.
             </p>
-            <div class="appPartsMetaRow">
-              <span class="appPartsMeta">Built for short daily resets</span>
-              <span class="appPartsMeta">Consistent, non-random recommendations</span>
-            </div>
+            <p>
+              <strong>Pivot Pro</strong> can adapt task suggestions to what you actually finish, add optional background
+              music (it pauses when you flip your phone), and more—optional, not required to start.
+            </p>
           </div>
+          <figure class="feature-shot">
+            <img
+              src="ScreenShots/FocusTask.PNG"
+              alt="Focus task card suggesting a real-world activity with duration and instructions."
+              width="1206"
+              height="2622"
+              loading="lazy"
+            />
+          </figure>
+        </div>
+      </section>
 
-          <div class="showcaseGrid appPartsLayout">
-            <div class="showcasePhone appPartsPreviewCol">
-              <div class="appPartsContextStrip fade" id="appPartsContextStrip" aria-live="polite">
-                <p id="appPartsContextCopy">
-                  Showing Focus first because users often start with one clear offline task.
-                </p>
+      <section class="section reveal" id="vent" aria-labelledby="vent-heading">
+        <div class="feature feature--reverse">
+          <div class="feature-copy">
+            <span class="feature-tag tag-vent">Vent</span>
+            <h2 id="vent-heading">Say it out loud—or type it out.</h2>
+            <p>
+              Vent is a private place to unload. Use the mic or keyboard; Pivot helps you reflect with AI-assisted
+              insight, then save entries to your journal so nothing important evaporates into another lost thread.
+            </p>
+          </div>
+          <figure class="feature-shot">
+            <img
+              src="ScreenShots/VentAddToJournal.PNG"
+              alt="Vent flow with option to add the session and reflection to the journal."
+              width="1206"
+              height="2622"
+              loading="lazy"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <section class="section reveal" id="move" aria-labelledby="move-heading">
+        <div class="feature">
+          <div class="feature-copy">
+            <span class="feature-tag tag-move">Move</span>
+            <h2 id="move-heading">A walk with a destination.</h2>
+            <p>
+              Move finds a nearby goal you can reach on foot, draws a route on the map, and celebrates when you arrive.
+              Finish with an optional photo and a short reflection—proof you traded scroll time for motion and fresh
+              air.
+            </p>
+          </div>
+          <figure class="feature-shot">
+            <img
+              src="ScreenShots/MoveJourney.PNG"
+              alt="Move journey map showing route progress toward an orange destination marker."
+              width="1206"
+              height="2622"
+              loading="lazy"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <section class="section reveal" id="journal" aria-labelledby="journal-heading">
+        <h2 id="journal-heading">Your week, in real actions</h2>
+        <p class="lead lead--journal">
+          Every Focus, Vent, and Move can live in one timeline. Open the book icon to see days and details—and a weekly
+          review that surfaces patterns. With <strong>Pivot Pro</strong>, get a plain-language AI action plan with
+          one-tap next steps.
+        </p>
+        <div class="journal-band">
+          <div class="journal-shots">
+            <figure>
+              <img
+                src="ScreenShots/Journal.PNG"
+                alt="Journal list showing recent Focus, Vent, and Move entries."
+                width="1206"
+                height="2622"
+                loading="lazy"
+              />
+            </figure>
+            <figure>
+              <img
+                src="ScreenShots/JournalToday.PNG"
+                alt="Journal today view grouping entries for the current day."
+                width="1206"
+                height="2622"
+                loading="lazy"
+              />
+            </figure>
+          </div>
+          <div>
+            <p class="journal-band-copy">
+              Scrolling doesn’t leave a meaningful trail. Pivot’s journal does—so you can notice what actually helps
+              when the urge hits.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="pro" aria-labelledby="pro-heading">
+        <div class="glass-card pro-panel">
+          <span class="feature-tag tag-focus">Pivot Pro</span>
+          <h2 id="pro-heading">Go deeper when you’re ready</h2>
+          <p class="pro-intro">Optional subscription inside the app—unlock more personalization and polish.</p>
+          <ul class="pro-list">
+            <li>
+              <span class="pro-icon pro-icon--themes" aria-hidden="true">🎨</span>
+              <div>
+                <strong>All themes</strong>
+                <div class="pro-list-desc">Match your mood with the full visual set.</div>
               </div>
-
-              <div class="devicePhone stickyPhone appPartsPreviewPhone">
-                <div class="shot-frame appPartsFrame">
-                  <img
-                    id="appPartShotImg"
-                    class="shot-img"
-                    data-shot="true"
-                    data-shot-title="Focus"
-                    src="ScreenShots/Focus.PNG"
-                    alt="Focus preview"
-                  />
-                  <div id="appPartComingSoon" class="comingSoonOverlay" hidden>
-                    In beta
-                  </div>
-                </div>
-                <div class="appPartsPreviewFooter">
-                  <div class="appPartsPreviewLabel">Live app preview</div>
-                  <a class="btn btn-primary appPartsPreviewCta" href="download.html">Try this flow</a>
-                </div>
+            </li>
+            <li>
+              <span class="pro-icon pro-icon--adaptive" aria-hidden="true">🧠</span>
+              <div>
+                <strong>Adaptive Focus tasks</strong>
+                <div class="pro-list-desc">Suggestions lean toward tasks you accept and complete.</div>
               </div>
-            </div>
-
-            <div class="showcaseSteps appPartsSteps appPartsRail" role="list" aria-label="Pivot feature cards">
-              <article
-                class="showcaseStep appPartStep appPartCard appPartCard-primary"
-                data-app-part="focus"
-                data-app-reason="Showing Focus first to help you start with one clear offline action."
-                tabindex="0"
-                role="button"
-                aria-pressed="true"
-                data-app-src="ScreenShots/Focus.PNG"
-                data-app-title="Focus"
-              >
-                <div class="appPartTopline">
-                  <span class="appPartPill">Core</span>
-                  <span class="appPartStat">Fast start</span>
-                </div>
-                <h3>Focus</h3>
-                <p>Face-down timer + one clear task. Commit fast, then protect attention while you execute.</p>
-              </article>
-
-              <article
-                class="showcaseStep appPartStep appPartCard"
-                data-app-part="vent"
-                data-app-reason="Vent appears when your pattern suggests mental unloading before action."
-                tabindex="0"
-                role="button"
-                aria-pressed="false"
-                data-app-src="ScreenShots/Vent.PNG"
-                data-app-title="Vent"
-              >
-                <div class="appPartTopline">
-                  <span class="appPartPill">Core</span>
-                  <span class="appPartStat">Voice or text</span>
-                </div>
-                <h3>Vent</h3>
-                <p>Voice or type your mental load, then get a cleaner next step instead of staying in rumination.</p>
-              </article>
-
-              <article
-                class="showcaseStep appPartStep appPartCard"
-                data-app-part="journal"
-                data-app-reason="Journal is prioritized when reflection consistency can compound your progress."
-                tabindex="0"
-                role="button"
-                aria-pressed="false"
-                data-app-src="ScreenShots/Journal.PNG"
-                data-app-title="Journal"
-              >
-                <div class="appPartTopline">
-                  <span class="appPartPill">Core</span>
-                  <span class="appPartStat">Weekly clarity</span>
-                </div>
-                <h3>Journal</h3>
-                <p>Track patterns across Focus, Vent, and Move so users can see what helps and repeat it.</p>
-              </article>
-
-              <article
-                class="showcaseStep appPartStep appPartCard appPartCard-primary"
-                data-app-part="move"
-                data-app-reason="Move becomes highlighted when momentum and energy are likely the best next step."
-                tabindex="0"
-                role="button"
-                aria-pressed="false"
-                data-app-src="ScreenShots/MainTheme2.PNG"
-                data-app-title="Move"
-              >
-                <div class="appPartTopline">
-                  <span class="appPartPill">Core</span>
-                  <span class="appPartStat">Route + completion flow</span>
-                </div>
-                <h3>Move</h3>
-                <p>Goal-based route, arrival confirmation, and reflection capture. Move is testing very strong in real use.</p>
-              </article>
-
-              <article
-                class="showcaseStep appPartStep appPartCard appPartCard-beta is-coming-soon"
-                data-app-part="pro"
-                data-app-reason="Pro appears when you are ready for deeper insight and structured progression."
-                tabindex="0"
-                role="button"
-                aria-pressed="false"
-                data-app-coming-soon="true"
-                data-app-title="Pro"
-              >
-                <div class="appPartTopline">
-                  <span class="appPartPill">Beta</span>
-                  <span class="appPartStat">Deeper insights</span>
-                </div>
-                <h3>Pro <span class="comingSoonTag">In beta</span></h3>
-                <p>Unlock deeper AI insights: adaptive Focus suggestions, Vent analysis depth, and weekly action plans.</p>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <section class="socialProof" data-track-section="home_reviews">
-          <div class="section-head fade">
-            <h2>What people feel after using Pivot</h2>
-            <p>Outcome-driven feedback matters more than generic praise. These are the shifts users care about.</p>
-          </div>
-
-          <div class="socialProofGrid">
-            <div class="glassCard ratingCard fade">
-              <div class="ratingRow">
-                <div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <div class="ratingText">
-                  <div class="ratingValue">Users report faster reset from scroll loops</div>
-                  <div class="ratingMeta muted">Public ratings will appear once the listing is live.</div>
+            </li>
+            <li>
+              <span class="pro-icon pro-icon--music" aria-hidden="true">🎵</span>
+              <div>
+                <strong>Focus background music</strong>
+                <div class="pro-list-desc">Ambient audio during sessions; pauses when you flip your phone.</div>
+              </div>
+            </li>
+            <li>
+              <span class="pro-icon pro-icon--weekly" aria-hidden="true">✨</span>
+              <div>
+                <strong>Weekly AI action plan</strong>
+                <div class="pro-list-desc">
+                  Insight, why it matters, and a one-tap Focus, Vent, or Move next step.
                 </div>
               </div>
-              <p class="muted mt14">
-                Quotes below reflect early beta feedback and will be updated with verified App Store reviews after launch.
-              </p>
-            </div>
+            </li>
+          </ul>
+        </div>
+      </section>
 
-            <div class="testimonials">
-              <figure class="card callout testimonialCard fade">
-                <blockquote>
-                  “Focus helped me stop negotiating with myself and just start.”
-                </blockquote>
-                <figcaption class="muted mt10">Beta tester feedback</figcaption>
-              </figure>
-
-              <figure class="card callout testimonialCard fade">
-                <blockquote>
-                  “Move got me out the door. That one walk changed my whole evening.”
-                </blockquote>
-                <figcaption class="muted mt10">Beta tester feedback</figcaption>
-              </figure>
-            </div>
-          </div>
-        </section>
-
-        <section class="section sectionTight8" id="download" data-track-section="home_download">
-          <div class="glassCard fade">
-            <div class="section-head">
-              <h2>Start your first reset in 2 minutes</h2>
-              <p>Install, pick one Focus or Move action, and feel immediate momentum today.</p>
-            </div>
-
-            <div class="downloadBadges" aria-label="Download options">
-              <a
-                class="downloadBadge"
-                href="https://apps.apple.com"
-                data-download="app-store"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span class="small">Download on the</span>
-                App Store
-              </a>
-              <a
-                class="downloadBadge"
-                href="https://testflight.apple.com"
-                data-download="testflight"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span class="small">Get the</span>
-                TestFlight build
-              </a>
-            </div>
-            <div class="cta-row mt14">
-              <a class="btn" href="download.html">View full install guide</a>
-            </div>
-          </div>
-        </section>
-      </div>
+      <section class="section reveal faq" id="faq" aria-labelledby="faq-heading">
+        <h2 id="faq-heading">FAQ</h2>
+        <details>
+          <summary>What do I need for TestFlight?</summary>
+          <p>
+            An Apple ID and the free TestFlight app from the App Store. Apple may limit beta seats—if a link is full,
+            try again later or ask the developer for an invite.
+          </p>
+        </details>
+        <details>
+          <summary>Is Pivot only for iPhone?</summary>
+          <p>Yes. Pivot is built for iOS. There is no Android version.</p>
+        </details>
+        <details>
+          <summary>What about privacy?</summary>
+          <p>
+            Your journal and sessions stay on your device; the app is designed around personal use. Features that use AI
+            follow the choices you make in the app (for example on-device vs. cloud where supported). See the
+            <a href="privacy.html">privacy page</a> for plain-language details.
+          </p>
+        </details>
+        <details>
+          <summary>Do I need Pivot Pro?</summary>
+          <p>
+            No. Core Focus, Vent, Move, and journaling work without a subscription. Pro adds themes, adaptive tasks,
+            Focus music, and the weekly AI action plan.
+          </p>
+        </details>
+        <details>
+          <summary>Which iOS version?</summary>
+          <p>
+            Install via TestFlight; Apple will show the minimum iOS version required for the current build. The project
+            targets recent iOS releases—check TestFlight if an install is blocked.
+          </p>
+        </details>
+      </section>
     </main>
 
-    <footer class="footerFinal">
-      <div class="wrap footer-inner footerFinalInner">
-        <div>
-          <div class="footerBrandName">Pivot</div>
-          <div class="footerBrandTag">Focus • Vent • Move • Journal</div>
-        </div>
-
-        <div class="footerFinalRight">
-          <div class="footer-links">
-            <a href="how-it-works.html">How It Works</a>
-            <a href="features.html">Features</a>
-            <a href="pricing.html">Pricing</a>
-            <a href="science.html">Science</a>
-            <a href="reviews.html">Reviews</a>
-            <a href="download.html">Download</a>
-            <a href="contact.html">Contact</a>
-            <a href="privacy.html">Privacy</a>
-            <a href="terms.html">Terms</a>
-          </div>
-        </div>
+    <footer class="site-footer">
+      <div class="footer-links">
+        <a href="https://testflight.apple.com/join/4sYs1Z8y" rel="noopener noreferrer">TestFlight</a>
+        <a href="privacy.html">Privacy</a>
       </div>
+      <p>Pivot · iOS app · App Store coming soon</p>
+      <p class="footer-note">This site is independent marketing; Apple and TestFlight are trademarks of Apple Inc.</p>
     </footer>
 
-    <script src="js/site.js"></script>
+    <div class="sticky-cta">
+      <a class="btn btn--primary" href="https://testflight.apple.com/join/4sYs1Z8y" rel="noopener noreferrer"
+        >Join TestFlight</a
+      >
+    </div>
+
+    <script src="config.js"></script>
+    <script src="meta.js"></script>
+    <script src="app.js" defer></script>
   </body>
 </html>
-
