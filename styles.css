@@ -356,9 +356,10 @@ h3 {
   }
 }
 
-/* Hero: large phone mockup — fills the right grid column (still beside text) */
+/* Hero: large phone — frame hugs the screen (no full-width “bubble” vs narrow screenshot) */
 .hero .device-wrap {
-  width: min(100%, 400px);
+  width: fit-content;
+  max-width: 100%;
   justify-self: center;
 }
 
@@ -368,8 +369,6 @@ h3 {
 
 @media (min-width: 900px) {
   .hero .device-wrap {
-    width: 100%;
-    max-width: 100%;
     justify-self: end;
   }
 
@@ -386,6 +385,8 @@ h3 {
 
 .device-frame {
   position: relative;
+  width: fit-content;
+  max-width: 100%;
   border-radius: 42px;
   padding: 12px;
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.2));
@@ -395,6 +396,9 @@ h3 {
 
 .device-screen {
   position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
   border-radius: 32px;
   overflow: hidden;
   aspect-ratio: 1179 / 2366;
