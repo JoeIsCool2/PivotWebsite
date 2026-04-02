@@ -3,9 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Privacy — Pivot</title>
-    <meta name="description" content="Privacy information for the Pivot iOS app and this marketing website." />
+    <title>Privacy Policy — Pivot</title>
+    <meta
+      name="description"
+      content="Privacy Policy for the Pivot iOS app and pivot marketing website: what we collect, how we use it, AI and third parties, your rights, and how to contact us."
+    />
     <meta name="theme-color" content="#80deea" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://YOUR_PRODUCTION_URL/privacy.html" />
     <link rel="icon" type="image/png" href="assets/app-icon.png" />
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -17,29 +22,137 @@
     <link rel="stylesheet" href="styles.css" />
     <style>
       .legal {
-        max-width: 720px;
+        max-width: 42rem;
         margin: 0 auto;
-        padding: 2.5rem 1.25rem 4rem;
+        padding: 2.25rem 1.25rem 4.5rem;
       }
-      .legal h1 {
+      .legal > h1 {
         font-family: var(--font-display);
-        font-size: 2rem;
-        margin-bottom: 0.5rem;
+        font-size: clamp(1.75rem, 4vw, 2.25rem);
+        margin: 0 0 0.35rem;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+      }
+      .legal .legal-meta {
+        font-size: 0.95rem;
+        color: var(--text-muted);
+        margin: 0 0 1.5rem;
       }
       .legal h2 {
         font-family: var(--font-display);
         font-size: 1.2rem;
-        margin-top: 2rem;
+        margin: 2.25rem 0 0.65rem;
+        letter-spacing: -0.02em;
+        scroll-margin-top: 5rem;
+      }
+      .legal h3 {
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        margin: 1.35rem 0 0.45rem;
+        color: var(--text);
       }
       .legal p,
       .legal li {
         color: var(--text-muted);
+        margin: 0 0 0.85rem;
+        font-size: 0.98rem;
+        line-height: 1.65;
+      }
+      .legal ul,
+      .legal ol {
+        margin: 0 0 1rem;
+        padding-left: 1.35rem;
+      }
+      .legal li {
+        margin-bottom: 0.45rem;
+      }
+      .legal li::marker {
+        color: var(--focus);
+      }
+      .legal strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .legal a {
+        color: var(--focus);
+        font-weight: 600;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .legal a:focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 3px;
+      }
+      .legal .note {
+        font-size: 0.92rem;
+        padding: 1rem 1.1rem;
+        border-radius: var(--radius-md);
+        background: rgba(0, 91, 159, 0.08);
+        border: 1px solid rgba(0, 91, 159, 0.15);
+        margin: 1.25rem 0;
+      }
+      .legal .toc {
+        padding: 1.1rem 1.2rem;
+        border-radius: var(--radius-md);
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        margin: 1.5rem 0 2rem;
+      }
+      .legal .toc strong {
+        display: block;
+        margin-bottom: 0.65rem;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--focus);
+      }
+      .legal .toc ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .legal .toc li {
+        margin: 0.4rem 0;
+      }
+      .legal .toc a {
+        font-weight: 500;
+        text-decoration: none;
+      }
+      .legal .toc a:hover {
+        text-decoration: underline;
+      }
+      .legal table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.92rem;
+        margin: 1rem 0 1.25rem;
+      }
+      .legal th,
+      .legal td {
+        border: 1px solid rgba(0, 43, 74, 0.12);
+        padding: 0.55rem 0.65rem;
+        text-align: left;
+        vertical-align: top;
+      }
+      .legal th {
+        background: rgba(255, 255, 255, 0.45);
+        color: var(--text);
+        font-family: var(--font-display);
+        font-weight: 600;
+      }
+      .legal td {
+        color: var(--text-muted);
       }
       .back {
         display: inline-block;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.25rem;
         font-weight: 600;
         color: var(--focus);
+        text-decoration: none;
+      }
+      .back:hover {
+        text-decoration: underline;
       }
       .back:focus-visible {
         outline: 2px solid var(--focus);
@@ -51,7 +164,7 @@
     <a class="skip-link" href="#privacy-main">Skip to content</a>
     <header class="site-header">
       <div class="header-inner">
-        <a class="brand" href="index.html">
+        <a class="brand" href="./">
           <img src="assets/app-icon.png" width="36" height="36" alt="" />
           Pivot
         </a>
@@ -60,41 +173,338 @@
         >
       </div>
     </header>
+
     <article class="legal" id="privacy-main">
-      <a class="back" href="index.html">← Back to home</a>
-      <h1>Privacy</h1>
-      <p><em>Last updated: April 2, 2026</em></p>
+      <a class="back" href="./">← Back to home</a>
+      <h1>Privacy Policy</h1>
+      <p class="legal-meta"><strong>Last updated:</strong> April 3, 2026 &nbsp;·&nbsp; <strong>Effective:</strong> April 3, 2026</p>
+
       <p>
-        This page describes how the Pivot <strong>marketing website</strong> and the Pivot <strong>iOS app</strong> treat
-        information in plain language. It is not legal advice. For App Store policies, Apple’s terms also apply.
+        This Privacy Policy explains how information is handled when you use <strong>Pivot</strong> (the iOS application)
+        and when you visit our <strong>marketing website</strong> (the static site that describes Pivot and links to
+        TestFlight or the App Store). By using the app or the site, you agree to this Policy. If you do not agree, please
+        do not use the services.
       </p>
 
-      <h2>This website</h2>
-      <p>
-        The static pages you are reading may be hosted by a provider (for example Netlify, Vercel, or Cloudflare). Those
-        providers may log standard technical data such as IP address and browser type for security and operations. This
-        site does not embed analytics by default; if you add analytics later, update this section.
+      <p class="note">
+        <strong>Summary.</strong> Pivot is built for personal use on your iPhone. Most of what you do in the app—journal
+        entries, Focus sessions, Vent text, Move routes, and optional photos—stays <strong>on your device</strong>. Some
+        features use <strong>Apple’s system services</strong> (location, maps, speech recognition, on-device
+        intelligence, purchases). If cloud-based AI is used (for example when your device uses a remote model or
+        provider), <strong>only the content needed for that request</strong> is sent to that provider, as described below.
+        We do not sell your personal information.
       </p>
 
-      <h2>The Pivot app (summary)</h2>
+      <nav class="toc" aria-label="Table of contents">
+        <strong>On this page</strong>
+        <ul>
+          <li><a href="#who">1. Who we are</a></li>
+          <li><a href="#scope">2. What this Policy covers</a></li>
+          <li><a href="#collect">3. Information we collect</a></li>
+          <li><a href="#use">4. How we use information</a></li>
+          <li><a href="#share">5. Sharing and third parties</a></li>
+          <li><a href="#retention">6. Retention</a></li>
+          <li><a href="#security">7. Security</a></li>
+          <li><a href="#rights">8. Your rights and choices</a></li>
+          <li><a href="#children">9. Children</a></li>
+          <li><a href="#international">10. International users</a></li>
+          <li><a href="#california">11. U.S. state privacy (including California)</a></li>
+          <li><a href="#website">12. Marketing website</a></li>
+          <li><a href="#changes">13. Changes to this Policy</a></li>
+          <li><a href="#contact">14. Contact</a></li>
+        </ul>
+      </nav>
+
+      <h2 id="who">1. Who we are</h2>
       <p>
-        Pivot is designed for personal use on your iPhone. Journal entries, Focus sessions, Vent content, and Move
-        activity are stored and processed primarily on your device. Some features may use Apple frameworks (such as
-        speech recognition, maps, or on-device intelligence) according to Apple’s privacy rules.
-      </p>
-      <p>
-        If you use optional AI features that contact a server, only the data required for that request is sent, and you
-        should review in-app disclosures and settings. Subscription purchases are handled by Apple via StoreKit.
+        Pivot is developed and published by the <strong>developer identified in App Store Connect</strong> as the seller
+        of the Pivot app (the “<strong>we</strong>,” “<strong>us</strong>,” or “<strong>developer</strong>”). For
+        privacy requests, use the contact methods in <a href="#contact">Section 14</a>.
       </p>
 
-      <h2>Contact</h2>
+      <h2 id="scope">2. What this Policy covers</h2>
+      <p>This Policy applies to:</p>
+      <ul>
+        <li>The <strong>Pivot iOS app</strong> distributed via TestFlight and/or the Apple App Store.</li>
+        <li>The <strong>public marketing website</strong> where this policy is hosted (for example pages that describe the app and link to TestFlight).</li>
+      </ul>
       <p>
-        For privacy questions about Pivot, contact the developer through the email or support channel listed on the App
-        Store or TestFlight page when available.
+        It does <strong>not</strong> govern Apple’s own services (iCloud backup of your device, App Store checkout,
+        Siri, system analytics controlled by Apple, etc.). Those are covered by
+        <a href="https://www.apple.com/legal/privacy/" rel="noopener noreferrer">Apple’s Privacy Policy</a> and your device
+        settings.
+      </p>
+
+      <h2 id="collect">3. Information we collect</h2>
+      <p>Depending on how you use Pivot, the following categories may apply.</p>
+
+      <h3>3.1 Information you provide or create in the app</h3>
+      <p>Stored primarily <strong>locally on your iPhone</strong> using Apple’s on-device storage (e.g. SwiftData):</p>
+      <ul>
+        <li>
+          <strong>Focus:</strong> Task choices, session timing, completion status, streaks, and related journal entries
+          you generate while using Focus (including data derived from device orientation used to run the face-down timer).
+        </li>
+        <li>
+          <strong>Vent:</strong> Text you type or dictate, AI-generated reflections or analyses you choose to keep, and
+          structured summaries stored with your journal entry (for example moods or themes the app derives for your
+          review).
+        </li>
+        <li>
+          <strong>Move:</strong> Route and journey information associated with a Move session, arrival/completion state,
+          optional notes, and optional <strong>photos</strong> you capture in connection with completing a Move (stored on
+          device as part of your journal; you may also use system features to save images to your Photo Library if you
+          grant permission).
+        </li>
+        <li>
+          <strong>Journal &amp; insights:</strong> Combined timeline of the above, daily/weekly summaries, and similar
+          on-device records used to show you patterns over time.
+        </li>
+        <li>
+          <strong>Adaptive / memory features:</strong> Optional on-device profiles (for example remembered preferences or
+          short factual snippets) used to personalize suggestions, where you have enabled such features in the app.
+        </li>
+      </ul>
+
+      <h3>3.2 Device permissions and sensors</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Permission / sensor</th>
+            <th>Typical use in Pivot</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Location (When In Use)</strong></td>
+            <td>
+              Used for <strong>Move</strong> to determine your position, compute walking routes, and show maps. Apple’s
+              Core Location and MapKit may process location as described in Apple’s documentation. We do not operate our
+              own location server for routine app use.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Motion &amp; fitness (device motion)</strong></td>
+            <td>
+              Used for <strong>Focus</strong> to detect when your phone is face-down so the session timer can run or pause
+              as designed. Processing is on-device.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Speech / microphone</strong></td>
+            <td>
+              Used when you choose to <strong>dictate</strong> in Vent. Speech recognition may use
+              <strong>on-device</strong> or <strong>Apple’s speech services</strong> according to your iOS settings and
+              Apple’s terms.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Camera / Photo Library</strong></td>
+            <td>
+              Used when you take or choose images for Move completion or when you export/save images to Photos, only if
+              you grant the relevant permission.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>3.3 AI and network processing</h3>
+      <p>
+        Some features use <strong>on-device intelligence</strong> (for example Apple’s on-device models where available
+        and enabled). When on-device processing is not used or not sufficient, the app may send a
+        <strong>limited payload</strong> (such as feature identifier, system instructions, and the text or context
+        needed for that feature) to a <strong>remote AI provider</strong> to generate a response—for example for Vent
+        analysis, weekly intelligence, or similar Pro features. Remote processing may be provided by
+        <strong>OpenAI</strong> or another service configured in the build (including a <strong>proxy endpoint</strong>
+        you or the developer operate). Only data necessary to fulfill that request should be transmitted.
+      </p>
+      <p>
+        Remote AI providers process data under <strong>their own privacy policies</strong>. For OpenAI, see
+        <a href="https://openai.com/policies/privacy-policy/" rel="noopener noreferrer">OpenAI’s Privacy Policy</a>. Do
+        not paste highly sensitive information (for example full medical records or financial account numbers) into
+        features that may use cloud AI unless you accept that risk.
+      </p>
+
+      <h3>3.4 Purchases and subscriptions</h3>
+      <p>
+        <strong>Pivot Pro</strong> and other in-app purchases are processed by <strong>Apple</strong> via StoreKit. We do
+        not receive your full payment card number. Apple may provide us limited transaction metadata (for example
+        subscription status) needed to unlock features.
+      </p>
+
+      <h3>3.5 Settings and diagnostics on device</h3>
+      <p>
+        The app stores <strong>preferences</strong> (such as theme, toggles, and feature flags) using UserDefaults or
+        similar on-device mechanisms. We do not operate a mandatory Pivot “account” in the cloud for normal use.
+      </p>
+
+      <h3>3.6 Information we do not intentionally collect</h3>
+      <p>
+        We do not ask you to create a Pivot username/password on our servers for core use. We do not require you to
+        provide government ID, precise contact lists, or browsing history from other apps. Do not send us such
+        information through support unless we explicitly request it for a specific issue.
+      </p>
+
+      <h2 id="use">4. How we use information</h2>
+      <p>We use the information above to:</p>
+      <ul>
+        <li>Provide, maintain, and improve Pivot’s features (Focus, Vent, Move, journal, weekly review, Pro features).</li>
+        <li>Personalize in-app suggestions where you have enabled personalization (for example adaptive tasks or memory-assisted prompts).</li>
+        <li>Process subscriptions and restore purchases through Apple.</li>
+        <li>Protect security, debug critical issues, and comply with law when required.</li>
+      </ul>
+      <p>
+        <strong>Legal bases (EEA/UK).</strong> Where GDPR applies, we rely on <strong>performance of a contract</strong>
+        (providing the app you request), <strong>legitimate interests</strong> (securing and improving the app, in line
+        with your expectations), and, where required, <strong>consent</strong> (for example optional analytics if added in
+        the future, or certain permissions you grant in iOS).
+      </p>
+
+      <h2 id="share">5. Sharing and third parties</h2>
+      <p>We may share information only as follows:</p>
+      <ul>
+        <li>
+          <strong>Apple:</strong> For distribution, payments, system APIs (maps, speech, StoreKit, on-device ML), crash
+          diagnostics if you opt in to sharing with developers via Apple, and device backups if you use iCloud backup.
+        </li>
+        <li>
+          <strong>AI providers:</strong> As described in Section 3.3, when a feature you invoke uses remote AI.
+        </li>
+        <li>
+          <strong>Service providers:</strong> If we use vendors (for example email delivery for support, or website
+          hosting), they process data under instructions and only as needed for those services.
+        </li>
+        <li>
+          <strong>Legal:</strong> If we believe disclosure is required by law, court order, or to protect rights, safety,
+          or security.
+        </li>
+        <li>
+          <strong>Business transfers:</strong> If Pivot or its assets are acquired or merged, information held locally on
+          user devices generally remains on those devices; any successor would be bound by this Policy or notify you of
+          changes as required.
+        </li>
+      </ul>
+      <p>
+        <strong>We do not sell your personal information</strong> and we do not share it for cross-context behavioral
+        advertising as those terms are commonly used in U.S. state laws.
+      </p>
+
+      <h2 id="retention">6. Retention</h2>
+      <ul>
+        <li>
+          <strong>On-device data:</strong> Remains until you delete it within the app (where available), delete the app,
+          or erase your device. Uninstalling the app may remove local databases unless restored from an
+          <strong>iCloud or device backup</strong> managed by Apple.
+        </li>
+        <li>
+          <strong>Server-side data:</strong> If the developer receives support emails or minimal server logs, retention
+          depends on the systems used; typically support correspondence is kept only as long as needed to resolve the
+          issue unless a longer period is required by law.
+        </li>
+        <li>
+          <strong>AI providers:</strong> Retention of prompts and outputs is governed by the provider’s policy and
+          settings; refer to their documentation.
+        </li>
+      </ul>
+
+      <h2 id="security">7. Security</h2>
+      <p>
+        We use reasonable technical and organizational measures appropriate to a consumer iOS app, including reliance on
+        Apple’s platform security for on-device storage and transport (for example HTTPS for network requests). No method
+        of transmission or storage is 100% secure; you use Pivot at your own risk to the extent permitted by law.
+      </p>
+
+      <h2 id="rights">8. Your rights and choices</h2>
+      <p>Depending on where you live, you may have rights to access, correct, delete, or export personal data, and to object to or restrict certain processing.</p>
+      <ul>
+        <li>
+          <strong>iOS settings:</strong> Control location, microphone, camera, photos, speech recognition, and related
+          permissions in <strong>Settings &gt; Privacy &amp; Security</strong> and per-app settings for Pivot.
+        </li>
+        <li>
+          <strong>In-app controls:</strong> Use settings screens inside Pivot to disable optional features (for example
+          personalization or memory), clear stored memory where offered, or manage Pro status through Apple.
+        </li>
+        <li>
+          <strong>Deletion:</strong> Deleting the app removes locally stored app data from the device subject to Apple
+          backup behavior. To delete cloud copies held by third parties (e.g. AI vendors), follow their tools or contact us
+          for guidance where possible.
+        </li>
+      </ul>
+      <p>
+        To exercise GDPR or similar rights against <strong>us</strong> as developer, contact us at
+        <a href="#contact">Section 14</a>. We may need to verify your request. You may also lodge a complaint with your
+        local supervisory authority.
+      </p>
+
+      <h2 id="children">9. Children</h2>
+      <p>
+        Pivot is not directed to children under <strong>13</strong> (or the minimum age required in your country). We do
+        not knowingly collect personal information from children. If you believe a child has provided us personal
+        information, contact us and we will take appropriate steps to delete it.
+      </p>
+
+      <h2 id="international">10. International users</h2>
+      <p>
+        If you use Pivot outside the United States, your information may be processed in the United States or other
+        countries where we, Apple, or our service providers operate. Those countries may have different data protection
+        laws. By using Pivot, you understand and consent to such transfer where legally required, or we rely on approved
+        mechanisms (such as Standard Contractual Clauses) where applicable.
+      </p>
+
+      <h2 id="california">11. U.S. state privacy (including California)</h2>
+      <p>
+        If you are a California resident, the California Consumer Privacy Act (CCPA), as amended, may grant you rights to
+        know, delete, and correct personal information, and to opt out of sale/sharing. We do <strong>not sell</strong>
+        personal information. Other states (Virginia, Colorado, Connecticut, Utah, and others) may provide similar
+        rights. To submit a request, use the contact information in <a href="#contact">Section 14</a>. We will not
+        discriminate against you for exercising privacy rights.
+      </p>
+
+      <h2 id="website">12. Marketing website</h2>
+      <p>
+        The static site may be hosted by a provider (such as Netlify, Vercel, Cloudflare Pages, or similar). That provider
+        may automatically collect <strong>technical data</strong> such as IP address, browser type, date/time, and
+        requested URL for security, fraud prevention, and operations. This site does not use first-party cookies for
+        tracking by default. If third-party analytics or embeds are added later, this section should be updated and, where
+        required, consent obtained.
+      </p>
+      <p>
+        <strong>Open source fonts:</strong> Loading Google Fonts may cause your browser to contact Google; see
+        <a href="https://policies.google.com/privacy" rel="noopener noreferrer">Google’s Privacy Policy</a> if you want
+        details. To avoid that, the site could be changed to self-host font files.
+      </p>
+
+      <h2 id="changes">13. Changes to this Policy</h2>
+      <p>
+        We may update this Policy from time to time. We will post the new version on this page and update the “Last
+        updated” date. For material changes to how we use personal information, we will provide additional notice as
+        required by law (for example an in-app notice or email if we have your address). Continued use after the effective
+        date means you accept the updated Policy.
+      </p>
+
+      <h2 id="contact">14. Contact</h2>
+      <p>For privacy questions, requests, or concerns about Pivot:</p>
+      <ul>
+        <li>
+          <strong>App Store / TestFlight:</strong> Use the <strong>support or developer website</strong> shown on Pivot’s
+          product page in the App Store, or the contact options Apple provides in the TestFlight app for this beta.
+        </li>
+        <li>
+          <strong>Email:</strong>
+          <!-- Before App Store submission: set href + visible address to your real privacy or support inbox. -->
+          <a href="mailto:privacy@YOURDOMAIN.com">privacy@YOURDOMAIN.com</a>
+        </li>
+      </ul>
+      <p>
+        If you are in the EEA, you may also contact your local data protection authority. For Apple’s role as platform
+        provider, see
+        <a href="https://www.apple.com/legal/privacy/" rel="noopener noreferrer">apple.com/legal/privacy</a>.
       </p>
     </article>
+
     <footer class="site-footer" style="padding-bottom: 2rem">
-      <p><a href="index.html">Home</a> · <a href="https://testflight.apple.com/join/4sYs1Z8y">TestFlight</a></p>
+      <p><a href="./">Home</a> · <a href="https://testflight.apple.com/join/4sYs1Z8y">TestFlight</a></p>
     </footer>
   </body>
 </html>
