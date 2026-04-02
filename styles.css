@@ -282,28 +282,17 @@ h3 {
 }
 
 @media (min-width: 900px) {
-  /* Single column so the phone mockup can scale up (~3×) without grid column clamp */
+  /* Text left, phone right — wider right column + roomier section so the mockup can scale up */
+  .hero.section {
+    max-width: min(1320px, 100%);
+  }
+
   .hero {
-    grid-template-columns: 1fr;
-    gap: 2.75rem;
-    justify-items: center;
-    text-align: center;
+    grid-template-columns: minmax(260px, 0.38fr) minmax(280px, 0.62fr);
+    gap: clamp(1.25rem, 3vw, 2.75rem);
+    align-items: center;
     padding-top: 2.5rem;
-    padding-bottom: clamp(4rem, 10vw, 6.5rem);
-  }
-
-  .hero > div:first-child {
-    max-width: 40rem;
-  }
-
-  .hero .lead,
-  .hero .hero-note {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .hero .hero-actions {
-    justify-content: center;
+    padding-bottom: clamp(3rem, 6vw, 5rem);
   }
 }
 
@@ -367,40 +356,31 @@ h3 {
   }
 }
 
-/* Hero: much larger phone mockup (~3× previous visual size on desktop) */
+/* Hero: large phone mockup — fills the right grid column (still beside text) */
 .hero .device-wrap {
-  width: min(100%, 96vw);
-  max-width: 520px;
+  width: min(100%, 400px);
+  justify-self: center;
 }
 
 .hero .device-screen {
-  max-height: min(78vh, 720px);
-}
-
-@media (min-width: 600px) {
-  .hero .device-wrap {
-    max-width: 640px;
-  }
-  .hero .device-screen {
-    max-height: min(82vh, 900px);
-  }
+  max-height: min(78vh, 760px);
 }
 
 @media (min-width: 900px) {
   .hero .device-wrap {
-    width: min(100%, 95vw);
-    max-width: 1020px;
-    justify-self: center;
+    width: 100%;
+    max-width: 100%;
+    justify-self: end;
   }
 
   .hero .device-screen {
-    max-height: min(88vh, 1760px);
-    border-radius: clamp(32px, 3.2vw, 44px);
+    max-height: min(92vh, 1500px);
+    border-radius: clamp(32px, 2.8vw, 42px);
   }
 
   .hero .device-frame {
-    border-radius: clamp(42px, 4.2vw, 58px);
-    padding: clamp(12px, 1.2vw, 20px);
+    border-radius: clamp(40px, 3.5vw, 54px);
+    padding: clamp(11px, 1vw, 18px);
   }
 }
 
