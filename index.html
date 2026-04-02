@@ -3,21 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Pivot - Experience life, not just your screen</title>
-    <meta name="description" content="Experience life, not just your screen. Pivot helps you scroll less, live more, and get back to real life one small action at a time." />
+    <title>Pivot | Scroll Less, Live More</title>
+    <meta name="description" content="Pivot helps you break scroll loops with Focus, Vent, and Journal reset flows so you can act in real life." />
     <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://pivotapp.com/" />
-    <meta property="og:title" content="Pivot - Experience life, not just your screen" />
-    <meta property="og:description" content="Less scrolling. More living. Get back to real life, one small action at a time." />
+    <meta property="og:title" content="Pivot | Scroll Less, Live More" />
+    <meta property="og:description" content="Break doom-scrolling with a short, structured reset loop." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://pivotapp.com/" />
     <meta property="og:image" content="ScreenShots/Focus.PNG" />
-    <meta property="og:image:alt" content="Pivot app preview (Focus)" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Pivot - Experience life, not just your screen" />
-    <meta name="twitter:description" content="Less scrolling. More living. Get back to real life, one small action at a time." />
+    <meta name="twitter:title" content="Pivot | Scroll Less, Live More" />
+    <meta name="twitter:description" content="Break doom-scrolling with a short, structured reset loop." />
     <meta name="twitter:image" content="ScreenShots/Focus.PNG" />
-    <meta name="theme-color" content="#E0F7FA" />
     <link rel="icon" type="image/png" href="assets/app-icon.png" />
     <link rel="stylesheet" href="css/site.css" />
     <link rel="stylesheet" href="css/design-system.css" />
@@ -34,28 +32,41 @@
             <div class="brand-tag">Focus • Vent • Move</div>
           </div>
         </a>
-
-        <div class="navLandingActions">
-          <a class="btn nav-cta nav-ghost" href="research.html">Research</a>
-          <a class="btn btn-ctaStrong nav-cta" href="#download">Download Pivot</a>
-        </div>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="how-it-works.html">How It Works</a>
+          <a href="features.html">Features</a>
+          <a href="science.html">Science</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="reviews.html">Reviews</a>
+          <a class="btn btn-ctaStrong nav-cta" href="download.html">Download</a>
+        </nav>
+        <button id="burger" class="burger" type="button" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
+      </div>
+      <div class="wrap mobile-menu" id="mobileMenu">
+        <a href="how-it-works.html" data-mobile-link="true">How It Works</a>
+        <a href="features.html" data-mobile-link="true">Features</a>
+        <a href="science.html" data-mobile-link="true">Science</a>
+        <a href="pricing.html" data-mobile-link="true">Pricing</a>
+        <a href="reviews.html" data-mobile-link="true">Reviews</a>
+        <a href="download.html" data-mobile-link="true">Download</a>
+        <a href="contact.html" data-mobile-link="true">Contact</a>
       </div>
     </header>
 
     <main id="main" class="hero landing">
       <div class="wrap">
-        <section class="landingHero">
+        <section class="landingHero" data-track-section="home_hero">
           <div class="landingHeroGrid">
             <div class="landingHeroCopy fade">
-              <div class="kicker">Less scrolling. More living.</div>
-              <h1>Experience life, not just your screen.</h1>
+              <div class="kicker">Built for fast daily resets</div>
+              <h1>Break the scroll loop in under 5 minutes.</h1>
               <p class="lead">
-                Pivot combines <b>Focus</b>, <b>Vent</b>, and <b>Move</b> into one loop that helps you get back to real life, one small action at a time.
+                Pivot combines <b>Focus</b>, <b>Vent</b>, and <b>Journal</b> so you can clear noise, choose one next action, and follow through offline.
               </p>
 
               <div class="cta-row">
-                <a class="btn btn-primary btn-ctaStrong" href="#download">Download Pivot</a>
-                <a class="btn" href="research.html">View Research</a>
+                <a class="btn btn-primary btn-ctaStrong" href="download.html">Download Pivot</a>
+                <a class="btn" href="how-it-works.html">See how it works</a>
               </div>
 
               <p class="lead muted fs14 mt16">
@@ -141,20 +152,20 @@
           </div>
         </section>
 
-        <section class="section sectionTight8">
+        <section class="section sectionTight8" data-track-section="home_proof">
           <div class="glassCard fade">
             <div class="section-head">
-              <h2>Research-backed design</h2>
-              <p>Pivot's core flows are informed by peer-reviewed work on implementation intentions, expressive writing, and physical activity.</p>
+              <h2>Why Pivot works</h2>
+              <p>Every flow maps to behavior-change principles: implementation intentions, expressive writing, and movement cues.</p>
             </div>
             <div class="cta-row">
-              <a class="btn btn-primary" href="research.html">Explore the evidence</a>
-              <a class="btn" href="features.html">See product features</a>
+              <a class="btn btn-primary" href="science.html">Read the science</a>
+              <a class="btn" href="download.html">Start your first reset</a>
             </div>
           </div>
         </section>
 
-        <section class="showcase appParts appPartsRedesign" id="app-parts" aria-label="Explore app parts">
+        <section class="showcase appParts appPartsRedesign" id="app-parts" aria-label="Explore app parts" data-track-section="home_features">
           <div class="appPartsAura" aria-hidden="true"></div>
           <div class="showcaseHead appPartsHead fade">
             <div class="kicker">Your reset, intelligently sequenced</div>
@@ -193,7 +204,7 @@
                 </div>
                 <div class="appPartsPreviewFooter">
                   <div class="appPartsPreviewLabel">Live app preview</div>
-                  <a class="btn btn-primary appPartsPreviewCta" href="#download">Try this flow</a>
+                  <a class="btn btn-primary appPartsPreviewCta" href="download.html">Try this flow</a>
                 </div>
               </div>
             </div>
@@ -292,7 +303,7 @@
           </div>
         </section>
 
-        <section class="socialProof">
+        <section class="socialProof" data-track-section="home_reviews">
           <div class="section-head fade">
             <h2>Early feedback from beta users</h2>
             <p>Example ratings and testimonials to help the page feel alive.</p>
@@ -330,11 +341,11 @@
           </div>
         </section>
 
-        <section class="section sectionTight8">
-          <div id="download" class="glassCard fade">
+        <section class="section sectionTight8" id="download" data-track-section="home_download">
+          <div class="glassCard fade">
             <div class="section-head">
               <h2>Download Pivot</h2>
-              <p>Less scrolling. More living. Start your first real-life reset today.</p>
+              <p>Choose your install path and start your first real-life reset today.</p>
             </div>
 
             <div class="downloadBadges" aria-label="Download options">
@@ -359,6 +370,9 @@
                 TestFlight build
               </a>
             </div>
+            <div class="cta-row mt14">
+              <a class="btn" href="download.html">View full install guide</a>
+            </div>
           </div>
         </section>
       </div>
@@ -373,10 +387,15 @@
 
         <div class="footerFinalRight">
           <div class="footer-links">
-            <a href="research.html">Research</a>
+            <a href="how-it-works.html">How It Works</a>
+            <a href="features.html">Features</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="science.html">Science</a>
+            <a href="reviews.html">Reviews</a>
+            <a href="download.html">Download</a>
+            <a href="contact.html">Contact</a>
             <a href="privacy.html">Privacy</a>
             <a href="terms.html">Terms</a>
-            <a href="contact.html">Contact</a>
           </div>
         </div>
       </div>

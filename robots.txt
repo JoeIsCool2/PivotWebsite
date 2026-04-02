@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://pivotapp.com/sitemap.xml

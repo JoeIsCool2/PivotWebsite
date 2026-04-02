@@ -224,6 +224,10 @@
   });
 
   // CTA tracking: prepares event hooks for analytics tools.
+  const pageStartMs = (window.performance && typeof window.performance.now === "function")
+    ? window.performance.now()
+    : Date.now();
+  let hasTrackedFirstCta = false;
   $$("a, button").forEach((el) => {
     el.addEventListener("click", () => {
       const href = (el.getAttribute("href") || "").trim();
@@ -234,11 +238,23 @@
 
       if (!isDownload) return;
 
-      emitAnalyticsEvent("cta_click", {
+      const payload = {
         cta_type: isAppStore ? "app_store" : isTestFlight ? "testflight" : "download",
         cta_label: label || "Download",
         href: href || null
-      });
+      };
+      emitAnalyticsEvent("cta_click", payload);
+
+      if (!hasTrackedFirstCta) {
+        hasTrackedFirstCta = true;
+        const elapsedMs = (window.performance && typeof window.performance.now === "function")
+          ? Math.round(window.performance.now() - pageStartMs)
+          : 0;
+        emitAnalyticsEvent("first_cta_click", {
+          ...payload,
+          first_cta_time_ms: elapsedMs
+        });
+      }
     });
   });
 
@@ -246,6 +262,23 @@
   const activeCtaVariant = resolveCtaVariant();
   applyCtaVariantCopy(activeCtaVariant);
   emitAnalyticsEvent("cta_variant_assigned", { cta_variant: activeCtaVariant });
+  emitAnalyticsEvent("page_view", { path: currentPath, cta_variant: activeCtaVariant });
+
+  // Track section visibility to understand content engagement.
+  const trackedSections = $$("[data-track-section]");
+  if (trackedSections.length > 0 && "IntersectionObserver" in window) {
+    const seenSections = new Set();
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const sectionName = entry.target.getAttribute("data-track-section");
+        if (!sectionName || seenSections.has(sectionName)) return;
+        seenSections.add(sectionName);
+        emitAnalyticsEvent("section_view", { section: sectionName });
+      });
+    }, { threshold: 0.45 });
+    trackedSections.forEach((section) => sectionObserver.observe(section));
+  }
 
   // Reflection-only Journal insights (deterministic, no AI).
   const reflectionTimeline = document.getElementById("reflectionTimeline");
