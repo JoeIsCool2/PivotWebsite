@@ -356,11 +356,44 @@ h3 {
   }
 }
 
-/* Hero: large phone — frame hugs the screen (no full-width “bubble” vs narrow screenshot) */
+.device-frame {
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 42px;
+  padding: 12px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.2));
+  box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+}
+
+/*
+ * Screenshots use position:absolute, so this box needs a real size from aspect-ratio + width.
+ * Frame width is capped from desired max height (1179:2366) so the glass “bubble” matches the image.
+ */
+.device-screen {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  aspect-ratio: 1179 / 2366;
+  max-height: 620px;
+  border-radius: 32px;
+  overflow: hidden;
+  background: #000;
+}
+
 .hero .device-wrap {
-  width: fit-content;
+  width: 100%;
   max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-self: center;
+}
+
+.hero .device-frame {
+  box-sizing: border-box;
+  width: min(100%, calc(min(78vh, 760px) * 1179 / 2366 + 24px));
+  max-width: 100%;
 }
 
 .hero .device-screen {
@@ -369,41 +402,20 @@ h3 {
 
 @media (min-width: 900px) {
   .hero .device-wrap {
+    align-items: flex-end;
     justify-self: end;
   }
 
-  .hero .device-screen {
-    max-height: min(92vh, 1500px);
-    border-radius: clamp(32px, 2.8vw, 42px);
-  }
-
   .hero .device-frame {
+    width: min(100%, calc(min(92vh, 1280px) * 1179 / 2366 + 24px));
     border-radius: clamp(40px, 3.5vw, 54px);
     padding: clamp(11px, 1vw, 18px);
   }
-}
 
-.device-frame {
-  position: relative;
-  width: fit-content;
-  max-width: 100%;
-  border-radius: 42px;
-  padding: 12px;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.2));
-  box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.65);
-}
-
-.device-screen {
-  position: relative;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  border-radius: 32px;
-  overflow: hidden;
-  aspect-ratio: 1179 / 2366;
-  max-height: 620px;
-  background: #000;
+  .hero .device-screen {
+    max-height: min(92vh, 1280px);
+    border-radius: clamp(32px, 2.8vw, 42px);
+  }
 }
 
 .device-screen img {
