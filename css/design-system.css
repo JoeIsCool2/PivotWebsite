@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap");
+
 /* Pivot design system overlays.
    We keep `site.css` as the base and add:
    - a valid :root token source (fixes any invalid selectors in base CSS)
@@ -32,7 +34,8 @@
   --lh-tight: 1.15;
   --lh-body: 1.65;
 
-  --font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-display: "Fraunces", "Plus Jakarta Sans", serif;
 
   /* Feature section redesign tokens */
   --feature-surface-1: color-mix(in srgb, var(--surface-1) 84%, transparent);
@@ -44,6 +47,10 @@
 html, body{
   color: var(--text);
   font-family: var(--font-sans);
+}
+
+body{
+  letter-spacing: -0.01em;
 }
 
 /* Per-page gradient themes (replaces inline `--grad-a/--grad-b` on <body>) */
@@ -58,6 +65,140 @@ html, body{
 /* Semantic wrappers */
 .page{
   padding: 22px 0 60px;
+}
+
+/* Conversion-focused visual hierarchy refinements */
+.pageIntro{
+  backdrop-filter: blur(16px);
+  border-radius: 28px;
+  border: 1px solid color-mix(in srgb, var(--surface-stroke) 90%, transparent);
+  background:
+    linear-gradient(150deg, color-mix(in srgb, var(--surface-2) 82%, transparent), color-mix(in srgb, var(--surface-1) 94%, transparent));
+  box-shadow: 0 24px 58px rgba(3, 10, 24, .18);
+}
+
+.pageIntro h1{
+  text-wrap: balance;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.pageIntro p{
+  max-width: 62ch;
+  font-size: 16px;
+  line-height: 1.72;
+}
+
+.kicker{
+  letter-spacing: 0.02em;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+.btn.btn-primary,
+.btn.btn-ctaStrong{
+  box-shadow: 0 14px 32px rgba(0,0,0,.2);
+  border-color: color-mix(in srgb, var(--active-accent) 45%, var(--surface-stroke));
+}
+
+.btn.btn-primary:hover,
+.btn.btn-ctaStrong:hover{
+  transform: translateY(-1px) scale(1.01);
+}
+
+.section-head h2{
+  text-wrap: balance;
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4.2vw, 42px);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.testimonialCard blockquote{
+  font-weight: 560;
+}
+
+/* Brand-forward navigation polish */
+.nav{
+  backdrop-filter: blur(18px) saturate(1.15);
+}
+
+.nav-links a{
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.brand-name{
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+
+.brand-tag{
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-size: 10px;
+  margin-top: -2px;
+}
+
+/* Home-page hierarchy refresh */
+.landingHeroCopy h1{
+  font-family: var(--font-display);
+  font-size: clamp(44px, 6.2vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  max-width: 10.5ch;
+}
+
+.landingHeroCopy .lead{
+  margin-top: 16px;
+  font-size: 17px;
+  line-height: 1.72;
+  max-width: 60ch;
+}
+
+.landingHero{
+  padding-top: 10px;
+}
+
+.glassCard{
+  border-radius: 22px;
+}
+
+.socialProofGrid,
+.showcaseGrid,
+.landingHeroGrid{
+  gap: 32px;
+}
+
+.evidenceCard,
+.testimonialCard,
+.ratingCard,
+.feature.card,
+.callout.card{
+  border-radius: 20px;
+}
+
+.feature.card h3,
+.callout h3,
+.showcaseStep h3{
+  letter-spacing: -0.02em;
+}
+
+.feature.card p,
+.callout p,
+.evidenceFinding{
+  line-height: 1.68;
+}
+
+.footer-links a{
+  opacity: 0.9;
+}
+
+.footer-links a:hover{
+  opacity: 1;
 }
 
 .sectionTitle{
@@ -260,7 +401,7 @@ body.inner-page .pageIntro::after{
 
 body.inner-page .pageIntro h1,
 body.inner-page .pageIntro h2{
-  font-size: clamp(30px, 5vw, 44px);
+  font-size: clamp(36px, 5.8vw, 54px);
   line-height: 1.06;
   letter-spacing: -0.03em;
 }
@@ -268,7 +409,7 @@ body.inner-page .pageIntro h2{
 body.inner-page .pageIntro p{
   margin-top: 12px;
   max-width: 74ch;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.72;
 }
 
@@ -538,6 +679,15 @@ body.theme-terms.inner-page .pageIntro::after{
 }
 
 @media (max-width: 900px){
+  .landingHeroCopy h1{
+    font-size: clamp(34px, 9vw, 52px);
+    max-width: 100%;
+  }
+
+  .section-head h2{
+    font-size: clamp(24px, 7vw, 34px);
+  }
+
   .reflectionStats{
     grid-template-columns: 1fr 1fr;
   }
@@ -584,7 +734,7 @@ body.theme-terms.inner-page .pageIntro::after{
 
   body.inner-page .pageIntro h1,
   body.inner-page .pageIntro h2{
-    font-size: clamp(26px, 8vw, 36px);
+    font-size: clamp(30px, 8.5vw, 40px);
   }
 
   body.inner-page .pageIntro p{
@@ -676,6 +826,14 @@ body.theme-terms.inner-page .pageIntro::after{
 }
 
 @media (max-width: 520px){
+  .brand-name{
+    font-size: 17px;
+  }
+
+  .brand-tag{
+    letter-spacing: 0.05em;
+  }
+
   .reflectionStats{
     grid-template-columns: 1fr;
   }
