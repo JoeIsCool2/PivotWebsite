@@ -59,13 +59,52 @@
       .support-card p {
         color: var(--text-muted);
       }
-      .support-steps {
-        margin: 0.75rem 0 0;
-        padding-left: 1rem;
+      .support-form {
+        display: grid;
+        gap: 0.7rem;
+      }
+      .support-form label {
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+      .support-form input,
+      .support-form select,
+      .support-form textarea {
+        width: 100%;
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.78);
+        color: var(--text);
+        font: inherit;
+        padding: 0.7rem 0.8rem;
+      }
+      .support-form textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+      .support-form input:focus-visible,
+      .support-form select:focus-visible,
+      .support-form textarea:focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 2px;
+      }
+      .support-hint {
+        margin-top: 0.35rem;
+        font-size: 0.92rem;
         color: var(--text-muted);
       }
-      .support-steps li + li {
-        margin-top: 0.4rem;
+      .support-status {
+        display: none;
+        margin-top: 0.75rem;
+        padding: 0.7rem 0.8rem;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        background: rgba(0, 91, 159, 0.12);
+        border: 1px solid rgba(0, 91, 159, 0.22);
+        color: var(--text);
+      }
+      .support-status.is-visible {
+        display: block;
       }
       .faq-stack {
         margin-top: 1rem;
@@ -108,23 +147,46 @@
     <main id="support-main" class="support-wrap">
       <section class="support-hero">
         <h1>Support</h1>
-        <p>Need help with Pivot? Use the in-app help flow and quick answers below. No email required.</p>
+        <p>Need help with Pivot? Submit your question below and it will be saved for your local support inbox.</p>
       </section>
 
       <section class="support-grid" aria-label="Support contact and help topics">
         <article class="support-card">
-          <h2>Get help in the app</h2>
-          <p>Support is handled inside Pivot so you do not need a separate email workflow.</p>
-          <ol class="support-steps">
-            <li>Open Pivot on your iPhone.</li>
-            <li>Go to Settings and open Help.</li>
-            <li>Choose the topic and submit your question there.</li>
-            <li>Check back in the app for your response and updates.</li>
-          </ol>
-          <p>If you are blocked before entering the app, use the TestFlight link and install the latest build first.</p>
-          <a class="btn btn--primary" href="https://testflight.apple.com/join/4sYs1Z8y" rel="noopener noreferrer"
-            >Open TestFlight</a
-          >
+          <h2>Send a support question</h2>
+          <p>Fill this out and your request is saved locally for review in the support inbox page.</p>
+          <form class="support-form" id="supportForm">
+            <label for="supportName">Name</label>
+            <input id="supportName" name="name" type="text" autocomplete="name" required />
+
+            <label for="supportEmail">Email</label>
+            <input id="supportEmail" name="email" type="email" autocomplete="email" required />
+
+            <label for="supportTopic">Topic</label>
+            <select id="supportTopic" name="topic" required>
+              <option value="">Select a topic</option>
+              <option value="testflight">TestFlight install</option>
+              <option value="billing">Billing / Pivot Pro</option>
+              <option value="bug">Bug report</option>
+              <option value="feature">Feature request</option>
+              <option value="other">Other support question</option>
+            </select>
+
+            <label for="supportMessage">Question or concern</label>
+            <textarea
+              id="supportMessage"
+              name="message"
+              placeholder="Tell us what happened and what help you need."
+              required
+            ></textarea>
+
+            <button class="btn btn--primary" type="submit">Submit support request</button>
+          </form>
+          <p class="support-hint">
+            Requests are saved in this browser on this device. Open
+            <a href="support-admin.html">support-admin.html</a>
+            to review and answer.
+          </p>
+          <div class="support-status" id="supportStatus" role="status" aria-live="polite"></div>
         </article>
 
         <article class="support-card faq">
@@ -160,9 +222,53 @@
     <footer class="site-footer" style="padding-bottom: 2rem">
       <p>
         <a href="./">Home</a> ·
+        <a href="support-admin.html">Support inbox</a> ·
         <a href="https://testflight.apple.com/join/4sYs1Z8y" rel="noopener noreferrer">TestFlight</a> ·
         <a href="privacy.html">Privacy</a>
       </p>
     </footer>
+    <script>
+      (function () {
+        var STORAGE_KEY = "pivotSupportInbox";
+        var form = document.getElementById("supportForm");
+        var statusEl = document.getElementById("supportStatus");
+        if (!form) return;
+
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          var payload = {
+            id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+            submittedAt: new Date().toISOString(),
+            name: form.name.value.trim(),
+            email: form.email.value.trim(),
+            topic: form.topic.value.trim(),
+            message: form.message.value.trim(),
+            answer: "",
+            answeredAt: "",
+            status: "open"
+          };
+
+          if (!payload.name || !payload.email || !payload.topic || !payload.message) return;
+
+          var inbox = [];
+          try {
+            inbox = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+            if (!Array.isArray(inbox)) inbox = [];
+          } catch (e) {
+            inbox = [];
+          }
+
+          inbox.unshift(payload);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(inbox));
+          form.reset();
+
+          if (statusEl) {
+            statusEl.classList.add("is-visible");
+            statusEl.textContent = "Thanks. Your question was saved. We will answer it from the support inbox.";
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

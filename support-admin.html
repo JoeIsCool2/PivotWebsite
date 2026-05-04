@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Support Inbox — Pivot</title>
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="theme-color" content="#80deea" />
+    <link rel="icon" type="image/png" href="assets/app-icon.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .admin-wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 2rem 1.25rem 4rem;
+      }
+      .admin-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.75rem;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      .admin-head h1 {
+        margin: 0;
+        font-size: clamp(1.5rem, 3.2vw, 2rem);
+      }
+      .admin-grid {
+        display: grid;
+        gap: 0.9rem;
+      }
+      .ticket {
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-md);
+        background: var(--glass);
+        box-shadow: var(--shadow);
+        padding: 1rem;
+      }
+      .ticket-meta {
+        margin: 0 0 0.65rem;
+        color: var(--text-muted);
+        font-size: 0.92rem;
+      }
+      .ticket h2 {
+        margin: 0 0 0.45rem;
+        font-size: 1.15rem;
+      }
+      .ticket p {
+        margin: 0.3rem 0;
+      }
+      .ticket textarea {
+        width: 100%;
+        margin-top: 0.55rem;
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        min-height: 110px;
+        resize: vertical;
+        background: rgba(255, 255, 255, 0.78);
+        color: var(--text);
+        font: inherit;
+        padding: 0.7rem 0.8rem;
+      }
+      .ticket-actions {
+        margin-top: 0.55rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .empty-state {
+        border: 1px dashed var(--glass-border);
+        border-radius: var(--radius-md);
+        padding: 1.25rem;
+        color: var(--text-muted);
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#admin-main">Skip to content</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="./">
+          <img src="assets/app-icon.png" width="36" height="36" alt="" />
+          Pivot
+        </a>
+        <div class="nav-cta">
+          <a class="btn btn-secondary" href="support.html">Support form</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="admin-main" class="admin-wrap">
+      <section class="admin-head">
+        <h1>Support inbox</h1>
+        <button class="btn btn-secondary" id="clearAnsweredBtn" type="button">Clear answered</button>
+      </section>
+      <div id="tickets" class="admin-grid"></div>
+    </main>
+
+    <script>
+      (function () {
+        var STORAGE_KEY = "pivotSupportInbox";
+        var listEl = document.getElementById("tickets");
+        var clearBtn = document.getElementById("clearAnsweredBtn");
+
+        function loadInbox() {
+          try {
+            var value = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+            return Array.isArray(value) ? value : [];
+          } catch (e) {
+            return [];
+          }
+        }
+
+        function saveInbox(inbox) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(inbox));
+        }
+
+        function formatDate(iso) {
+          var date = new Date(iso);
+          if (String(date) === "Invalid Date") return "Unknown time";
+          return date.toLocaleString();
+        }
+
+        function render() {
+          var inbox = loadInbox();
+          listEl.innerHTML = "";
+
+          if (!inbox.length) {
+            listEl.innerHTML = '<div class="empty-state">No support questions yet. Open <a href="support.html">support.html</a> to submit one.</div>';
+            return;
+          }
+
+          inbox.forEach(function (item) {
+            var ticket = document.createElement("article");
+            ticket.className = "ticket";
+            ticket.innerHTML =
+              '<p class="ticket-meta"><strong>Status:</strong> ' + (item.status || "open") + " · <strong>Submitted:</strong> " + formatDate(item.submittedAt) + "</p>" +
+              "<h2>" + (item.topic || "General question") + "</h2>" +
+              "<p><strong>From:</strong> " + (item.name || "Unknown") + " (" + (item.email || "no-email") + ")</p>" +
+              "<p><strong>Question:</strong> " + (item.message || "") + "</p>" +
+              '<label for="answer-' + item.id + '"><strong>Your answer</strong></label>' +
+              '<textarea id="answer-' + item.id + '" data-answer-id="' + item.id + '" placeholder="Write your response...">' + (item.answer || "") + "</textarea>" +
+              '<div class="ticket-actions">' +
+              '<button class="btn btn--primary" type="button" data-save-id="' + item.id + '">Save answer</button>' +
+              '<a class="btn btn-secondary" href="#" data-send-id="' + item.id + '">Send reply</a>' +
+              '<button class="btn btn-secondary" type="button" data-delete-id="' + item.id + '">Delete</button>' +
+              "</div>";
+            listEl.appendChild(ticket);
+          });
+        }
+
+        listEl.addEventListener("click", function (event) {
+          var saveId = event.target.getAttribute("data-save-id");
+          var sendId = event.target.getAttribute("data-send-id");
+          var deleteId = event.target.getAttribute("data-delete-id");
+          if (!saveId && !sendId && !deleteId) return;
+
+          var inbox = loadInbox();
+          var index = inbox.findIndex(function (item) {
+            return item.id === (saveId || sendId || deleteId);
+          });
+          if (index < 0) return;
+
+          if (deleteId) {
+            inbox.splice(index, 1);
+            saveInbox(inbox);
+            render();
+            return;
+          }
+
+          var textarea = document.querySelector('[data-answer-id="' + inbox[index].id + '"]');
+          var answer = textarea ? textarea.value.trim() : "";
+          inbox[index].answer = answer;
+          inbox[index].answeredAt = answer ? new Date().toISOString() : "";
+          inbox[index].status = answer ? "answered" : "open";
+          saveInbox(inbox);
+
+          if (sendId) {
+            event.preventDefault();
+            var subject = encodeURIComponent("Pivot support reply: " + (inbox[index].topic || "Question"));
+            var body = encodeURIComponent(
+              "Hi " + (inbox[index].name || "") + ",\n\n" +
+                (answer || "Thanks for your question. ") +
+                "\n\n---\nOriginal question:\n" + (inbox[index].message || "")
+            );
+            var mailto = "mailto:" + encodeURIComponent(inbox[index].email || "") + "?subject=" + subject + "&body=" + body;
+            window.location.href = mailto;
+          } else {
+            render();
+          }
+        });
+
+        clearBtn.addEventListener("click", function () {
+          var inbox = loadInbox().filter(function (item) {
+            return item.status !== "answered";
+          });
+          saveInbox(inbox);
+          render();
+        });
+
+        render();
+      })();
+    </script>
+  </body>
+</html>
