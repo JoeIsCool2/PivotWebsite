@@ -59,39 +59,13 @@
       .support-card p {
         color: var(--text-muted);
       }
-      .support-form {
-        display: grid;
-        gap: 0.7rem;
-      }
-      .support-form label {
-        font-weight: 600;
-        font-size: 0.95rem;
-      }
-      .support-form input,
-      .support-form select,
-      .support-form textarea {
-        width: 100%;
-        border: 1px solid var(--glass-border);
-        border-radius: 12px;
-        background: rgba(255, 255, 255, 0.78);
-        color: var(--text);
-        font: inherit;
-        padding: 0.7rem 0.8rem;
-      }
-      .support-form textarea {
-        min-height: 120px;
-        resize: vertical;
-      }
-      .support-form input:focus-visible,
-      .support-form select:focus-visible,
-      .support-form textarea:focus-visible {
-        outline: 3px solid var(--focus);
-        outline-offset: 2px;
-      }
-      .support-hint {
-        margin-top: 0.2rem;
-        font-size: 0.92rem;
+      .support-steps {
+        margin: 0.75rem 0 0;
+        padding-left: 1rem;
         color: var(--text-muted);
+      }
+      .support-steps li + li {
+        margin-top: 0.4rem;
       }
       .faq-stack {
         margin-top: 1rem;
@@ -134,49 +108,23 @@
     <main id="support-main" class="support-wrap">
       <section class="support-hero">
         <h1>Support</h1>
-        <p>Need help with Pivot? Send your question and we will point you in the right direction.</p>
+        <p>Need help with Pivot? Use the in-app help flow and quick answers below. No email required.</p>
       </section>
 
       <section class="support-grid" aria-label="Support contact and help topics">
         <article class="support-card">
-          <h2>Send a support request</h2>
-          <p>Use this form to ask a question, report a bug, or request account and subscription help.</p>
-          <form
-            class="support-form"
-            action="mailto:support@YOURDOMAIN.com"
-            method="post"
-            enctype="text/plain"
+          <h2>Get help in the app</h2>
+          <p>Support is handled inside Pivot so you do not need a separate email workflow.</p>
+          <ol class="support-steps">
+            <li>Open Pivot on your iPhone.</li>
+            <li>Go to Settings and open Help.</li>
+            <li>Choose the topic and submit your question there.</li>
+            <li>Check back in the app for your response and updates.</li>
+          </ol>
+          <p>If you are blocked before entering the app, use the TestFlight link and install the latest build first.</p>
+          <a class="btn btn--primary" href="https://testflight.apple.com/join/4sYs1Z8y" rel="noopener noreferrer"
+            >Open TestFlight</a
           >
-            <label for="support-name">Name</label>
-            <input id="support-name" name="name" type="text" autocomplete="name" required />
-
-            <label for="support-email">Email</label>
-            <input id="support-email" name="email" type="email" autocomplete="email" required />
-
-            <label for="support-topic">Topic</label>
-            <select id="support-topic" name="topic" required>
-              <option value="">Select a topic</option>
-              <option value="testflight">TestFlight install</option>
-              <option value="billing">Billing / Pivot Pro</option>
-              <option value="bug">Bug report</option>
-              <option value="feature">Feature request</option>
-              <option value="other">Other support question</option>
-            </select>
-
-            <label for="support-message">Message</label>
-            <textarea
-              id="support-message"
-              name="message"
-              placeholder="What happened, what you expected, and any device/iOS details."
-              required
-            ></textarea>
-
-            <button class="btn btn--primary" type="submit">Send request</button>
-          </form>
-          <p class="support-hint">
-            This opens your email app. If you prefer, email us directly at
-            <a href="mailto:support@YOURDOMAIN.com">support@YOURDOMAIN.com</a>.
-          </p>
         </article>
 
         <article class="support-card faq">
@@ -191,7 +139,7 @@
           </details>
           <details>
             <summary>How can I report a bug well?</summary>
-            <p>Send iPhone model, iOS version, what you tapped, and what happened. Screenshots help a lot.</p>
+            <p>In the in-app help flow, include iPhone model, iOS version, what you tapped, and what happened. Screenshots help a lot.</p>
           </details>
           <details>
             <summary>Where can I read privacy details?</summary>
