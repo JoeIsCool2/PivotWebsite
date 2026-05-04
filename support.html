@@ -143,10 +143,13 @@
           <p>Fill this out and your request is saved locally for review in the support inbox page.</p>
           <form
             class="support-form"
-            action="mailto:pivotmindfulproductivity@gmail.com"
+            action="https://formsubmit.co/pivotmindfulproductivity@gmail.com"
             method="post"
-            enctype="text/plain"
           >
+            <input type="hidden" name="_subject" value="New Pivot support request" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_template" value="table" />
+
             <label for="supportName">Name</label>
             <input id="supportName" name="name" type="text" autocomplete="name" required />
 
@@ -174,7 +177,7 @@
             <button class="btn btn--primary" type="submit">Submit support request</button>
           </form>
           <p class="support-hint">
-            Submitting opens your email app and sends the request to
+            Submitting sends your request directly to
             <a href="mailto:pivotmindfulproductivity@gmail.com">pivotmindfulproductivity@gmail.com</a>.
           </p>
         </article>
