@@ -93,19 +93,6 @@
         font-size: 0.92rem;
         color: var(--text-muted);
       }
-      .support-status {
-        display: none;
-        margin-top: 0.75rem;
-        padding: 0.7rem 0.8rem;
-        border-radius: 10px;
-        font-size: 0.95rem;
-        background: rgba(0, 91, 159, 0.12);
-        border: 1px solid rgba(0, 91, 159, 0.22);
-        color: var(--text);
-      }
-      .support-status.is-visible {
-        display: block;
-      }
       .faq-stack {
         margin-top: 1rem;
       }
@@ -154,7 +141,12 @@
         <article class="support-card">
           <h2>Send a support question</h2>
           <p>Fill this out and your request is saved locally for review in the support inbox page.</p>
-          <form class="support-form" id="supportForm">
+          <form
+            class="support-form"
+            action="mailto:pivotmindfulproductivity@gmail.com"
+            method="post"
+            enctype="text/plain"
+          >
             <label for="supportName">Name</label>
             <input id="supportName" name="name" type="text" autocomplete="name" required />
 
@@ -182,10 +174,9 @@
             <button class="btn btn--primary" type="submit">Submit support request</button>
           </form>
           <p class="support-hint">
-            Requests are saved in this browser on this device. You can also email us at
+            Submitting opens your email app and sends the request to
             <a href="mailto:pivotmindfulproductivity@gmail.com">pivotmindfulproductivity@gmail.com</a>.
           </p>
-          <div class="support-status" id="supportStatus" role="status" aria-live="polite"></div>
         </article>
 
         <article class="support-card faq">
@@ -225,48 +216,5 @@
         <a href="privacy.html">Privacy</a>
       </p>
     </footer>
-    <script>
-      (function () {
-        var STORAGE_KEY = "pivotSupportInbox";
-        var form = document.getElementById("supportForm");
-        var statusEl = document.getElementById("supportStatus");
-        if (!form) return;
-
-        form.addEventListener("submit", function (event) {
-          event.preventDefault();
-
-          var payload = {
-            id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
-            submittedAt: new Date().toISOString(),
-            name: form.name.value.trim(),
-            email: form.email.value.trim(),
-            topic: form.topic.value.trim(),
-            message: form.message.value.trim(),
-            answer: "",
-            answeredAt: "",
-            status: "open"
-          };
-
-          if (!payload.name || !payload.email || !payload.topic || !payload.message) return;
-
-          var inbox = [];
-          try {
-            inbox = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-            if (!Array.isArray(inbox)) inbox = [];
-          } catch (e) {
-            inbox = [];
-          }
-
-          inbox.unshift(payload);
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(inbox));
-          form.reset();
-
-          if (statusEl) {
-            statusEl.classList.add("is-visible");
-            statusEl.textContent = "Thanks. Your question was saved. We will answer it from the support inbox.";
-          }
-        });
-      })();
-    </script>
   </body>
 </html>
