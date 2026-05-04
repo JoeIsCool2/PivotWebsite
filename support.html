@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Support — Pivot</title>
+    <meta
+      name="description"
+      content="Get support for Pivot. Ask questions, report bugs, and get help with TestFlight, Focus, Vent, Move, and Journal."
+    />
+    <meta name="theme-color" content="#80deea" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://YOUR_PRODUCTION_URL/support.html" />
+    <link rel="icon" type="image/png" href="assets/app-icon.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Outfit:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .support-wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 2.25rem 1.25rem 4.5rem;
+      }
+      .support-hero {
+        max-width: 44rem;
+        margin-bottom: 1.75rem;
+      }
+      .support-hero h1 {
+        margin: 0 0 0.5rem;
+        font-size: clamp(1.95rem, 5vw, 2.6rem);
+      }
+      .support-hero p {
+        color: var(--text-muted);
+        margin: 0;
+      }
+      .support-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 1rem;
+      }
+      .support-card {
+        border-radius: var(--radius-md);
+        border: 1px solid var(--glass-border);
+        background: var(--glass);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: var(--shadow);
+        padding: 1.1rem;
+      }
+      .support-card h2 {
+        margin: 0 0 0.8rem;
+        font-size: 1.25rem;
+      }
+      .support-card p {
+        color: var(--text-muted);
+      }
+      .support-form {
+        display: grid;
+        gap: 0.7rem;
+      }
+      .support-form label {
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+      .support-form input,
+      .support-form select,
+      .support-form textarea {
+        width: 100%;
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.78);
+        color: var(--text);
+        font: inherit;
+        padding: 0.7rem 0.8rem;
+      }
+      .support-form textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+      .support-form input:focus-visible,
+      .support-form select:focus-visible,
+      .support-form textarea:focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 2px;
+      }
+      .support-hint {
+        margin-top: 0.2rem;
+        font-size: 0.92rem;
+        color: var(--text-muted);
+      }
+      .faq-stack {
+        margin-top: 1rem;
+      }
+      .faq-stack details + details {
+        margin-top: 0.55rem;
+      }
+      .inline-list {
+        margin: 0.4rem 0 0;
+        padding-left: 1rem;
+        color: var(--text-muted);
+      }
+      .inline-list li + li {
+        margin-top: 0.25rem;
+      }
+      @media (max-width: 900px) {
+        .support-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#support-main">Skip to content</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="./">
+          <img src="assets/app-icon.png" width="36" height="36" alt="" />
+          Pivot
+        </a>
+        <div class="nav-cta">
+          <a class="btn btn-secondary" href="privacy.html">Privacy</a>
+          <a class="btn btn--primary" href="https://testflight.apple.com/join/4sYs1Z8y" rel="noopener noreferrer"
+            >Join TestFlight</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main id="support-main" class="support-wrap">
+      <section class="support-hero">
+        <h1>Support</h1>
+        <p>Need help with Pivot? Send your question and we will point you in the right direction.</p>
+      </section>
+
+      <section class="support-grid" aria-label="Support contact and help topics">
+        <article class="support-card">
+          <h2>Send a support request</h2>
+          <p>Use this form to ask a question, report a bug, or request account and subscription help.</p>
+          <form
+            class="support-form"
+            action="mailto:support@YOURDOMAIN.com"
+            method="post"
+            enctype="text/plain"
+          >
+            <label for="support-name">Name</label>
+            <input id="support-name" name="name" type="text" autocomplete="name" required />
+
+            <label for="support-email">Email</label>
+            <input id="support-email" name="email" type="email" autocomplete="email" required />
+
+            <label for="support-topic">Topic</label>
+            <select id="support-topic" name="topic" required>
+              <option value="">Select a topic</option>
+              <option value="testflight">TestFlight install</option>
+              <option value="billing">Billing / Pivot Pro</option>
+              <option value="bug">Bug report</option>
+              <option value="feature">Feature request</option>
+              <option value="other">Other support question</option>
+            </select>
+
+            <label for="support-message">Message</label>
+            <textarea
+              id="support-message"
+              name="message"
+              placeholder="What happened, what you expected, and any device/iOS details."
+              required
+            ></textarea>
+
+            <button class="btn btn--primary" type="submit">Send request</button>
+          </form>
+          <p class="support-hint">
+            This opens your email app. If you prefer, email us directly at
+            <a href="mailto:support@YOURDOMAIN.com">support@YOURDOMAIN.com</a>.
+          </p>
+        </article>
+
+        <article class="support-card faq">
+          <h2>Quick help</h2>
+          <details>
+            <summary>How do I join the beta?</summary>
+            <p>Install Apple TestFlight, then open the invite link from the home page. If the beta is full, try again later.</p>
+          </details>
+          <details>
+            <summary>How do I restore Pivot Pro?</summary>
+            <p>Open the app settings and use the restore purchases option. Apple controls billing and receipt validation.</p>
+          </details>
+          <details>
+            <summary>How can I report a bug well?</summary>
+            <p>Send iPhone model, iOS version, what you tapped, and what happened. Screenshots help a lot.</p>
+          </details>
+          <details>
+            <summary>Where can I read privacy details?</summary>
+            <p>See our <a href="privacy.html">Privacy Policy</a> for data handling, AI processing notes, and contact options.</p>
+          </details>
+          <div class="faq-stack">
+            <p><strong>Before you contact support:</strong></p>
+            <ul class="inline-list">
+              <li>Update to the latest TestFlight build.</li>
+              <li>Force close and reopen the app.</li>
+              <li>Restart your iPhone if a feature hangs.</li>
+            </ul>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer" style="padding-bottom: 2rem">
+      <p>
+        <a href="./">Home</a> ·
+        <a href="https://testflight.apple.com/join/4sYs1Z8y" rel="noopener noreferrer">TestFlight</a> ·
+        <a href="privacy.html">Privacy</a>
+      </p>
+    </footer>
+  </body>
+</html>
